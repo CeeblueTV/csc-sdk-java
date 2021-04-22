@@ -1,0 +1,9 @@
+ceeblue:
+  settings:
+    username: vladyslav
+    password: sudosugo
+    api: https://shark.ceeblue.tv/api
+
+spring:
+  main:
+    web-application-type: none
