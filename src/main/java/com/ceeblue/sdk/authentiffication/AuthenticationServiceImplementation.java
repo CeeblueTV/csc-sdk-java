@@ -9,12 +9,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,20 +78,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
     }
 
     @Override
-    public HttpEntity<String> getAuthenticationHeader() {
-        if (!StringUtils.hasText(settings.getToken())) {
-            authenticate();
-        }
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set(AUTHORIZATION_HEADER, BEARER + settings.getToken());
-
-        return new HttpEntity<>("", headers);
-    }
-
-    @Override
-    public String getToken() {
+    public String getOrCreateToken() {
         if (!StringUtils.hasText(settings.getToken())) {
             authenticate();
         }
@@ -102,11 +87,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
     }
 
     @Override
-    public RestTemplateBuilder getBuilderWithToken() {
-        if (!StringUtils.hasText(settings.getToken())) {
-            authenticate();
-        }
-
-        return builder.defaultHeader(AUTHORIZATION_HEADER, BEARER + settings.getToken());
+    public RestTemplateBuilder getAuthenticatedBuilder() {
+        return builder.defaultHeader(AUTHORIZATION_HEADER, BEARER + getOrCreateToken());
     }
 }
