@@ -1,15 +1,12 @@
 package com.ceeblue.sdk.authentiffication;
 
 import com.ceeblue.sdk.authentiffication.utils.AuthorizationException;
-import com.ceeblue.sdk.authentiffication.utils.RestTemplateResponseErrorHandler;
+import com.ceeblue.sdk.http.template.HttpTemplate;
 import com.ceeblue.sdk.settings.Settings;
+import com.ceeblue.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -25,55 +22,41 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
 
     final Settings settings;
 
-    final RestTemplateBuilder builder;
+    private final HttpTemplate template;
 
-    public AuthenticationServiceImplementation(Settings credentials, RestTemplateBuilder builder) {
+    public AuthenticationServiceImplementation(Settings credentials, HttpTemplate template) {
         this.settings = credentials;
-        this.builder = builder;
+        this.template = template;
     }
 
     @Override
     public String authenticate() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        String json = credentialsToJson();
-
-        String token = authorize(headers, json);
-
-        settings.setToken(token);
-
-        return settings.getToken();
-    }
-
-    private String authorize(HttpHeaders headers, String json) {
-        TypeReference<HashMap<String, String>> typeRef
-                = new TypeReference<HashMap<String, String>>() {
+        TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
         };
 
-        String token = builder
-                .errorHandler(new RestTemplateResponseErrorHandler())
-                .build()
-                .postForObject(settings.getApi() + LOGIN, new HttpEntity<>(json, headers), String.class);
+        String body = getBody();
+
+        String token = template.post(String.class, settings.getApi() + LOGIN, body, new HashMap<>());
 
         try {
-            return mapper.readValue(token, typeRef).get("token");
+            settings.setToken(mapper.readValue(token, typeRef).get("token"));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new AuthorizationException("Invalid response From Server");
         }
+
+        return settings.getToken();
     }
 
-    private String credentialsToJson() {
-        Map<String, String> payload = new HashMap<>();
+    private String getBody() {
+        Map<String, Object> payload = new HashMap<>();
         payload.put(USERNAME, settings.getUsername());
         payload.put(PASSWORD, settings.getPassword());
 
         try {
             return mapper.writeValueAsString(payload);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new AuthorizationException("Unpredictable behavior. Please Ping someone from R&D");
+            throw new JsonParseException("Can't parse passed stream for creation. Stream: " + payload, e);
         }
     }
 
@@ -84,10 +67,5 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
         }
 
         return settings.getToken();
-    }
-
-    @Override
-    public RestTemplateBuilder getAuthenticatedBuilder() {
-        return builder.defaultHeader(AUTHORIZATION_HEADER, BEARER + getOrCreateToken());
     }
 }

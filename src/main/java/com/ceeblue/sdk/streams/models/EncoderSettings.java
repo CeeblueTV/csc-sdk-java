@@ -27,4 +27,12 @@ public class EncoderSettings {
     public void setBitrate(Integer bitrate) {
         this.bitrate = bitrate;
     }
+
+    @Override
+    public String toString() {
+        return "EncoderSettings{" +
+                "codec=" + codec +
+                ", bitrate=" + bitrate +
+                '}';
+    }
 }

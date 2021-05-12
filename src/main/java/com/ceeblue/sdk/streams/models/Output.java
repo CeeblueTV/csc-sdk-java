@@ -1,5 +1,6 @@
 package com.ceeblue.sdk.streams.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public class Output {
     private Overlay overlay;
     private List<Track> tracks;
 
+    public Output() {
+    }
 
     public Output(boolean passthrough) {
         this.passthrough = passthrough;
@@ -66,5 +69,15 @@ public class Output {
 
     public void setTracks(List<Track> tracks) {
         this.tracks = tracks;
+    }
+
+    @Override
+    public String toString() {
+        return "Output{" +
+                "passthrough=" + passthrough +
+                ", version=" + version +
+                ", overlay=" + overlay +
+                ", tracks=" + tracks +
+                '}';
     }
 }

@@ -7,6 +7,4 @@ public interface AuthenticationService {
     String authenticate();
 
     String getOrCreateToken();
-
-    RestTemplateBuilder getAuthenticatedBuilder();
 }
