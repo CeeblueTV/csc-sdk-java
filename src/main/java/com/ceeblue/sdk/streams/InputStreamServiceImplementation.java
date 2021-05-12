@@ -37,41 +37,6 @@ public class InputStreamServiceImplementation implements InputStreamService {
         this.template = template;
     }
 
-    @PostConstruct
-    public void init() {
-        try {
-            StreamBuilder builder = new StreamBuilder(InputFormat.WebRTC)
-                    .setOutput(
-                            new Output(true)
-                                    .version(1)
-                                    .tracks(Arrays.asList(
-                                            new VideoTrack(Video, new VP8Settings(VP8, 110, 20)),
-                                            new AudioTrack(Audio, new EncoderSettings(AAC, 30))
-                                    )));
-
-            Stream stream = builder.build();
-            CreatedStream createdStream = createStream(stream);
-            System.out.println("Created:\n" + createdStream);
-            System.out.println("All Streams:\n" + getInputs());
-            System.out.println("Result of creating:\n" + getInput(createdStream.getId()));
-
-            createdStream = updateInput(createdStream.getId(), Access.Private, null);
-            System.out.println("Result of update:\n" + getInput(createdStream.getId()));
-
-            Output output = getOutput(createdStream.getId());
-            System.out.println("Output: \n" + output);
-            output.setPassthrough(false);
-            System.out.println("Result of update output:\n" + updateOutput(createdStream.getId(), output));
-
-            deleteInput(createdStream.getId());
-
-
-            System.out.println("Result of delete:\n" + getInput(createdStream.getId()));
-        } catch (ApiCallException exception) {
-            System.out.println(exception);
-        }
-    }
-
     @Override
     public CreatedStream createStream(Stream stream) {
         ObjectMapper mapper = new ObjectMapper();
