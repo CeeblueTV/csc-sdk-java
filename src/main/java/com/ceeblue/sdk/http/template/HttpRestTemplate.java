@@ -1,6 +1,6 @@
 package com.ceeblue.sdk.http.template;
 
-import com.ceeblue.sdk.authentiffication.utils.RestTemplateResponseErrorHandler;
+import com.ceeblue.sdk.utils.RestTemplateResponseErrorHandler;
 import com.ceeblue.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

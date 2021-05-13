@@ -1,7 +1,10 @@
 package com.ceeblue.sdk.streams.models;
 
+import com.ceeblue.sdk.streams.utils.EncoderSettingsDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+@JsonDeserialize(using = EncoderSettingsDeserializer.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EncoderSettings {
     CodecName codec;

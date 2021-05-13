@@ -15,8 +15,7 @@ import javax.annotation.PostConstruct;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.ceeblue.sdk.streams.models.CodecName.AAC;
-import static com.ceeblue.sdk.streams.models.CodecName.VP8;
+import static com.ceeblue.sdk.streams.models.CodecName.*;
 import static com.ceeblue.sdk.streams.models.TrackType.Audio;
 import static com.ceeblue.sdk.streams.models.TrackType.Video;
 
@@ -35,6 +34,41 @@ public class InputStreamServiceImplementation implements InputStreamService {
         this.authenticationService = authenticationService;
         this.settings = settings;
         this.template = template;
+    }
+
+    @PostConstruct
+    public void init() {
+        try {
+            StreamBuilder builder = new StreamBuilder(InputFormat.WebRTC)
+                    .setOutput(
+                            new Output(true)
+                                    .version(1)
+                                    .tracks(Arrays.asList(
+                                            new VideoTrack(Video, new H264Settings(H264, 110, SpeedPreset.faster,20)),
+                                            new AudioTrack(Audio, new EncoderSettings(AAC, 30))
+                                    )));
+
+            Stream stream = builder.build();
+            CreatedStream createdStream = createStream(stream);
+            System.out.println("Created:\n" + createdStream);
+            System.out.println("All Streams:\n" + getInputs());
+            System.out.println("Result of creating:\n" + getInput(createdStream.getId()));
+
+            createdStream = updateInput(createdStream.getId(), Access.Private, null);
+            System.out.println("Result of update:\n" + getInput(createdStream.getId()));
+
+            Output output = getOutput(createdStream.getId());
+            System.out.println("Output: \n" + output);
+            output.setPassthrough(false);
+            System.out.println("Result of update output:\n" + updateOutput(createdStream.getId(), output));
+
+            deleteInput(createdStream.getId());
+
+
+            System.out.println("Result of delete:\n" + getInput(createdStream.getId()));
+        } catch (ApiCallException exception) {
+            exception.printStackTrace();
+        }
     }
 
     @Override

@@ -28,4 +28,14 @@ public class H264Settings extends EncoderSettings{
     public void setKeyIntMax(Integer keyIntMax) {
         this.keyIntMax = keyIntMax;
     }
+
+    @Override
+    public String toString() {
+        return "H264Settings{" +
+                "codec=" + codec +
+                ", bitrate=" + bitrate +
+                ", speedPreset=" + speedPreset +
+                ", keyIntMax=" + keyIntMax +
+                '}';
+    }
 }
