@@ -1,140 +1,49 @@
 package com.ceeblue.sdk.http.template;
 
+import com.ceeblue.sdk.utils.ApiCallException;
 import com.ceeblue.sdk.utils.RestTemplateResponseErrorHandler;
-import com.ceeblue.sdk.utils.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.time.Duration;
 
-import static com.ceeblue.sdk.authentiffication.utils.AuthenticationConstants.AUTHORIZATION_HEADER;
-import static com.ceeblue.sdk.authentiffication.utils.AuthenticationConstants.BEARER;
+import static java.time.temporal.ChronoUnit.MILLIS;
 
 @Component
 public class HttpRestTemplate implements HttpTemplate {
-    private final ObjectMapper mapper = new ObjectMapper();
     private final RestTemplate template;
-    String token;
 
     public HttpRestTemplate(RestTemplateBuilder template) {
-        this.template = template.errorHandler(new RestTemplateResponseErrorHandler()).build();
+        this.template = template.errorHandler(new RestTemplateResponseErrorHandler())
+                .setConnectTimeout(Duration.of(10000, MILLIS))
+                .setReadTimeout(Duration.of(10000, MILLIS)).build();
     }
 
     @Override
-    public void authorize(String token) {
-        this.token = token;
-    }
-
-    @Override
-    public <T> T get(Class<T> resultClass, String uri, String body, Map<String, String> headers) throws JsonParseException {
+    public String exchange(String uri, RequestInfo payload) {
         try {
-            HttpEntity<String> entity = getPayload(body, headers);
+            HttpEntity<String> entity = processPayload(payload);
 
-            return sendRequest(HttpMethod.GET, resultClass, uri, entity);
-        } catch (JsonProcessingException e) {
-            throw new JsonParseException("Can't create json from passed parameters. Params: " + body, e);
+            return template.exchange(uri, HttpMethod.valueOf(payload.getMethod().name()), entity, String.class).getBody();
+        } catch (ResourceAccessException exception) {
+            throw new ApiCallException("Timeout", -1, exception.getMessage());
         }
     }
 
-    @Override
-    public <T> T get(Class<T> resultClass, String uri) {
-        try {
-            HttpEntity<String> entity = getPayload(null, new HashMap<>());
-
-            return sendRequest(HttpMethod.GET, resultClass, uri, entity);
-        } catch (JsonProcessingException e) {
-            throw new JsonParseException("Can't create json from passed parameters", e);
-        }
-    }
-
-    @Override
-    public <T> T post(Class<T> resultClass, String uri, String body, Map<String, String> headers) {
-        try {
-            HttpEntity<String> entity = getPayload(body, headers);
-
-            return sendRequest(HttpMethod.POST, resultClass, uri, entity);
-        } catch (JsonProcessingException e) {
-            throw new JsonParseException("Can't create json from passed parameters. Params: " + body, e);
-        }
-    }
-
-    @Override
-    public <T> T post(Class<T> resultClass, String uri) {
-        try {
-            HttpEntity<String> entity = getPayload(null, new HashMap<>());
-
-            return sendRequest(HttpMethod.POST, resultClass, uri, entity);
-        } catch (JsonProcessingException e) {
-            throw new JsonParseException("Can't create json from passed parameters", e);
-        }
-    }
-
-    @Override
-    public <T> T put(Class<T> resultClass, String uri, String body, Map<String, String> headers) {
-        try {
-            HttpEntity<String> entity = getPayload(body, headers);
-
-            return sendRequest(HttpMethod.PUT, resultClass, uri, entity);
-        } catch (JsonProcessingException e) {
-            throw new JsonParseException("Can't create json from passed parameters. Params: " + body, e);
-        }
-    }
-
-    @Override
-    public <T> T put(Class<T> resultClass, String uri) {
-        try {
-            HttpEntity<String> entity = getPayload(null, new HashMap<>());
-
-            return sendRequest(HttpMethod.PUT, resultClass, uri, entity);
-        } catch (JsonProcessingException e) {
-            throw new JsonParseException("Can't create json from passed parameters", e);
-        }
-    }
-
-    @Override
-    public <T> T delete(Class<T> resultClass, String uri, String body, Map<String, String> headers) {
-        try {
-            HttpEntity<String> entity = getPayload(body, headers);
-
-            return sendRequest(HttpMethod.DELETE, resultClass, uri, entity);
-        } catch (JsonProcessingException e) {
-            throw new JsonParseException("Can't create json from passed parameters. Params: " + body, e);
-        }
-    }
-
-    @Override
-    public <T> T delete(Class<T> resultClass, String uri) {
-        try {
-            HttpEntity<String> entity = getPayload("", new HashMap<>());
-
-            return sendRequest(HttpMethod.DELETE, resultClass, uri, entity);
-        } catch (JsonProcessingException e) {
-            throw new JsonParseException("Can't create json from passed parameters", e);
-        }
-    }
-
-
-    private HttpEntity<String> getPayload(String body, Map<String, String> headers) throws JsonProcessingException {
+    private HttpEntity<String> processPayload(RequestInfo payload) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        if (token != null) {
-            httpHeaders.set(AUTHORIZATION_HEADER, BEARER + token);
-        }
 
-        headers.forEach(httpHeaders::set);
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        payload.getHeaders().forEach((headerName, headerValue) -> httpHeaders.set(headerName, headerValue.toString()));
 
-        return new HttpEntity<>(body, httpHeaders);
+        httpHeaders.setContentType(MediaType.valueOf(payload.getMediaType().getType()));
+
+        return new HttpEntity<>(payload.getBody(), httpHeaders);
     }
 
-    private <T> T sendRequest(HttpMethod method, Class<T> resultClass, String uri, HttpEntity<String> entity) {
-        return template.exchange(uri, method, entity, resultClass).getBody();
-    }
 }

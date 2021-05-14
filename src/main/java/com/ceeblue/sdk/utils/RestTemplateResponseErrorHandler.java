@@ -6,8 +6,10 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResponseErrorHandler;
 
-import javax.security.sasl.AuthenticationException;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 @Component
 public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
@@ -20,14 +22,25 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
 
     @Override
     public void handleError(ClientHttpResponse httpResponse) throws IOException {
-        if (httpResponse.getStatusCode().series() == HttpStatus.Series.SERVER_ERROR) {
-            throw new ApiCallException("Wrong credentials",
-                    httpResponse.getStatusCode().value(),
-                    "");
-        } else if (httpResponse.getStatusCode().series() == HttpStatus.Series.CLIENT_ERROR) {
-            throw new ApiCallException("Internal error on remote server",
-                    httpResponse.getStatusCode().value(),
-                    "");
+        String body = "";
+        if (httpResponse.getStatusCode().series().value() == HttpStatus.Series.CLIENT_ERROR.value()) {
+            if (httpResponse.getBody() != null) {
+
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getBody()))) {
+                    body = reader.lines().collect(Collectors.joining(""));
+
+                }
+            }
+
+            throw new ApiCallException("Can't evaluate request", httpResponse.getStatusCode().value(), body);
+        } else if (httpResponse.getStatusCode().series() == HttpStatus.Series.SERVER_ERROR) {
+            if (httpResponse.getBody() != null) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getBody()))) {
+                    body = reader.lines().collect(Collectors.joining(""));
+                }
+            }
+
+            throw new ApiCallException("Internal error on remote server", httpResponse.getStatusCode().value(), body);
         }
     }
 }

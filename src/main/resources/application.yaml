@@ -1,8 +1,7 @@
 ceeblue:
-  settings:
+  credentials:
     username: vladyslav
     password: sudosugo
-    api: https://shark.ceeblue.tv/api
 
 spring:
   main:

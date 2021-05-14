@@ -1,10 +1,5 @@
 package com.ceeblue.sdk.authentiffication;
 
-import org.springframework.boot.web.client.RestTemplateBuilder;
-
 public interface AuthenticationService {
-
-    String authenticate();
-
-    String getOrCreateToken();
+    void authenticate(String username, String password, Session session);
 }

@@ -1,14 +1,16 @@
 package com.ceeblue.sdk.authentiffication;
 
 import com.ceeblue.sdk.authentiffication.utils.AuthorizationException;
+import com.ceeblue.sdk.http.template.HTTPMethod;
 import com.ceeblue.sdk.http.template.HttpTemplate;
-import com.ceeblue.sdk.settings.Settings;
+import com.ceeblue.sdk.http.template.MediaType;
+import com.ceeblue.sdk.http.template.RequestInfo;
+import com.ceeblue.sdk.settings.Credential;
 import com.ceeblue.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,39 +21,40 @@ import static com.ceeblue.sdk.authentiffication.utils.AuthenticationConstants.*;
 public class AuthenticationServiceImplementation implements AuthenticationService {
 
     public static final ObjectMapper mapper = new ObjectMapper();
+    public static final String TOKEN = "token";
 
-    final Settings settings;
+    final Credential credential;
 
-    private final HttpTemplate template;
+    private HttpTemplate template;
 
-    public AuthenticationServiceImplementation(Settings credentials, HttpTemplate template) {
-        this.settings = credentials;
+    public AuthenticationServiceImplementation(Credential credentials, HttpTemplate template) {
+        this.credential = credentials;
         this.template = template;
     }
 
     @Override
-    public String authenticate() {
+    public void authenticate(String username, String password, Session session) {
         TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
         };
 
         String body = getBody();
 
-        String token = template.post(String.class, settings.getApi() + LOGIN, body, new HashMap<>());
-
+        String jsonToken = template.exchange(session.getEndpoint() + LOGIN, new RequestInfo()
+                .setBody(body)
+                .setHeaders(new HashMap<>())
+                .setMethod(HTTPMethod.POST)
+                .setMediaType(MediaType.JSON));
         try {
-            settings.setToken(mapper.readValue(token, typeRef).get("token"));
+            session.setToken(mapper.readValue(jsonToken, typeRef).get(TOKEN));
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new AuthorizationException("Invalid response From Server");
+            throw new AuthorizationException("Invalid response from Server: " + jsonToken);
         }
-
-        return settings.getToken();
     }
 
     private String getBody() {
         Map<String, Object> payload = new HashMap<>();
-        payload.put(USERNAME, settings.getUsername());
-        payload.put(PASSWORD, settings.getPassword());
+        payload.put(USERNAME, credential.getUsername());
+        payload.put(PASSWORD, credential.getPassword());
 
         try {
             return mapper.writeValueAsString(payload);
@@ -60,12 +63,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
         }
     }
 
-    @Override
-    public String getOrCreateToken() {
-        if (!StringUtils.hasText(settings.getToken())) {
-            authenticate();
-        }
-
-        return settings.getToken();
+    public void setTemplate(HttpTemplate template) {
+        this.template = template;
     }
 }

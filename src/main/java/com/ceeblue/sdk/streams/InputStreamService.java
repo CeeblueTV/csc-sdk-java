@@ -4,11 +4,10 @@ import com.ceeblue.sdk.streams.models.Access;
 import com.ceeblue.sdk.streams.models.CreatedStream;
 import com.ceeblue.sdk.streams.models.Output;
 import com.ceeblue.sdk.streams.models.Stream;
-import com.ceeblue.sdk.http.clients.HttpClient;
 
 import java.util.List;
 
-public interface InputStreamService extends HttpClient {
+public interface InputStreamService {
     CreatedStream createStream(Stream stream);
 
     List<CreatedStream> getInputs();

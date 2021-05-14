@@ -13,6 +13,9 @@ public class Track {
         this.settings = settings;
     }
 
+    public Track() {
+    }
+
     public TrackType getType() {
         return type;
     }

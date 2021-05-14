@@ -1,21 +1,32 @@
 package com.ceeblue.sdk.streams;
 
 import com.ceeblue.sdk.authentiffication.AuthenticationService;
+import com.ceeblue.sdk.authentiffication.Session;
+import com.ceeblue.sdk.http.template.HTTPMethod;
 import com.ceeblue.sdk.http.template.HttpTemplate;
-import com.ceeblue.sdk.settings.Settings;
+import com.ceeblue.sdk.http.template.MediaType;
+import com.ceeblue.sdk.http.template.RequestInfo;
+import com.ceeblue.sdk.settings.Credential;
 import com.ceeblue.sdk.streams.models.*;
-import com.ceeblue.sdk.utils.ApiCallException;
+import com.ceeblue.sdk.utils.ClientException;
 import com.ceeblue.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpStatusCodeException;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.ceeblue.sdk.streams.models.CodecName.*;
+import static com.ceeblue.sdk.authentiffication.utils.AuthenticationConstants.AUTHORIZATION_HEADER;
+import static com.ceeblue.sdk.authentiffication.utils.AuthenticationConstants.BEARER;
+import static com.ceeblue.sdk.http.template.HTTPMethod.*;
+import static com.ceeblue.sdk.streams.models.CodecName.AAC;
+import static com.ceeblue.sdk.streams.models.CodecName.H264;
 import static com.ceeblue.sdk.streams.models.TrackType.Audio;
 import static com.ceeblue.sdk.streams.models.TrackType.Video;
 
@@ -26,14 +37,17 @@ public class InputStreamServiceImplementation implements InputStreamService {
     public static final ObjectMapper mapper = new ObjectMapper();
     public static final String OUTPUT = "/output/";
     private final AuthenticationService authenticationService;
-    private final Settings settings;
+    private HttpTemplate template;
+    private Credential credential;
+    private Session session = new Session();
 
-    private final HttpTemplate template;
-
-    public InputStreamServiceImplementation(AuthenticationService authenticationService, Settings settings, HttpTemplate template) {
+    public InputStreamServiceImplementation(AuthenticationService authenticationService, Credential credential, HttpTemplate template, Session session) {
         this.authenticationService = authenticationService;
-        this.settings = settings;
+        this.credential = credential;
         this.template = template;
+        if (session != null) {
+            this.session = session;
+        }
     }
 
     @PostConstruct
@@ -44,7 +58,7 @@ public class InputStreamServiceImplementation implements InputStreamService {
                             new Output(true)
                                     .version(1)
                                     .tracks(Arrays.asList(
-                                            new VideoTrack(Video, new H264Settings(H264, 110, SpeedPreset.faster,20)),
+                                            new VideoTrack(Video, new H264Settings(H264, 110, SpeedPreset.faster, 20)),
                                             new AudioTrack(Audio, new EncoderSettings(AAC, 30))
                                     )));
 
@@ -63,102 +77,166 @@ public class InputStreamServiceImplementation implements InputStreamService {
             System.out.println("Result of update output:\n" + updateOutput(createdStream.getId(), output));
 
             deleteInput(createdStream.getId());
-
+            deleteInput(createdStream.getId());
 
             System.out.println("Result of delete:\n" + getInput(createdStream.getId()));
-        } catch (ApiCallException exception) {
-            exception.printStackTrace();
+        } catch (RuntimeException exception) {
+            System.out.println(exception);
         }
     }
 
     @Override
     public CreatedStream createStream(Stream stream) {
-        ObjectMapper mapper = new ObjectMapper();
-        String json;
         try {
-            json = mapper.writeValueAsString(stream);
-        } catch (JsonProcessingException e) {
-            throw new JsonParseException("Can't parse passed stream for creation. Stream: " + stream, e);
-        }
 
-        authenticate();
-        return template.post(CreatedStream.class, settings.getApi() + INPUTS, json, new HashMap<>());
+            String json;
+            try {
+                json = mapper.writeValueAsString(stream);
+            } catch (JsonProcessingException e) {
+                throw new JsonParseException("Can't parse passed stream for creation. Stream: " + stream, e);
+            }
+
+            return exchange(session.getEndpoint() + INPUTS, json, POST, CreatedStream.class);
+
+        } catch (RuntimeException exception) {
+            throw new ClientException("Can't create stream", session.getEndpoint() + INPUTS, POST, exception);
+        }
     }
 
     @Override
     public List<CreatedStream> getInputs() {
-        authenticate();
-        CreatedStream[] inputs = template.get(CreatedStream[].class, settings.getApi() + INPUTS);
-        return Arrays.stream(Objects.requireNonNull(inputs)).collect(Collectors.toList());
+        try {
+
+            return Arrays.stream(exchange(session.getEndpoint() + INPUTS, "", GET, CreatedStream[].class))
+                    .collect(Collectors.toList());
+
+        } catch (RuntimeException exception) {
+            throw new ClientException("Can't get stream", session.getEndpoint() + INPUTS, GET, exception);
+
+        }
+
     }
 
     @Override
     public CreatedStream getInput(String id) {
         try {
-            authenticate();
-            return template.get(CreatedStream.class, settings.getApi() + INPUTS + id);
-        } catch (HttpStatusCodeException exception) {
-            throw new ApiCallException("Can't find input with id: " + id, exception.getStatusCode().value(), exception.getResponseBodyAsString());
+            return exchange(session.getEndpoint() + INPUTS + id, "", GET, CreatedStream.class);
+        } catch (RuntimeException exception) {
+            throw new ClientException("Can't get stream", session.getEndpoint() + INPUTS + id, GET, exception);
         }
+
     }
 
 
     @Override
     public CreatedStream updateInput(String id, Access access, String token) {
-        Map<String, Object> updated = new HashMap<>();
-        if (id == null) {
-            throw new IllegalArgumentException("Id must be nonnull");
-        }
-        if (access != null) {
-            updated.put("access", access);
-        }
-        if (access != null) {
-            updated.put("accessToken", token);
-        }
         try {
-            String body = mapper.writeValueAsString(updated);
+            Map<String, Object> updated = new HashMap<>();
+            if (id == null) {
+                throw new IllegalArgumentException("Id must be nonnull");
+            }
+            if (access != null) {
+                updated.put("access", access);
+            }
+            if (access != null) {
+                updated.put("accessToken", token);
+            }
+            try {
+                String body = mapper.writeValueAsString(updated);
 
-            authenticate();
-            return template.put(CreatedStream.class, settings.getApi() + INPUTS + id, body, new HashMap<>());
-        } catch (JsonProcessingException e) {
-            throw new JsonParseException("Can't create json from passed parameters. Params: " + updated, e);
+                authenticateIfHaveNot();
+                return exchange(session.getEndpoint() + INPUTS + id, body, PUT, CreatedStream.class);
+            } catch (JsonProcessingException e) {
+                throw new JsonParseException("Can't create json from passed parameters. Params: " + updated, e);
+            }
+
+        } catch (RuntimeException exception) {
+            throw new ClientException("Can't update stream", session.getEndpoint() + INPUTS + id + INPUTS + id, PUT, exception);
         }
     }
 
     @Override
     public void deleteInput(String id) {
-        authenticate();
-        template.delete(String.class, settings.getApi() + INPUTS + id);
+        try {
+            authenticateIfHaveNot();
+            exchange(session.getEndpoint() + INPUTS + id, "", DELETE, String.class);
+
+        } catch (RuntimeException exception) {
+            throw new ClientException("Can't delete stream", session.getEndpoint() + INPUTS + id, DELETE, exception);
+        }
     }
 
     @Override
     public Output getOutput(String id) {
         try {
-            authenticate();
-            return template.get(Output.class, settings.getApi() + INPUTS + id + OUTPUT);
-        } catch (HttpStatusCodeException exception) {
-            throw new ApiCallException("Can't find input with id: " + id, exception.getStatusCode().value(), exception.getResponseBodyAsString());
+            authenticateIfHaveNot();
+            return exchange(session.getEndpoint() + INPUTS + id + OUTPUT, "", GET, Output.class);
+        } catch (RuntimeException exception) {
+            throw new ClientException("Can't get output", session.getEndpoint() + INPUTS + id + OUTPUT, GET, exception);
         }
     }
 
     @Override
     public Output updateOutput(String id, Output output) {
         try {
-            try {
-                String body = mapper.writeValueAsString(output);
-                authenticate();
-                return template.put(Output.class, settings.getApi() + INPUTS + id + OUTPUT, body, new HashMap<>());
-            } catch (JsonProcessingException e) {
-                throw new JsonParseException("Can't create json from passed parameters. Params: " + output, e);
-            }
-        } catch (HttpStatusCodeException exception) {
-            throw new ApiCallException("Can't find input with id: " + id, exception.getStatusCode().value(), exception.getResponseBodyAsString());
+            String body = mapper.writeValueAsString(output);
+            authenticateIfHaveNot();
+            return exchange(session.getEndpoint() + INPUTS + id + OUTPUT, body, PUT, Output.class);
+        } catch (JsonProcessingException e) {
+            throw new JsonParseException("Can't create json from passed parameters. Params: " + output, e);
+        } catch (RuntimeException exception) {
+            throw new ClientException("Can't update output", session.getEndpoint() + INPUTS + id + OUTPUT, PUT, exception);
         }
     }
 
-    public void authenticate() {
-        if (settings.getToken() == null) {
-            template.authorize(authenticationService.getOrCreateToken());
+    public HashMap<String, Object> authenticateIfHaveNot() {
+        if (session.getToken() == null) {
+            authenticationService.authenticate(credential.getUsername(), credential.getPassword(), session);
         }
+
+        HashMap<String, Object> authHeader = new HashMap<>();
+        authHeader.put(AUTHORIZATION_HEADER, BEARER + session.getToken());
+
+        return authHeader;
+    }
+
+    @Nullable
+    private <T> T exchange(String url, String body, HTTPMethod method, Class<T> type) throws JsonParseException {
+        return exchange(url, body, method, type, new HashMap<>());
+    }
+
+    @Nullable
+    private <T> T exchange(String url, String body, HTTPMethod method, Class<T> type, Map<String, Object> headers) throws JsonParseException {
+        HashMap<String, Object> authHeader = authenticateIfHaveNot();
+        authHeader.putAll(headers);
+
+        String result = template.exchange(url, new RequestInfo()
+                .setBody(body)
+                .setMediaType(MediaType.JSON)
+                .setHeaders(authHeader)
+                .setMethod(method)
+        );
+
+        try {
+            if (result != null) {
+                return mapper.readValue(result, type);
+            } else {
+                return null; // if server return nothing
+            }
+        } catch (JsonProcessingException e) {
+            throw new JsonParseException("Can't parse response from server" + result, e);
+        }
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public void setTemplate(HttpTemplate template) {
+        this.template = template;
+    }
+
+    public void setCredential(Credential credential) {
+        this.credential = credential;
     }
 }
