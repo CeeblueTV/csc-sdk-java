@@ -2,9 +2,8 @@ package com.ceeblue.sdk.http.template;
 
 import com.ceeblue.sdk.http.HttpClient;
 import com.ceeblue.sdk.http.RequestInfo;
-import com.ceeblue.sdk.http.template.utils.RestTemplateResponseErrorHandler;
 import com.ceeblue.sdk.utils.ApiCallException;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,18 +12,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.Duration;
-
-import static java.time.temporal.ChronoUnit.MILLIS;
-
 @Component
 public class HttpRestClient implements HttpClient {
     private final RestTemplate template;
 
-    public HttpRestClient(RestTemplateBuilder template) {
-        this.template = template.errorHandler(new RestTemplateResponseErrorHandler())
-                .setConnectTimeout(Duration.of(10000, MILLIS))
-                .setReadTimeout(Duration.of(10000, MILLIS)).build();
+    public HttpRestClient(@Qualifier("okHttpRestTemplate") RestTemplate template) {
+        this.template =  template;
     }
 
     @Override
