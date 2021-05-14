@@ -7,7 +7,7 @@ import com.ceeblue.sdk.streams.models.Stream;
 
 import java.util.List;
 
-public interface InputStreamService {
+public interface InputStreamClient {
     CreatedStream createStream(Stream stream);
 
     List<CreatedStream> getInputs();
