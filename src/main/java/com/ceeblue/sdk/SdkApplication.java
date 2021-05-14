@@ -1,5 +1,6 @@
 package com.ceeblue.sdk;
 
+import com.ceeblue.sdk.http.template.utils.OkHttpErrorHandler;
 import com.ceeblue.sdk.http.template.utils.RestTemplateResponseErrorHandler;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +26,7 @@ public class SdkApplication {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(Duration.of(10000, MILLIS))
                 .readTimeout(Duration.of(10000, MILLIS))
+                .addInterceptor(new OkHttpErrorHandler())
                 .build();
 
         return new RestTemplate(new OkHttp3ClientHttpRequestFactory(client));
