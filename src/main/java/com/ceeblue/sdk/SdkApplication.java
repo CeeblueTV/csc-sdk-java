@@ -14,13 +14,7 @@ public class SdkApplication {
     }
 
     @Bean
-    public RestTemplate getTemplate(RestTemplateBuilder builder){
+    public RestTemplate getTemplate(RestTemplateBuilder builder) {
         return builder.build();
     }
-
-    @Bean
-    public String getNull(){
-        return null;
-    }
-
 }

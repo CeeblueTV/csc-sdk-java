@@ -1,4 +1,7 @@
-package com.ceeblue.sdk.http.template;
+package com.ceeblue.sdk.http;
+
+import com.ceeblue.sdk.http.template.utils.HTTPMethod;
+import com.ceeblue.sdk.http.template.utils.MediaType;
 
 import java.util.HashMap;
 import java.util.Map;

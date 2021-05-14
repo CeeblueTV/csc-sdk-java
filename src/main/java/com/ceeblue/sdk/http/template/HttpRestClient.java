@@ -1,7 +1,9 @@
 package com.ceeblue.sdk.http.template;
 
+import com.ceeblue.sdk.http.HttpClient;
+import com.ceeblue.sdk.http.RequestInfo;
+import com.ceeblue.sdk.http.template.utils.RestTemplateResponseErrorHandler;
 import com.ceeblue.sdk.utils.ApiCallException;
-import com.ceeblue.sdk.utils.RestTemplateResponseErrorHandler;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,17 +18,17 @@ import java.time.Duration;
 import static java.time.temporal.ChronoUnit.MILLIS;
 
 @Component
-public class HttpRestTemplate implements HttpTemplate {
+public class HttpRestClient implements HttpClient {
     private final RestTemplate template;
 
-    public HttpRestTemplate(RestTemplateBuilder template) {
+    public HttpRestClient(RestTemplateBuilder template) {
         this.template = template.errorHandler(new RestTemplateResponseErrorHandler())
                 .setConnectTimeout(Duration.of(10000, MILLIS))
                 .setReadTimeout(Duration.of(10000, MILLIS)).build();
     }
 
     @Override
-    public String exchange(String uri, RequestInfo payload) {
+    public String exchange(String uri, RequestInfo payload) throws ApiCallException {
         try {
             HttpEntity<String> entity = processPayload(payload);
 
@@ -45,5 +47,4 @@ public class HttpRestTemplate implements HttpTemplate {
 
         return new HttpEntity<>(payload.getBody(), httpHeaders);
     }
-
 }

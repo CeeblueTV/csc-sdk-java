@@ -1,6 +1,7 @@
-package com.ceeblue.sdk.utils;
+package com.ceeblue.sdk.http.template.utils;
 
 
+import com.ceeblue.sdk.utils.ApiCallException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;

@@ -1,5 +1,5 @@
 package com.ceeblue.sdk.authentiffication;
 
-public interface AuthenticationService {
+public interface AuthenticationClient {
     Session authenticate();
 }

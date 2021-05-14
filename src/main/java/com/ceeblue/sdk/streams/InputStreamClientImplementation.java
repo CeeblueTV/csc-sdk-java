@@ -1,12 +1,13 @@
 package com.ceeblue.sdk.streams;
 
-import com.ceeblue.sdk.authentiffication.AuthenticationService;
+import com.ceeblue.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.sdk.authentiffication.Session;
-import com.ceeblue.sdk.http.template.HTTPMethod;
-import com.ceeblue.sdk.http.template.HttpTemplate;
-import com.ceeblue.sdk.http.template.MediaType;
-import com.ceeblue.sdk.http.template.RequestInfo;
+import com.ceeblue.sdk.http.HttpClient;
+import com.ceeblue.sdk.http.RequestInfo;
+import com.ceeblue.sdk.http.template.utils.HTTPMethod;
+import com.ceeblue.sdk.http.template.utils.MediaType;
 import com.ceeblue.sdk.streams.models.*;
+import com.ceeblue.sdk.utils.ApiCallException;
 import com.ceeblue.sdk.utils.ClientException;
 import com.ceeblue.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 
 import static com.ceeblue.sdk.authentiffication.utils.AuthenticationConstants.AUTHORIZATION_HEADER;
 import static com.ceeblue.sdk.authentiffication.utils.AuthenticationConstants.BEARER;
-import static com.ceeblue.sdk.http.template.HTTPMethod.*;
+import static com.ceeblue.sdk.http.template.utils.HTTPMethod.*;
 import static com.ceeblue.sdk.streams.models.CodecName.AAC;
 import static com.ceeblue.sdk.streams.models.CodecName.H264;
 import static com.ceeblue.sdk.streams.models.TrackType.Audio;
@@ -35,12 +36,12 @@ public class InputStreamClientImplementation implements InputStreamClient {
     public static final String INPUTS = "/inputs/";
     public static final ObjectMapper mapper = new ObjectMapper();
     public static final String OUTPUT = "/output/";
-    private final AuthenticationService authenticationService;
-    private HttpTemplate template;
+    private final AuthenticationClient authenticationClient;
+    private HttpClient template;
     private Session session;
 
-    public InputStreamClientImplementation(AuthenticationService authenticationService, HttpTemplate template) {
-        this.authenticationService = authenticationService;
+    public InputStreamClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
+        this.authenticationClient = authenticationClient;
         this.template = template;
     }
 
@@ -72,38 +73,37 @@ public class InputStreamClientImplementation implements InputStreamClient {
 
             deleteInput(createdStream.getId());
 
-            System.out.println("Result of delete:\n" + getInput(createdStream.getId()));
+            System.out.println("Result of delete. Expected ClientException. Result:");
+            try {
+                System.out.println(getInput(createdStream.getId()));
+            } catch (ApiCallException exception) {
+                System.out.println(exception);
+            }
+
         } catch (RuntimeException exception) {
             System.out.println(exception);
         }
     }
 
     @Override
-    public CreatedStream createStream(Stream stream) {
+    public CreatedStream createStream(Stream stream) throws ClientException {
         try {
-
-            String json;
-            try {
-                json = mapper.writeValueAsString(stream);
-            } catch (JsonProcessingException e) {
-                throw new JsonParseException("Can't parse passed stream for creation. Stream: " + stream, e);
-            }
+            String json = createJson(stream);
 
             return exchange(INPUTS, json, POST, CreatedStream.class);
-
-        } catch (RuntimeException exception) {
-            throw new ClientException("Can't create stream", session + INPUTS, POST, exception);
+        } catch (JsonParseException | ApiCallException exception) {
+            throw new ClientException("Can't create stream: " + stream, session + INPUTS, POST, exception);
         }
     }
 
     @Override
-    public List<CreatedStream> getInputs() {
+    public List<CreatedStream> getInputs() throws ClientException {
         try {
 
-            return Arrays.stream(exchange( INPUTS, "", GET, CreatedStream[].class))
+            return Arrays.stream(exchange(INPUTS, "", GET, CreatedStream[].class))
                     .collect(Collectors.toList());
 
-        } catch (RuntimeException exception) {
+        } catch (JsonParseException | ApiCallException exception) {
             throw new ClientException("Can't get stream", session + INPUTS, GET, exception);
 
         }
@@ -111,18 +111,18 @@ public class InputStreamClientImplementation implements InputStreamClient {
     }
 
     @Override
-    public CreatedStream getInput(String id) {
+    public CreatedStream getInput(String id) throws ClientException {
         try {
-            return exchange( INPUTS + id, "", GET, CreatedStream.class);
-        } catch (RuntimeException exception) {
+            return exchange(INPUTS + id, "", GET, CreatedStream.class);
+
+        } catch (JsonParseException | ApiCallException exception) {
             throw new ClientException("Can't get stream", session + INPUTS + id, GET, exception);
         }
-
     }
 
 
     @Override
-    public CreatedStream updateInput(String id, Access access, String token) {
+    public CreatedStream updateInput(String id, Access access, String token) throws ClientException {
         try {
             Map<String, Object> updated = new HashMap<>();
             if (id == null) {
@@ -134,23 +134,19 @@ public class InputStreamClientImplementation implements InputStreamClient {
             if (access != null) {
                 updated.put("accessToken", token);
             }
-            try {
-                String body = mapper.writeValueAsString(updated);
 
-                return exchange( INPUTS + id, body, PUT, CreatedStream.class);
-            } catch (JsonProcessingException e) {
-                throw new JsonParseException("Can't create json from passed parameters. Params: " + updated, e);
-            }
+            String body = createJson(updated);
 
-        } catch (RuntimeException exception) {
+            return exchange(INPUTS + id, body, PUT, CreatedStream.class);
+        } catch (JsonParseException | ApiCallException exception) {
             throw new ClientException("Can't update stream", INPUTS + id + INPUTS + id, PUT, exception);
         }
     }
 
     @Override
-    public void deleteInput(String id) {
+    public void deleteInput(String id) throws ClientException {
         try {
-            exchange( INPUTS + id, "", DELETE, String.class);
+            exchange(INPUTS + id, "", DELETE, Void.class);
 
         } catch (RuntimeException exception) {
             throw new ClientException("Can't delete stream", session + INPUTS + id, DELETE, exception);
@@ -158,29 +154,29 @@ public class InputStreamClientImplementation implements InputStreamClient {
     }
 
     @Override
-    public Output getOutput(String id) {
+    public Output getOutput(String id) throws ClientException {
         try {
-            return exchange( INPUTS + id + OUTPUT, "", GET, Output.class);
-        } catch (RuntimeException exception) {
-            throw new ClientException("Can't get output", session+ INPUTS + id + OUTPUT, GET, exception);
+            return exchange(INPUTS + id + OUTPUT, "", GET, Output.class);
+
+        } catch (JsonParseException | ApiCallException exception) {
+            throw new ClientException("Can't get output", session + INPUTS + id + OUTPUT, GET, exception);
         }
     }
 
     @Override
-    public Output updateOutput(String id, Output output) {
+    public Output updateOutput(String id, Output output) throws ClientException {
         try {
-            String body = mapper.writeValueAsString(output);
-            return exchange( INPUTS + id + OUTPUT, body, PUT, Output.class);
-        } catch (JsonProcessingException e) {
-            throw new JsonParseException("Can't create json from passed parameters. Params: " + output, e);
-        } catch (RuntimeException exception) {
-            throw new ClientException("Can't update output", session.getEndpoint() + INPUTS + id + OUTPUT, PUT, exception);
+            String body = createJson(output);
+            return exchange(INPUTS + id + OUTPUT, body, PUT, Output.class);
+
+        } catch (ApiCallException | JsonParseException exception) {
+            throw new ClientException("Can't update output. New output: " + output, session.getEndpoint() + INPUTS + id + OUTPUT, PUT, exception);
         }
     }
 
     public HashMap<String, Object> authenticateIfHaveNot() {
         if (session == null) {
-          session =  authenticationService.authenticate();
+            session = authenticationClient.authenticate();
         }
 
         HashMap<String, Object> authHeader = new HashMap<>();
@@ -190,12 +186,12 @@ public class InputStreamClientImplementation implements InputStreamClient {
     }
 
     @Nullable
-    private <T> T exchange(String queryParameters, String body, HTTPMethod method, Class<T> type) throws JsonParseException {
+    private <T> T exchange(String queryParameters, String body, HTTPMethod method, Class<T> type) throws JsonParseException, ApiCallException {
         return exchange(queryParameters, body, method, type, new HashMap<>());
     }
 
     @Nullable
-    private <T> T exchange(String queryParameters, String body, HTTPMethod method, Class<T> type, Map<String, Object> headers) throws JsonParseException {
+    private <T> T exchange(String queryParameters, String body, HTTPMethod method, Class<T> type, Map<String, Object> headers) throws JsonParseException, ApiCallException {
         HashMap<String, Object> authHeader = authenticateIfHaveNot();
         authHeader.putAll(headers);
 
@@ -206,14 +202,29 @@ public class InputStreamClientImplementation implements InputStreamClient {
                 .setMethod(method)
         );
 
+        return parseJson(type, result);
+    }
+
+    @Nullable
+    private <T> T parseJson(Class<T> type, String result) throws JsonParseException {
         try {
-            if (result != null) {
+            if (type != Void.class) {
                 return mapper.readValue(result, type);
-            } else {
-                return null; // if server return nothing
             }
         } catch (JsonProcessingException e) {
             throw new JsonParseException("Can't parse response from server" + result, e);
+        }
+
+        return null;
+    }
+
+    @Nullable
+    private <T> String createJson(T result) throws JsonParseException {
+        try {
+            return mapper.writeValueAsString(result);
+
+        } catch (JsonProcessingException e) {
+            throw new JsonParseException("Can't create json: " + result, e);
         }
     }
 
@@ -221,7 +232,7 @@ public class InputStreamClientImplementation implements InputStreamClient {
         this.session = session;
     }
 
-    public void setTemplate(HttpTemplate template) {
+    public void setTemplate(HttpClient template) {
         this.template = template;
     }
 }

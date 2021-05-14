@@ -1,4 +1,4 @@
-package com.ceeblue.sdk.http.template;
+package com.ceeblue.sdk.http.template.utils;
 
 public enum MediaType {
     JSON("application/json");

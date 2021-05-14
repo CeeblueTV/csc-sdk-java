@@ -58,4 +58,16 @@ public class Stream {
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
+
+    @Override
+    public String toString() {
+        return "Stream{" +
+                "format=" + format +
+                ", streamer=" + streamer +
+                ", callbackUri='" + callbackUri + '\'' +
+                ", output=" + output +
+                ", access=" + access +
+                ", accessToken='" + accessToken + '\'' +
+                '}';
+    }
 }

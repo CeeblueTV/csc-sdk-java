@@ -1,6 +1,6 @@
 package com.ceeblue.sdk.utils;
 
-import com.ceeblue.sdk.http.template.HTTPMethod;
+import com.ceeblue.sdk.http.template.utils.HTTPMethod;
 
 public class ClientException extends RuntimeException {
     String api;
@@ -17,11 +17,11 @@ public class ClientException extends RuntimeException {
 
     @Override
     public String toString() {
-        return "ClientException{" +
-                "api='" + api + '\'' +
-                ", method=" + method +
-                ", exception=" + exception +
-                ", message='" + message + '\'' +
+        return "ClientException: \n" +
+                "api='" + api + '\n' +
+                "Method=" + method + "\n" +
+                "Exception=" + exception + "\n" +
+                "Message='" + message + '\'' +
                 '}';
     }
 }

@@ -3,6 +3,9 @@ package com.ceeblue.sdk.streams.models;
 class Parameters {
     private String signallingUri;
 
+    public Parameters() {
+    }
+
     public String getSignallingUri() {
         return signallingUri;
     }

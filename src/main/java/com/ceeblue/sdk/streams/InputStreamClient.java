@@ -4,6 +4,7 @@ import com.ceeblue.sdk.streams.models.Access;
 import com.ceeblue.sdk.streams.models.CreatedStream;
 import com.ceeblue.sdk.streams.models.Output;
 import com.ceeblue.sdk.streams.models.Stream;
+import com.ceeblue.sdk.utils.ClientException;
 
 import java.util.List;
 
@@ -20,5 +21,5 @@ public interface InputStreamClient {
 
     Output getOutput(String id);
 
-    Output updateOutput(String id, Output output);
+    Output updateOutput(String id, Output output) throws ClientException;
 }

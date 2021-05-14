@@ -1,6 +1,7 @@
 package com.ceeblue.sdk.streams.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class CreatedStream {
     private String accessToken;
     private String callbackUri;
     private List<String> statusMessages;
+    @JsonProperty("connection")
     private Parameters connection;
 
     public String getId() {

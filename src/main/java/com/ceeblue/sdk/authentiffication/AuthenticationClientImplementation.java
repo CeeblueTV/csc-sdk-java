@@ -1,16 +1,16 @@
 package com.ceeblue.sdk.authentiffication;
 
 import com.ceeblue.sdk.authentiffication.utils.AuthorizationException;
-import com.ceeblue.sdk.http.template.HTTPMethod;
-import com.ceeblue.sdk.http.template.HttpTemplate;
-import com.ceeblue.sdk.http.template.MediaType;
-import com.ceeblue.sdk.http.template.RequestInfo;
+import com.ceeblue.sdk.http.HttpClient;
+import com.ceeblue.sdk.http.RequestInfo;
+import com.ceeblue.sdk.http.template.utils.HTTPMethod;
+import com.ceeblue.sdk.http.template.utils.MediaType;
 import com.ceeblue.sdk.settings.Credential;
 import com.ceeblue.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.lang.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -19,16 +19,16 @@ import java.util.Map;
 import static com.ceeblue.sdk.authentiffication.utils.AuthenticationConstants.*;
 
 @Component
-public class AuthenticationServiceImplementation implements AuthenticationService {
+public class AuthenticationClientImplementation implements AuthenticationClient {
 
     public static final ObjectMapper mapper = new ObjectMapper();
     public static final String TOKEN = "token";
 
     final Credential credential;
     private final Session session = new Session();
-    private HttpTemplate template;
+    private final HttpClient template;
 
-    public AuthenticationServiceImplementation(Credential credentials, HttpTemplate template, @Nullable String endpoint) {
+    public AuthenticationClientImplementation(Credential credentials, HttpClient template, String endpoint) {
         this.credential = credentials;
         this.template = template;
         if (endpoint == null) {
@@ -37,8 +37,19 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
         session.setEndpoint(endpoint);
     }
 
+    @Autowired
+    public AuthenticationClientImplementation(Credential credentials, HttpClient template) {
+        this.credential = credentials;
+        this.template = template;
+        session.setEndpoint(DEFAULT_ENDPOINT);
+    }
+
     @Override
     public Session authenticate() {
+        if (session.getToken() != null) {
+            return session;
+        }
+
         TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
         };
 
@@ -66,9 +77,5 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
         } catch (JsonProcessingException e) {
             throw new JsonParseException("Can't parse passed stream for creation. Stream: " + payload, e);
         }
-    }
-
-    public void setTemplate(HttpTemplate template) {
-        this.template = template;
     }
 }
