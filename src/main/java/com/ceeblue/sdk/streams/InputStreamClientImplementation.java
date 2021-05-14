@@ -6,7 +6,6 @@ import com.ceeblue.sdk.http.template.HTTPMethod;
 import com.ceeblue.sdk.http.template.HttpTemplate;
 import com.ceeblue.sdk.http.template.MediaType;
 import com.ceeblue.sdk.http.template.RequestInfo;
-import com.ceeblue.sdk.settings.Credential;
 import com.ceeblue.sdk.streams.models.*;
 import com.ceeblue.sdk.utils.ClientException;
 import com.ceeblue.sdk.utils.JsonParseException;
@@ -31,23 +30,18 @@ import static com.ceeblue.sdk.streams.models.TrackType.Audio;
 import static com.ceeblue.sdk.streams.models.TrackType.Video;
 
 @Service
-public class InputStreamServiceImplementation implements InputStreamService {
+public class InputStreamClientImplementation implements InputStreamClient {
 
     public static final String INPUTS = "/inputs/";
     public static final ObjectMapper mapper = new ObjectMapper();
     public static final String OUTPUT = "/output/";
     private final AuthenticationService authenticationService;
     private HttpTemplate template;
-    private Credential credential;
-    private Session session = new Session();
+    private Session session;
 
-    public InputStreamServiceImplementation(AuthenticationService authenticationService, Credential credential, HttpTemplate template, Session session) {
+    public InputStreamClientImplementation(AuthenticationService authenticationService, HttpTemplate template) {
         this.authenticationService = authenticationService;
-        this.credential = credential;
         this.template = template;
-        if (session != null) {
-            this.session = session;
-        }
     }
 
     @PostConstruct
@@ -77,7 +71,6 @@ public class InputStreamServiceImplementation implements InputStreamService {
             System.out.println("Result of update output:\n" + updateOutput(createdStream.getId(), output));
 
             deleteInput(createdStream.getId());
-            deleteInput(createdStream.getId());
 
             System.out.println("Result of delete:\n" + getInput(createdStream.getId()));
         } catch (RuntimeException exception) {
@@ -96,10 +89,10 @@ public class InputStreamServiceImplementation implements InputStreamService {
                 throw new JsonParseException("Can't parse passed stream for creation. Stream: " + stream, e);
             }
 
-            return exchange(session.getEndpoint() + INPUTS, json, POST, CreatedStream.class);
+            return exchange(INPUTS, json, POST, CreatedStream.class);
 
         } catch (RuntimeException exception) {
-            throw new ClientException("Can't create stream", session.getEndpoint() + INPUTS, POST, exception);
+            throw new ClientException("Can't create stream", session + INPUTS, POST, exception);
         }
     }
 
@@ -107,11 +100,11 @@ public class InputStreamServiceImplementation implements InputStreamService {
     public List<CreatedStream> getInputs() {
         try {
 
-            return Arrays.stream(exchange(session.getEndpoint() + INPUTS, "", GET, CreatedStream[].class))
+            return Arrays.stream(exchange( INPUTS, "", GET, CreatedStream[].class))
                     .collect(Collectors.toList());
 
         } catch (RuntimeException exception) {
-            throw new ClientException("Can't get stream", session.getEndpoint() + INPUTS, GET, exception);
+            throw new ClientException("Can't get stream", session + INPUTS, GET, exception);
 
         }
 
@@ -120,9 +113,9 @@ public class InputStreamServiceImplementation implements InputStreamService {
     @Override
     public CreatedStream getInput(String id) {
         try {
-            return exchange(session.getEndpoint() + INPUTS + id, "", GET, CreatedStream.class);
+            return exchange( INPUTS + id, "", GET, CreatedStream.class);
         } catch (RuntimeException exception) {
-            throw new ClientException("Can't get stream", session.getEndpoint() + INPUTS + id, GET, exception);
+            throw new ClientException("Can't get stream", session + INPUTS + id, GET, exception);
         }
 
     }
@@ -144,35 +137,32 @@ public class InputStreamServiceImplementation implements InputStreamService {
             try {
                 String body = mapper.writeValueAsString(updated);
 
-                authenticateIfHaveNot();
-                return exchange(session.getEndpoint() + INPUTS + id, body, PUT, CreatedStream.class);
+                return exchange( INPUTS + id, body, PUT, CreatedStream.class);
             } catch (JsonProcessingException e) {
                 throw new JsonParseException("Can't create json from passed parameters. Params: " + updated, e);
             }
 
         } catch (RuntimeException exception) {
-            throw new ClientException("Can't update stream", session.getEndpoint() + INPUTS + id + INPUTS + id, PUT, exception);
+            throw new ClientException("Can't update stream", INPUTS + id + INPUTS + id, PUT, exception);
         }
     }
 
     @Override
     public void deleteInput(String id) {
         try {
-            authenticateIfHaveNot();
-            exchange(session.getEndpoint() + INPUTS + id, "", DELETE, String.class);
+            exchange( INPUTS + id, "", DELETE, String.class);
 
         } catch (RuntimeException exception) {
-            throw new ClientException("Can't delete stream", session.getEndpoint() + INPUTS + id, DELETE, exception);
+            throw new ClientException("Can't delete stream", session + INPUTS + id, DELETE, exception);
         }
     }
 
     @Override
     public Output getOutput(String id) {
         try {
-            authenticateIfHaveNot();
-            return exchange(session.getEndpoint() + INPUTS + id + OUTPUT, "", GET, Output.class);
+            return exchange( INPUTS + id + OUTPUT, "", GET, Output.class);
         } catch (RuntimeException exception) {
-            throw new ClientException("Can't get output", session.getEndpoint() + INPUTS + id + OUTPUT, GET, exception);
+            throw new ClientException("Can't get output", session+ INPUTS + id + OUTPUT, GET, exception);
         }
     }
 
@@ -180,8 +170,7 @@ public class InputStreamServiceImplementation implements InputStreamService {
     public Output updateOutput(String id, Output output) {
         try {
             String body = mapper.writeValueAsString(output);
-            authenticateIfHaveNot();
-            return exchange(session.getEndpoint() + INPUTS + id + OUTPUT, body, PUT, Output.class);
+            return exchange( INPUTS + id + OUTPUT, body, PUT, Output.class);
         } catch (JsonProcessingException e) {
             throw new JsonParseException("Can't create json from passed parameters. Params: " + output, e);
         } catch (RuntimeException exception) {
@@ -190,8 +179,8 @@ public class InputStreamServiceImplementation implements InputStreamService {
     }
 
     public HashMap<String, Object> authenticateIfHaveNot() {
-        if (session.getToken() == null) {
-            authenticationService.authenticate(credential.getUsername(), credential.getPassword(), session);
+        if (session == null) {
+          session =  authenticationService.authenticate();
         }
 
         HashMap<String, Object> authHeader = new HashMap<>();
@@ -201,16 +190,16 @@ public class InputStreamServiceImplementation implements InputStreamService {
     }
 
     @Nullable
-    private <T> T exchange(String url, String body, HTTPMethod method, Class<T> type) throws JsonParseException {
-        return exchange(url, body, method, type, new HashMap<>());
+    private <T> T exchange(String queryParameters, String body, HTTPMethod method, Class<T> type) throws JsonParseException {
+        return exchange(queryParameters, body, method, type, new HashMap<>());
     }
 
     @Nullable
-    private <T> T exchange(String url, String body, HTTPMethod method, Class<T> type, Map<String, Object> headers) throws JsonParseException {
+    private <T> T exchange(String queryParameters, String body, HTTPMethod method, Class<T> type, Map<String, Object> headers) throws JsonParseException {
         HashMap<String, Object> authHeader = authenticateIfHaveNot();
         authHeader.putAll(headers);
 
-        String result = template.exchange(url, new RequestInfo()
+        String result = template.exchange(session.getEndpoint() + queryParameters, new RequestInfo()
                 .setBody(body)
                 .setMediaType(MediaType.JSON)
                 .setHeaders(authHeader)
@@ -234,9 +223,5 @@ public class InputStreamServiceImplementation implements InputStreamService {
 
     public void setTemplate(HttpTemplate template) {
         this.template = template;
-    }
-
-    public void setCredential(Credential credential) {
-        this.credential = credential;
     }
 }

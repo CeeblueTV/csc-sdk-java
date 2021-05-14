@@ -18,4 +18,9 @@ public class SdkApplication {
         return builder.build();
     }
 
+    @Bean
+    public String getNull(){
+        return null;
+    }
+
 }

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Session {
-    String endpoint = "https://shark.ceeblue.tv/api";
+    String endpoint;
     String token;
 
     public Session(String endpoint, String token) {
@@ -19,15 +19,22 @@ public class Session {
         return endpoint;
     }
 
-    public void setEndpoint(String endpoint) {
+    public Session setEndpoint(String endpoint) {
         this.endpoint = endpoint;
+        return this;
     }
 
     public String getToken() {
         return token;
     }
 
-    public void setToken(String token) {
+    public Session setToken(String token) {
         this.token = token;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return endpoint;
     }
 }

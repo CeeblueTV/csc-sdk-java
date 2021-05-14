@@ -10,6 +10,7 @@ import com.ceeblue.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -24,16 +25,20 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
     public static final String TOKEN = "token";
 
     final Credential credential;
-
+    private final Session session = new Session();
     private HttpTemplate template;
 
-    public AuthenticationServiceImplementation(Credential credentials, HttpTemplate template) {
+    public AuthenticationServiceImplementation(Credential credentials, HttpTemplate template, @Nullable String endpoint) {
         this.credential = credentials;
         this.template = template;
+        if (endpoint == null) {
+            endpoint = DEFAULT_ENDPOINT;
+        }
+        session.setEndpoint(endpoint);
     }
 
     @Override
-    public void authenticate(String username, String password, Session session) {
+    public Session authenticate() {
         TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
         };
 
@@ -45,7 +50,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
                 .setMethod(HTTPMethod.POST)
                 .setMediaType(MediaType.JSON));
         try {
-            session.setToken(mapper.readValue(jsonToken, typeRef).get(TOKEN));
+            return session.setToken(mapper.readValue(jsonToken, typeRef).get(TOKEN));
         } catch (JsonProcessingException e) {
             throw new AuthorizationException("Invalid response from Server: " + jsonToken);
         }
