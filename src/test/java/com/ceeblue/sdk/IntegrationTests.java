@@ -5,7 +5,7 @@ import com.ceeblue.sdk.http.HttpClient;
 import com.ceeblue.sdk.streams.input.InputStreamClient;
 import com.ceeblue.sdk.streams.input.InputStreamClientImplementation;
 import com.ceeblue.sdk.streams.input.StreamBuilder;
-import com.ceeblue.sdk.streams.models.*;
+import com.ceeblue.sdk.streams.input.models.*;
 import com.ceeblue.sdk.utils.ClientException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,10 +14,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 
-import static com.ceeblue.sdk.streams.models.CodecName.AAC;
-import static com.ceeblue.sdk.streams.models.CodecName.H264;
-import static com.ceeblue.sdk.streams.models.TrackType.Audio;
-import static com.ceeblue.sdk.streams.models.TrackType.Video;
+import static com.ceeblue.sdk.streams.input.models.CodecName.AAC;
+import static com.ceeblue.sdk.streams.input.models.CodecName.H264;
+import static com.ceeblue.sdk.streams.input.models.TrackType.Audio;
+import static com.ceeblue.sdk.streams.input.models.TrackType.Video;
 
 @SpringBootTest
 class IntegrationTests {

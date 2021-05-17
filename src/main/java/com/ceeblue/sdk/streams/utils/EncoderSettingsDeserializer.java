@@ -1,6 +1,6 @@
 package com.ceeblue.sdk.streams.utils;
 
-import com.ceeblue.sdk.streams.models.*;
+import com.ceeblue.sdk.streams.input.models.*;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;

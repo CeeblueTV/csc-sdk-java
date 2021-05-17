@@ -1,14 +1,16 @@
 package com.ceeblue.sdk.streams.input;
 
-import com.ceeblue.sdk.streams.models.Access;
-import com.ceeblue.sdk.streams.models.CreatedStream;
-import com.ceeblue.sdk.streams.models.Output;
-import com.ceeblue.sdk.streams.models.Stream;
+import com.ceeblue.sdk.http.HttpClient;
+import com.ceeblue.sdk.streams.input.models.Access;
+import com.ceeblue.sdk.streams.input.models.CreatedStream;
+import com.ceeblue.sdk.streams.input.models.Output;
+import com.ceeblue.sdk.streams.input.models.Stream;
 import com.ceeblue.sdk.utils.ClientException;
 
 import java.util.List;
 
 public interface InputStreamClient {
+
     CreatedStream createStream(Stream stream) throws ClientException;
 
     List<CreatedStream> getInputs() throws ClientException;
@@ -22,4 +24,6 @@ public interface InputStreamClient {
     Output getOutput(String id) throws ClientException;
 
     Output updateOutput(String id, Output output) throws ClientException;
+
+    void setTemplate(HttpClient template);
 }

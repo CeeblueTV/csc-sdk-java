@@ -1,4 +1,4 @@
-package com.ceeblue.sdk.streams.models;
+package com.ceeblue.sdk.streams.input.models;
 
 import java.util.Objects;
 

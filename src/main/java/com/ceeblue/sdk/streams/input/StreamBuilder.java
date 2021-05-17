@@ -1,9 +1,9 @@
 package com.ceeblue.sdk.streams.input;
 
-import com.ceeblue.sdk.streams.models.InputFormat;
-import com.ceeblue.sdk.streams.models.InputStreamer;
-import com.ceeblue.sdk.streams.models.Output;
-import com.ceeblue.sdk.streams.models.Stream;
+import com.ceeblue.sdk.streams.input.models.InputFormat;
+import com.ceeblue.sdk.streams.input.models.InputStreamer;
+import com.ceeblue.sdk.streams.input.models.Output;
+import com.ceeblue.sdk.streams.input.models.Stream;
 
 public class StreamBuilder {
     Stream stream = new Stream();
