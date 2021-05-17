@@ -1,7 +1,8 @@
 package com.ceeblue.sdk.streams.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class VP8Settings extends EncoderSettings {
@@ -28,5 +29,19 @@ public class VP8Settings extends EncoderSettings {
                 ", bitrate=" + bitrate +
                 ", keyMaxDist=" + keyMaxDist +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        VP8Settings that = (VP8Settings) o;
+        return Objects.equals(keyMaxDist, that.keyMaxDist);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), keyMaxDist);
     }
 }

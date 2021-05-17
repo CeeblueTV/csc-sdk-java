@@ -13,10 +13,10 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-public class HttpRestClient implements HttpClient {
+public class HttpRestTemplate implements HttpClient {
     private final RestTemplate template;
 
-    public HttpRestClient(@Qualifier("okHttpRestTemplate") RestTemplate template) {
+    public HttpRestTemplate(@Qualifier("okHttpRestTemplate") RestTemplate template) {
         this.template =  template;
     }
 

@@ -8,7 +8,5 @@ public class AuthenticationConstants {
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String BEARER = "Bearer ";
 
-    public static final String INPUTS_API = "/inputs";
-
     public static final String DEFAULT_ENDPOINT = "https://shark.ceeblue.tv/api";
 }

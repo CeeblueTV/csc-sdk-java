@@ -1,5 +1,7 @@
 package com.ceeblue.sdk.streams.models;
 
+import java.util.Objects;
+
 class Parameters {
     private String signallingUri;
 
@@ -19,5 +21,18 @@ class Parameters {
         return "Parameters{" +
                 "signallingUri='" + signallingUri + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Parameters that = (Parameters) o;
+        return signallingUri.equals(that.signallingUri);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(signallingUri);
     }
 }

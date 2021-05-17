@@ -3,6 +3,7 @@ package com.ceeblue.sdk.streams.models;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
+import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Output {
@@ -78,5 +79,18 @@ public class Output {
                 ", overlay=" + overlay +
                 ", tracks=" + tracks +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Output output = (Output) o;
+        return passthrough == output.passthrough && version.equals(output.version) && Objects.equals(overlay, output.overlay) && tracks.equals(output.tracks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(passthrough, version, overlay, tracks);
     }
 }

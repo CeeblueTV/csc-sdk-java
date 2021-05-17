@@ -1,4 +1,4 @@
-package com.ceeblue.sdk.streams;
+package com.ceeblue.sdk.streams.input;
 
 import com.ceeblue.sdk.streams.models.InputFormat;
 import com.ceeblue.sdk.streams.models.InputStreamer;
@@ -12,22 +12,22 @@ public class StreamBuilder {
         stream.setFormat(format);
     }
 
-    StreamBuilder setInputStreamer(InputStreamer streamer) {
+    public StreamBuilder setInputStreamer(InputStreamer streamer) {
         stream.setStreamer(streamer);
         return this;
     }
 
-    StreamBuilder setCallbackUri(String callbackUri) {
+    public StreamBuilder setCallbackUri(String callbackUri) {
         stream.setCallbackUri(callbackUri);
         return this;
     }
 
-    StreamBuilder setOutput(Output output) {
+    public StreamBuilder setOutput(Output output) {
         stream.setOutput(output);
         return this;
     }
 
-    StreamBuilder setAccessToken(String format) {
+    public StreamBuilder setAccessToken(String format) {
         stream.setAccessToken(format);
         return this;
     }
