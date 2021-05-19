@@ -1,4 +1,4 @@
-package com.ceeblue.sdk.streams.utils;
+package com.ceeblue.sdk.streams.input.utils;
 
 import com.ceeblue.sdk.streams.input.models.*;
 import com.fasterxml.jackson.core.JsonParser;

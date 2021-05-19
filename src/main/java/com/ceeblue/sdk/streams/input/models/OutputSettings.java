@@ -6,35 +6,35 @@ import java.util.List;
 import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Output {
+public class OutputSettings {
     private boolean passthrough;
     private Integer version;
     private Overlay overlay;
     private List<Track> tracks;
 
-    public Output() {
+    public OutputSettings() {
     }
 
-    public Output(boolean passthrough) {
+    public OutputSettings(boolean passthrough) {
         this.passthrough = passthrough;
     }
 
-    public Output passthrough(boolean passthrough) {
+    public OutputSettings passthrough(boolean passthrough) {
         this.passthrough = passthrough;
         return this;
     }
 
-    public Output version(Integer version) {
+    public OutputSettings version(Integer version) {
         this.version = version;
         return this;
     }
 
-    public Output Overlay(Overlay overlay) {
+    public OutputSettings Overlay(Overlay overlay) {
         this.overlay = overlay;
         return this;
     }
 
-    public Output tracks(List<Track> tracks) {
+    public OutputSettings tracks(List<Track> tracks) {
         this.tracks = tracks;
         return this;
     }
@@ -85,7 +85,7 @@ public class Output {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Output output = (Output) o;
+        OutputSettings output = (OutputSettings) o;
         return passthrough == output.passthrough && version.equals(output.version) && Objects.equals(overlay, output.overlay) && tracks.equals(output.tracks);
     }
 

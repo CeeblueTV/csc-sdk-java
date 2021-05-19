@@ -7,7 +7,7 @@ public class Stream {
     InputFormat format;
     InputStreamer streamer;
     String callbackUri;
-    Output output = new Output(true);
+    OutputSettings output = new OutputSettings(true);
     Access access = Access.Public;
     String accessToken;
 
@@ -35,11 +35,11 @@ public class Stream {
         this.callbackUri = callbackUri;
     }
 
-    public Output getOutput() {
+    public OutputSettings getOutput() {
         return output;
     }
 
-    public void setOutput(Output output) {
+    public void setOutput(OutputSettings output) {
         this.output = output;
     }
 

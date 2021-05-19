@@ -2,7 +2,7 @@ package com.ceeblue.sdk.streams.push;
 
 import com.ceeblue.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.sdk.http.HttpClient;
-import com.ceeblue.sdk.streams.StreamClient;
+import com.ceeblue.sdk.streams.ApiClient;
 import com.ceeblue.sdk.streams.push.models.CreatedPush;
 import com.ceeblue.sdk.streams.push.models.StreamPush;
 import com.ceeblue.sdk.utils.ApiCallException;
@@ -18,17 +18,17 @@ import java.util.stream.Collectors;
 import static com.ceeblue.sdk.http.template.utils.HTTPMethod.*;
 
 @Service
-public class StreamPushClientImplementation extends StreamClient implements StreamPushClient {
+public class ApiPushClientImplementation extends ApiClient implements StreamPushClient {
 
     private static final String PUSHES = "/pushes/";
     private static final String STREAM = "/stream/";
 
     @Autowired
-    public StreamPushClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
+    public ApiPushClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
     }
 
-    public StreamPushClientImplementation(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
+    public ApiPushClientImplementation(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
         super(authenticationClient, template, endpoint);
     }
 

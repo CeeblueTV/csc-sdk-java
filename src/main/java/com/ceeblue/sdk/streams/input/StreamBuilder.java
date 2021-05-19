@@ -1,9 +1,8 @@
 package com.ceeblue.sdk.streams.input;
 
-import com.ceeblue.sdk.streams.input.models.InputFormat;
-import com.ceeblue.sdk.streams.input.models.InputStreamer;
-import com.ceeblue.sdk.streams.input.models.Output;
-import com.ceeblue.sdk.streams.input.models.Stream;
+import com.ceeblue.sdk.streams.input.models.*;
+
+import static com.ceeblue.sdk.streams.input.models.Access.Private;
 
 public class StreamBuilder {
     Stream stream = new Stream();
@@ -22,13 +21,16 @@ public class StreamBuilder {
         return this;
     }
 
-    public StreamBuilder setOutput(Output output) {
+    public StreamBuilder setOutput(OutputSettings output) {
         stream.setOutput(output);
         return this;
     }
 
-    public StreamBuilder setAccessToken(String format) {
-        stream.setAccessToken(format);
+    public StreamBuilder setAccess(Access access, String token) {
+        stream.setAccess(access);
+        if (stream.getAccess() == Private) {
+            stream.setAccessToken(token);
+        }
         return this;
     }
 

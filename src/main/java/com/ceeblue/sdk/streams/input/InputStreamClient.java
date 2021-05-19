@@ -3,7 +3,7 @@ package com.ceeblue.sdk.streams.input;
 import com.ceeblue.sdk.http.HttpClient;
 import com.ceeblue.sdk.streams.input.models.Access;
 import com.ceeblue.sdk.streams.input.models.CreatedStream;
-import com.ceeblue.sdk.streams.input.models.Output;
+import com.ceeblue.sdk.streams.input.models.OutputSettings;
 import com.ceeblue.sdk.streams.input.models.Stream;
 import com.ceeblue.sdk.utils.ClientException;
 
@@ -21,9 +21,9 @@ public interface InputStreamClient {
 
     void deleteInput(String id) throws ClientException;
 
-    Output getOutput(String id) throws ClientException;
+    OutputSettings getOutputSettings(String id) throws ClientException;
 
-    Output updateOutput(String id, Output output) throws ClientException;
+    OutputSettings updateOutput(String id, OutputSettings output) throws ClientException;
 
     void setTemplate(HttpClient template);
 }

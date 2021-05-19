@@ -2,10 +2,10 @@ package com.ceeblue.sdk.streams.input;
 
 import com.ceeblue.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.sdk.http.HttpClient;
-import com.ceeblue.sdk.streams.StreamClient;
+import com.ceeblue.sdk.streams.ApiClient;
 import com.ceeblue.sdk.streams.input.models.Access;
 import com.ceeblue.sdk.streams.input.models.CreatedStream;
-import com.ceeblue.sdk.streams.input.models.Output;
+import com.ceeblue.sdk.streams.input.models.OutputSettings;
 import com.ceeblue.sdk.streams.input.models.Stream;
 import com.ceeblue.sdk.utils.ApiCallException;
 import com.ceeblue.sdk.utils.ClientException;
@@ -22,17 +22,17 @@ import java.util.stream.Collectors;
 import static com.ceeblue.sdk.http.template.utils.HTTPMethod.*;
 
 @Service
-public class InputStreamClientImplementation extends StreamClient implements InputStreamClient {
+public class InputApiClientImplementation extends ApiClient implements InputStreamClient {
 
     public static final String INPUTS = "/inputs/";
     public static final String OUTPUT = "/output/";
 
     @Autowired
-    public InputStreamClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
+    public InputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
     }
 
-    public InputStreamClientImplementation(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
+    public InputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
         super(authenticationClient, template, endpoint);
     }
 
@@ -43,7 +43,7 @@ public class InputStreamClientImplementation extends StreamClient implements Inp
 
             return exchange(INPUTS, json, POST, CreatedStream.class);
         } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't create stream: " + stream, session + INPUTS, POST, exception);
+            throw new ClientException("Can't create input stream: " + stream, session + INPUTS, POST, exception);
         }
     }
 
@@ -106,9 +106,9 @@ public class InputStreamClientImplementation extends StreamClient implements Inp
     }
 
     @Override
-    public Output getOutput(String id) {
+    public OutputSettings getOutputSettings(String id) {
         try {
-            return exchange(INPUTS + id + OUTPUT, "", GET, Output.class);
+            return exchange(INPUTS + id + OUTPUT, "", GET, OutputSettings.class);
 
         } catch (JsonParseException | ApiCallException exception) {
             throw new ClientException("Can't get output", session + INPUTS + id + OUTPUT, GET, exception);
@@ -116,10 +116,10 @@ public class InputStreamClientImplementation extends StreamClient implements Inp
     }
 
     @Override
-    public Output updateOutput(String id, Output output) {
+    public OutputSettings updateOutput(String id, OutputSettings output) {
         try {
             String body = createJson(output);
-            return exchange(INPUTS + id + OUTPUT, body, PUT, Output.class);
+            return exchange(INPUTS + id + OUTPUT, body, PUT, OutputSettings.class);
 
         } catch (ApiCallException | JsonParseException exception) {
             throw new ClientException("Can't update output. New output: " + output, session.getEndpoint() + INPUTS + id + OUTPUT, PUT, exception);

@@ -17,20 +17,20 @@ import java.util.Map;
 
 import static com.ceeblue.sdk.authentiffication.utils.AuthenticationConstants.*;
 
-public abstract class StreamClient {
+public abstract class ApiClient {
 
     public static final ObjectMapper mapper = new ObjectMapper();
     private final AuthenticationClient authenticationClient;
     protected HttpClient template;
     protected Session session;
 
-    protected StreamClient(AuthenticationClient authenticationClient, HttpClient template) {
+    protected ApiClient(AuthenticationClient authenticationClient, HttpClient template) {
         this.authenticationClient = authenticationClient;
         this.template = template;
         session = new Session().setEndpoint(DEFAULT_ENDPOINT);
     }
 
-    protected StreamClient(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
+    protected ApiClient(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
         this.authenticationClient = authenticationClient;
         this.template = template;
         session = new Session().setEndpoint(endpoint);
