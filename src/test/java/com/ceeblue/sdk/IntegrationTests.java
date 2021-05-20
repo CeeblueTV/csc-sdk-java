@@ -6,17 +6,16 @@ import com.ceeblue.sdk.streams.input.InputApiClientImplementation;
 import com.ceeblue.sdk.streams.input.InputStreamClient;
 import com.ceeblue.sdk.streams.input.StreamBuilder;
 import com.ceeblue.sdk.streams.input.models.*;
+import com.ceeblue.sdk.streams.input.models.encoder.EncoderSettings;
+import com.ceeblue.sdk.streams.input.models.encoder.H264Settings;
+import com.ceeblue.sdk.streams.input.models.inputs.CreatedInput;
+import com.ceeblue.sdk.streams.input.models.inputs.Input;
+import com.ceeblue.sdk.streams.input.models.tracks.AudioTrack;
+import com.ceeblue.sdk.streams.input.models.tracks.VideoTrack;
 import com.ceeblue.sdk.streams.output.OutputStreamClient;
 import com.ceeblue.sdk.streams.output.models.output.CreatedOutput;
 import com.ceeblue.sdk.streams.output.models.output.Output;
-import com.ceeblue.sdk.streams.push.models.output.TrackSelector;
 import com.ceeblue.sdk.streams.recording.RecordingClient;
-import com.ceeblue.sdk.streams.recording.models.Capture;
-import com.ceeblue.sdk.streams.recording.models.FileFormat;
-import com.ceeblue.sdk.streams.recording.models.Recording;
-import com.ceeblue.sdk.streams.recording.models.Source;
-import com.ceeblue.sdk.streams.recording.models.created.CreatedRecording;
-import com.ceeblue.sdk.streams.recording.models.created.State;
 import com.ceeblue.sdk.streams.storage.StorageClient;
 import com.ceeblue.sdk.streams.storage.models.storages.AmazonS3;
 import com.ceeblue.sdk.streams.storage.models.storages.AmazonS3Compatible;
@@ -31,8 +30,8 @@ import java.util.List;
 
 import static com.ceeblue.sdk.streams.input.models.CodecName.AAC;
 import static com.ceeblue.sdk.streams.input.models.CodecName.H264;
-import static com.ceeblue.sdk.streams.input.models.TrackType.Audio;
-import static com.ceeblue.sdk.streams.input.models.TrackType.Video;
+import static com.ceeblue.sdk.streams.input.models.tracks.TrackType.Audio;
+import static com.ceeblue.sdk.streams.input.models.tracks.TrackType.Video;
 
 @SpringBootTest
 class IntegrationTests {
@@ -68,31 +67,31 @@ class IntegrationTests {
                                         new AudioTrack(Audio, new EncoderSettings(AAC, 30))
                                 )));
 
-        Stream stream = builder.build();
+        Input input = builder.build();
 
-        CreatedStream createdStream = Assertions.assertDoesNotThrow(() -> inputStreamClient.createStream(stream), "Try to create input stream");
+        CreatedInput createdInput = Assertions.assertDoesNotThrow(() -> inputStreamClient.createStream(input), "Try to create input stream");
 
         Assertions.assertTrue(inputStreamClient.getInputs().size() > 0, "Check getting all input streams");
         Assertions.assertDoesNotThrow(() -> inputStreamClient.getInputs().size() > 0, "Check getting all input streams");
 
-        CreatedStream finalCreatedStream1 = createdStream;
-        Assertions.assertDoesNotThrow(() -> inputStreamClient.getInput(finalCreatedStream1.getId()), "Check getting input stream");
+        CreatedInput finalCreatedInput1 = createdInput;
+        Assertions.assertDoesNotThrow(() -> inputStreamClient.getInput(finalCreatedInput1.getId()), "Check getting input stream");
 
 
-        createdStream = Assertions.assertDoesNotThrow(() -> inputStreamClient.updateInput(finalCreatedStream1.getId(), Access.Private, null), "Try to update input stream");
-        Assertions.assertEquals(createdStream, inputStreamClient.getInput(createdStream.getId()), "Check updated stream");
+        createdInput = Assertions.assertDoesNotThrow(() -> inputStreamClient.updateInput(finalCreatedInput1.getId(), Access.Private, null), "Try to update input stream");
+        Assertions.assertEquals(createdInput, inputStreamClient.getInput(createdInput.getId()), "Check updated stream");
 
-        CreatedStream finalCreatedStream = createdStream;
+        CreatedInput finalCreatedInput = createdInput;
 
-        OutputSettings output = Assertions.assertDoesNotThrow(() -> inputStreamClient.getOutputSettings(finalCreatedStream.getId()), "Try to get output");
+        OutputSettings output = Assertions.assertDoesNotThrow(() -> inputStreamClient.getOutputSettings(finalCreatedInput.getId()), "Try to get output");
 
         output.setPassthrough(false);
-        Assertions.assertEquals(output, inputStreamClient.updateOutput(createdStream.getId(), output), "Try to update output");
+        Assertions.assertEquals(output, inputStreamClient.updateOutputSettings(createdInput.getId(), output), "Try to update output");
 
 
-        Assertions.assertDoesNotThrow(() -> inputStreamClient.deleteInput(finalCreatedStream.getId()), "Could not delete input stream");
+        Assertions.assertDoesNotThrow(() -> inputStreamClient.deleteInput(finalCreatedInput.getId()), "Could not delete input stream");
 
-        Assertions.assertThrows(ClientException.class, () -> inputStreamClient.getInput(finalCreatedStream.getId()), "Try to get deleted inputStream");
+        Assertions.assertThrows(ClientException.class, () -> inputStreamClient.getInput(finalCreatedInput.getId()), "Try to get deleted inputStream");
     }
 
     @Test
@@ -109,19 +108,19 @@ class IntegrationTests {
                                         new AudioTrack(Audio, new EncoderSettings(AAC, 30))
                                 ))).setAccess(Access.Private, "xxx");
 
-        Stream stream = builder.build();
+        Input input = builder.build();
 
-        CreatedStream createdStream = Assertions.assertDoesNotThrow(() -> inputStreamClient.createStream(stream), "Try to create input stream");
+        CreatedInput createdInput = Assertions.assertDoesNotThrow(() -> inputStreamClient.createStream(input), "Try to create input stream");
 
-        CreatedOutput createdOutput = outputStreamClient.createOutput(new Output(createdStream.getId(), InputFormat.RTMP));
+        CreatedOutput createdOutput = outputStreamClient.createOutput(new Output(createdInput.getId(), InputFormat.RTMP));
 
-        List<CreatedOutput> outputs = outputStreamClient.getOutputs(createdStream.getId());
+        List<CreatedOutput> outputs = outputStreamClient.getOutputs(createdInput.getId());
 
         Assertions.assertTrue(outputs.size() > 0, "Check getting all input streams. Should be at least 1");
 
         Assertions.assertDoesNotThrow(() -> outputStreamClient.deleteOutput(createdOutput.getId()), "Try to delete output");
 
-        Assertions.assertEquals(0, outputStreamClient.getOutputs(createdStream.getId()).size(), "Check result of deleting");
+        Assertions.assertEquals(0, outputStreamClient.getOutputs(createdInput.getId()).size(), "Check result of deleting");
 
         Assertions.assertDoesNotThrow(() -> outputStreamClient.deleteOutputSessions(createdOutput.getId()), "Try to delete output sessions");
     }

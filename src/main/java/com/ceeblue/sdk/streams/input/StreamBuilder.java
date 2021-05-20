@@ -1,41 +1,42 @@
 package com.ceeblue.sdk.streams.input;
 
 import com.ceeblue.sdk.streams.input.models.*;
+import com.ceeblue.sdk.streams.input.models.inputs.Input;
 
 import static com.ceeblue.sdk.streams.input.models.Access.Private;
 
 public class StreamBuilder {
-    Stream stream = new Stream();
+    Input input = new Input();
 
     public StreamBuilder(InputFormat format) {
-        stream.setFormat(format);
+        input.setFormat(format);
     }
 
     public StreamBuilder setInputStreamer(InputStreamer streamer) {
-        stream.setStreamer(streamer);
+        input.setStreamer(streamer);
         return this;
     }
 
     public StreamBuilder setCallbackUri(String callbackUri) {
-        stream.setCallbackUri(callbackUri);
+        input.setCallbackUri(callbackUri);
         return this;
     }
 
     public StreamBuilder setOutput(OutputSettings output) {
-        stream.setOutput(output);
+        input.setOutput(output);
         return this;
     }
 
     public StreamBuilder setAccess(Access access, String token) {
-        stream.setAccess(access);
-        if (stream.getAccess() == Private) {
-            stream.setAccessToken(token);
+        input.setAccess(access);
+        if (input.getAccess() == Private) {
+            input.setAccessToken(token);
         }
         return this;
     }
 
 
-    public Stream build() {
-        return stream;
+    public Input build() {
+        return input;
     }
 }

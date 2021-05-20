@@ -1,6 +1,6 @@
 package com.ceeblue.sdk.streams.input.models;
 
-class Streamer {
+public class Streamer {
     private String ipAddress;
 
     public String getIpAddress() {

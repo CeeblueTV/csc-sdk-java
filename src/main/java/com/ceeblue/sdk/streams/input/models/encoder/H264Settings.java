@@ -1,11 +1,13 @@
-package com.ceeblue.sdk.streams.input.models;
+package com.ceeblue.sdk.streams.input.models.encoder;
 
+import com.ceeblue.sdk.streams.input.models.CodecName;
+import com.ceeblue.sdk.streams.input.models.SpeedPreset;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class H264Settings extends EncoderSettings{
+public class H264Settings extends EncoderSettings {
     private SpeedPreset speedPreset;
     private Integer keyIntMax;
 

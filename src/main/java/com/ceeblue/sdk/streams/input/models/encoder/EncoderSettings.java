@@ -1,5 +1,6 @@
-package com.ceeblue.sdk.streams.input.models;
+package com.ceeblue.sdk.streams.input.models.encoder;
 
+import com.ceeblue.sdk.streams.input.models.CodecName;
 import com.ceeblue.sdk.streams.input.utils.EncoderSettingsDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

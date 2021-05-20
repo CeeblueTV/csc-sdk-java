@@ -1,5 +1,6 @@
-package com.ceeblue.sdk.streams.input.models;
+package com.ceeblue.sdk.streams.input.models.encoder;
 
+import com.ceeblue.sdk.streams.input.models.CodecName;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Objects;

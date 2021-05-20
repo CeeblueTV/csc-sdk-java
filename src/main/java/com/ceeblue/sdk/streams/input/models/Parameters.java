@@ -2,7 +2,7 @@ package com.ceeblue.sdk.streams.input.models;
 
 import java.util.Objects;
 
-class Parameters {
+public class Parameters {
     private String signallingUri;
 
     public Parameters() {

@@ -1,9 +1,13 @@
-package com.ceeblue.sdk.streams.input.models;
+package com.ceeblue.sdk.streams.input.models.inputs;
 
+import com.ceeblue.sdk.streams.input.models.Access;
+import com.ceeblue.sdk.streams.input.models.InputFormat;
+import com.ceeblue.sdk.streams.input.models.InputStreamer;
+import com.ceeblue.sdk.streams.input.models.OutputSettings;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Stream {
+public class Input {
     InputFormat format;
     InputStreamer streamer;
     String callbackUri;

@@ -4,9 +4,9 @@ import com.ceeblue.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.sdk.http.HttpClient;
 import com.ceeblue.sdk.streams.ApiClient;
 import com.ceeblue.sdk.streams.input.models.Access;
-import com.ceeblue.sdk.streams.input.models.CreatedStream;
+import com.ceeblue.sdk.streams.input.models.inputs.CreatedInput;
 import com.ceeblue.sdk.streams.input.models.OutputSettings;
-import com.ceeblue.sdk.streams.input.models.Stream;
+import com.ceeblue.sdk.streams.input.models.inputs.Input;
 import com.ceeblue.sdk.utils.ApiCallException;
 import com.ceeblue.sdk.utils.ClientException;
 import com.ceeblue.sdk.utils.JsonParseException;
@@ -37,21 +37,21 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     }
 
     @Override
-    public CreatedStream createStream(Stream stream) {
+    public CreatedInput createStream(Input input) {
         try {
-            String json = createJson(stream);
+            String json = createJson(input);
 
-            return exchange(INPUTS, json, POST, CreatedStream.class);
+            return exchange(INPUTS, json, POST, CreatedInput.class);
         } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't create input stream: " + stream, session + INPUTS, POST, exception);
+            throw new ClientException("Can't create input stream: " + input, session + INPUTS, POST, exception);
         }
     }
 
     @Override
-    public List<CreatedStream> getInputs() {
+    public List<CreatedInput> getInputs() {
         try {
 
-            CreatedStream[] result = exchange(INPUTS, "", GET, CreatedStream[].class);
+            CreatedInput[] result = exchange(INPUTS, "", GET, CreatedInput[].class);
             if (result != null) {
                 return Arrays.stream(result)
                         .collect(Collectors.toList());
@@ -64,9 +64,9 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     }
 
     @Override
-    public CreatedStream getInput(String id) {
+    public CreatedInput getInput(String id) {
         try {
-            return exchange(INPUTS + id, "", GET, CreatedStream.class);
+            return exchange(INPUTS + id, "", GET, CreatedInput.class);
 
         } catch (JsonParseException | ApiCallException exception) {
             throw new ClientException("Can't get stream input", session + INPUTS + id, GET, exception);
@@ -75,7 +75,7 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
 
 
     @Override
-    public CreatedStream updateInput(String id, Access access, String token) {
+    public CreatedInput updateInput(String id, Access access, String token) {
         try {
             Map<String, Object> updated = new HashMap<>();
             if (id == null) {
@@ -90,7 +90,7 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
 
             String body = createJson(updated);
 
-            return exchange(INPUTS + id, body, PUT, CreatedStream.class);
+            return exchange(INPUTS + id, body, PUT, CreatedInput.class);
         } catch (JsonParseException | ApiCallException exception) {
             throw new ClientException("Can't update stream", INPUTS + id + INPUTS + id, PUT, exception);
         }
@@ -116,7 +116,7 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     }
 
     @Override
-    public OutputSettings updateOutput(String id, OutputSettings output) {
+    public OutputSettings updateOutputSettings(String id, OutputSettings output) {
         try {
             String body = createJson(output);
             return exchange(INPUTS + id + OUTPUT, body, PUT, OutputSettings.class);

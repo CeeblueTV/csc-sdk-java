@@ -1,5 +1,6 @@
-package com.ceeblue.sdk.streams.input.models;
+package com.ceeblue.sdk.streams.input.models.inputs;
 
+import com.ceeblue.sdk.streams.input.models.*;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CreatedStream {
+public class CreatedInput {
     private String id;
     private InputFormat format;
     private Streamer streamer;
@@ -110,7 +111,7 @@ public class CreatedStream {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CreatedStream that = (CreatedStream) o;
+        CreatedInput that = (CreatedInput) o;
         return Objects.equals(id, that.id) && format == that.format && Objects.equals(streamer, that.streamer) && status == that.status && access == that.access && Objects.equals(accessToken, that.accessToken) && Objects.equals(callbackUri, that.callbackUri) && Objects.equals(statusMessages, that.statusMessages) && Objects.equals(connection, that.connection);
     }
 

@@ -1,6 +1,9 @@
 package com.ceeblue.sdk.streams.input.utils;
 
 import com.ceeblue.sdk.streams.input.models.*;
+import com.ceeblue.sdk.streams.input.models.encoder.EncoderSettings;
+import com.ceeblue.sdk.streams.input.models.encoder.H264Settings;
+import com.ceeblue.sdk.streams.input.models.encoder.VP8Settings;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
