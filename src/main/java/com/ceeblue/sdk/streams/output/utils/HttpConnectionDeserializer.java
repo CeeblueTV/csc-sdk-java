@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 
-import static com.ceeblue.sdk.streams.output.utils.CONSTANTS.*;
+import static com.ceeblue.sdk.streams.output.utils.Constants.*;
 
 public class HttpConnectionDeserializer extends JsonDeserializer<HttpConnection> {
 

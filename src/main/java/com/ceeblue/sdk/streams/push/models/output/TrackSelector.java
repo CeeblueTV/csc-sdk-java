@@ -9,6 +9,9 @@ public class TrackSelector {
     CodecName codecName;
     VideoResolutionSelector resolution;
 
+    public TrackSelector() {
+    }
+
     public TrackSelector(TrackType type) {
         this.type = type;
     }

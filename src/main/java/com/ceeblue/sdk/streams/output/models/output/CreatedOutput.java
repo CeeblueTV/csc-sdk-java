@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-import static com.ceeblue.sdk.streams.output.utils.CONSTANTS.CONNECTION_JSON_NAME;
+import static com.ceeblue.sdk.streams.output.utils.Constants.CONNECTION_JSON_NAME;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
