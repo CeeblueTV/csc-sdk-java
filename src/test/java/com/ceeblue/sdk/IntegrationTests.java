@@ -5,7 +5,10 @@ import com.ceeblue.sdk.http.HttpClient;
 import com.ceeblue.sdk.streams.input.InputApiClientImplementation;
 import com.ceeblue.sdk.streams.input.InputStreamClient;
 import com.ceeblue.sdk.streams.input.StreamBuilder;
-import com.ceeblue.sdk.streams.input.models.*;
+import com.ceeblue.sdk.streams.input.models.Access;
+import com.ceeblue.sdk.streams.input.models.InputFormat;
+import com.ceeblue.sdk.streams.input.models.OutputSettings;
+import com.ceeblue.sdk.streams.input.models.SpeedPreset;
 import com.ceeblue.sdk.streams.input.models.encoder.EncoderSettings;
 import com.ceeblue.sdk.streams.input.models.encoder.H264Settings;
 import com.ceeblue.sdk.streams.input.models.inputs.CreatedInput;
@@ -15,7 +18,14 @@ import com.ceeblue.sdk.streams.input.models.tracks.VideoTrack;
 import com.ceeblue.sdk.streams.output.OutputStreamClient;
 import com.ceeblue.sdk.streams.output.models.output.CreatedOutput;
 import com.ceeblue.sdk.streams.output.models.output.Output;
+import com.ceeblue.sdk.streams.push.models.TrackSelector;
 import com.ceeblue.sdk.streams.recording.RecordingClient;
+import com.ceeblue.sdk.streams.recording.models.Capture;
+import com.ceeblue.sdk.streams.recording.models.FileFormat;
+import com.ceeblue.sdk.streams.recording.models.Recording;
+import com.ceeblue.sdk.streams.recording.models.Source;
+import com.ceeblue.sdk.streams.recording.models.created.CreatedRecording;
+import com.ceeblue.sdk.streams.recording.models.created.State;
 import com.ceeblue.sdk.streams.storage.StorageClient;
 import com.ceeblue.sdk.streams.storage.models.storages.AmazonS3;
 import com.ceeblue.sdk.streams.storage.models.storages.AmazonS3Compatible;
@@ -150,6 +160,8 @@ class IntegrationTests {
 
     @Test
     void fullRecordingStreamCycle() {
+//        String node = "368087c2-42e7-4781-bd5c-63d6ce1bcf06";
+//
 //        AmazonS3Compatible storage = new AmazonS3Compatible("Test storage", "AK...............PU", "GW.............................f+", "test-recordings", "google..com");
 //        AmazonS3Compatible createdStorage = (AmazonS3Compatible) Assertions.assertDoesNotThrow(() -> storageClient.createStorage(storage), "Try to create storage");
 //
@@ -157,7 +169,7 @@ class IntegrationTests {
 //        List<CreatedRecording> allRecordings = Assertions.assertDoesNotThrow(() -> recordingClient.getRecordings(), "Try to get all recordings");
 //
 //        CreatedRecording createdRecording = recordingClient.createRecording(
-//                new Recording("616e70c7-08d3-434a-9f8e-edd9664420b1", "recordingTest", FileFormat.MKV,
+//                new Recording(node, "recordingTest", FileFormat.MKV,
 //                        new Capture().setSource(Source.Incoming).setTrackSelector(new TrackSelector(Video)), createdStorage.getName()
 //
 //                )
@@ -169,7 +181,7 @@ class IntegrationTests {
 //
 //        Assertions.assertTrue(allRecordingsAfterCreation.size() > allRecordings.size());
 //
-//        List<CreatedRecording> allStreamRecordings = Assertions.assertDoesNotThrow(() -> recordingClient.getRecordingByStreamId("616e70c7-08d3-434a-9f8e-edd9664420b1"));
+//        List<CreatedRecording> allStreamRecordings = Assertions.assertDoesNotThrow(() -> recordingClient.getRecordingByStreamId(node));
 //
 //        Assertions.assertEquals(1, allStreamRecordings.size());
 //
@@ -189,7 +201,7 @@ class IntegrationTests {
 //
 //        Assertions.assertDoesNotThrow(() -> recordingClient.deleteRecording(createdRecording.getId()));
 //
-//        allStreamRecordings = Assertions.assertDoesNotThrow(() -> recordingClient.getRecordingByStreamId("616e70c7-08d3-434a-9f8e-edd9664420b1"));
+//        allStreamRecordings = Assertions.assertDoesNotThrow(() -> recordingClient.getRecordingByStreamId(node));
 //
 //        Assertions.assertEquals(0, allStreamRecordings.size());
     }

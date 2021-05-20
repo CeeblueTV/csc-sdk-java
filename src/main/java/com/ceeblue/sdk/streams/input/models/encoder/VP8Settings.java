@@ -10,6 +10,10 @@ public class VP8Settings extends EncoderSettings {
 
     private Integer keyMaxDist;
 
+
+    public VP8Settings() {
+    }
+
     public VP8Settings(CodecName codec, Integer bitrate, Integer keyMaxDist) {
         super(codec, bitrate);
         this.keyMaxDist = keyMaxDist;

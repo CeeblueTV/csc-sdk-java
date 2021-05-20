@@ -11,6 +11,9 @@ public class H264Settings extends EncoderSettings {
     private SpeedPreset speedPreset;
     private Integer keyIntMax;
 
+    public H264Settings() {
+    }
+
     public H264Settings(CodecName codec, Integer bitrate, SpeedPreset speedPreset, Integer keyIntMax) {
         super(codec, bitrate);
         this.speedPreset = speedPreset;
