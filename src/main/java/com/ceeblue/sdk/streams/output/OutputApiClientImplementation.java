@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.ceeblue.sdk.http.template.utils.HTTPMethod.*;
+import static com.ceeblue.sdk.streams.output.utils.Constants.OUTPUTS;
+import static com.ceeblue.sdk.streams.output.utils.Constants.SESSIONS;
 
 @Service
 public class OutputApiClientImplementation extends ApiClient implements OutputStreamClient {
 
-    private static final String OUTPUTS = "/outputs";
-    private static final String SESSIONS = "/sessions";
 
     @Autowired
     protected OutputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
@@ -63,7 +63,7 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
     @Override
     public void deleteOutputSessions(String outputId) {
         try {
-            exchange(OUTPUTS +"/"+ outputId + SESSIONS, "", DELETE, Void.class);
+            exchange(OUTPUTS + "/" + outputId + SESSIONS, "", DELETE, Void.class);
         } catch (RuntimeException exception) {
             throw new ClientException("Can't delete output stream", session + OUTPUTS + outputId + SESSIONS, DELETE, exception);
         }
