@@ -37,7 +37,7 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     }
 
     @Override
-    public CreatedInput createStream(Input input) {
+    public CreatedInput createInput(Input input) {
         try {
             String json = createJson(input);
 

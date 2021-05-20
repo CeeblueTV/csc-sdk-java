@@ -19,14 +19,17 @@ public class HttpConnectionDeserializer extends JsonDeserializer<HttpConnection>
         ObjectCodec oc = jp.getCodec();
         JsonNode node = oc.readTree(jp);
 
-        if (node.findValue(URI_JSON_NAME) != null) {
+        if (node.has(URI_JSON_NAME)) {
             return new HttpConnection().setUri(node.get(URI_JSON_NAME).asText());
         }
 
         return new WebRTCConnection(node.get(SIGNALLING_URI_JSON_NAME).asText())
-                .setStun(node.get(STUN_JSON_NAME).asText())
-                .setTurn(node.get(TURN_JSON_NAME).asText());
+                .setStun(getString(STUN_JSON_NAME, node))
+                .setTurn(getString(TURN_JSON_NAME, node));
     }
 
+    String getString(String jsonName, JsonNode node) {
+        return node.has(jsonName) ? node.get(jsonName).asText() : null;
+    }
 
 }

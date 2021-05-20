@@ -1,8 +1,8 @@
 package com.ceeblue.sdk.streams.input.models.inputs;
 
 import com.ceeblue.sdk.streams.input.models.*;
+import com.ceeblue.sdk.streams.output.models.connection.HttpConnection;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,79 +17,97 @@ public class CreatedInput {
     private String accessToken;
     private String callbackUri;
     private List<String> statusMessages;
-    @JsonProperty("connection")
-    private Parameters connection;
+    private HttpConnection connection;
+    private Parameters parameters;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public CreatedInput setId(String id) {
         this.id = id;
+        return this;
     }
 
     public InputFormat getFormat() {
         return format;
     }
 
-    public void setFormat(InputFormat format) {
+    public CreatedInput setFormat(InputFormat format) {
         this.format = format;
+        return this;
     }
 
     public Streamer getStreamer() {
         return streamer;
     }
 
-    public void setStreamer(Streamer streamer) {
+    public CreatedInput setStreamer(Streamer streamer) {
         this.streamer = streamer;
+        return this;
     }
 
     public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public CreatedInput setStatus(Status status) {
         this.status = status;
+        return this;
     }
 
     public Access getAccess() {
         return access;
     }
 
-    public void setAccess(Access access) {
+    public CreatedInput setAccess(Access access) {
         this.access = access;
+        return this;
     }
 
     public String getAccessToken() {
         return accessToken;
     }
 
-    public void setAccessToken(String accessToken) {
+    public CreatedInput setAccessToken(String accessToken) {
         this.accessToken = accessToken;
+        return this;
     }
 
     public String getCallbackUri() {
         return callbackUri;
     }
 
-    public void setCallbackUri(String callbackUri) {
+    public CreatedInput setCallbackUri(String callbackUri) {
         this.callbackUri = callbackUri;
+        return this;
     }
 
     public List<String> getStatusMessages() {
         return statusMessages;
     }
 
-    public void setStatusMessages(List<String> statusMessages) {
+    public CreatedInput setStatusMessages(List<String> statusMessages) {
         this.statusMessages = statusMessages;
+        return this;
     }
 
-    public Parameters getConnection() {
+    public Parameters getParameters() {
+        return parameters;
+    }
+
+    public CreatedInput setParameters(Parameters parameters) {
+        this.parameters = parameters;
+        return this;
+    }
+
+    public HttpConnection getConnection() {
         return connection;
     }
 
-    public void setConnection(Parameters connection) {
+    public CreatedInput setConnection(HttpConnection connection) {
         this.connection = connection;
+        return this;
     }
 
     @Override
@@ -103,7 +121,7 @@ public class CreatedInput {
                 ", accessToken='" + (accessToken != null ? accessToken : "") +
                 ", callbackUri='" + (callbackUri != null ? callbackUri : "") +
                 ", statusMessages=" + (statusMessages != null ? statusMessages.toString() : "") +
-                ", connection=" + (connection != null ? connection.toString() : "") +
+                ", connection=" + (parameters != null ? parameters.toString() : "") +
                 '}';
     }
 
@@ -112,11 +130,11 @@ public class CreatedInput {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CreatedInput that = (CreatedInput) o;
-        return Objects.equals(id, that.id) && format == that.format && Objects.equals(streamer, that.streamer) && status == that.status && access == that.access && Objects.equals(accessToken, that.accessToken) && Objects.equals(callbackUri, that.callbackUri) && Objects.equals(statusMessages, that.statusMessages) && Objects.equals(connection, that.connection);
+        return Objects.equals(id, that.id) && format == that.format && Objects.equals(streamer, that.streamer) && status == that.status && access == that.access && Objects.equals(accessToken, that.accessToken) && Objects.equals(callbackUri, that.callbackUri) && Objects.equals(statusMessages, that.statusMessages) && Objects.equals(parameters, that.parameters);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, format, streamer, status, access, accessToken, callbackUri, statusMessages, connection);
+        return Objects.hash(id, format, streamer, status, access, accessToken, callbackUri, statusMessages, parameters);
     }
 }

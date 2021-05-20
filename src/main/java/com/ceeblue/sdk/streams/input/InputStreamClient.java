@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface InputStreamClient {
 
-    CreatedInput createStream(Input input) throws ClientException;
+    CreatedInput createInput(Input input) throws ClientException;
 
     List<CreatedInput> getInputs() throws ClientException;
 

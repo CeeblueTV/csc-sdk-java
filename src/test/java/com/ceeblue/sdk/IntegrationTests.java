@@ -69,7 +69,7 @@ class IntegrationTests {
 
         Input input = builder.build();
 
-        CreatedInput createdInput = Assertions.assertDoesNotThrow(() -> inputStreamClient.createStream(input), "Try to create input stream");
+        CreatedInput createdInput = Assertions.assertDoesNotThrow(() -> inputStreamClient.createInput(input), "Try to create input stream");
 
         Assertions.assertTrue(inputStreamClient.getInputs().size() > 0, "Check getting all input streams");
         Assertions.assertDoesNotThrow(() -> inputStreamClient.getInputs().size() > 0, "Check getting all input streams");
@@ -110,7 +110,7 @@ class IntegrationTests {
 
         Input input = builder.build();
 
-        CreatedInput createdInput = Assertions.assertDoesNotThrow(() -> inputStreamClient.createStream(input), "Try to create input stream");
+        CreatedInput createdInput = Assertions.assertDoesNotThrow(() -> inputStreamClient.createInput(input), "Try to create input stream");
 
         CreatedOutput createdOutput = outputStreamClient.createOutput(new Output(createdInput.getId(), InputFormat.RTMP));
 
