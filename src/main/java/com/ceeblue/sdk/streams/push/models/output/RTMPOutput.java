@@ -1,6 +1,6 @@
 package com.ceeblue.sdk.streams.push.models.output;
 
-public class RTMPOutput {
+public class RTMPOutput extends OutputParent {
     String server;
     String key;
 
@@ -12,15 +12,17 @@ public class RTMPOutput {
         return server;
     }
 
-    public void setServer(String server) {
+    public RTMPOutput setServer(String server) {
         this.server = server;
+        return this;
     }
 
     public String getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public RTMPOutput setKey(String key) {
         this.key = key;
+        return this;
     }
 }

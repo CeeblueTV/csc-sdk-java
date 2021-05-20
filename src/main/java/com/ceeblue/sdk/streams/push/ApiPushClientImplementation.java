@@ -3,8 +3,8 @@ package com.ceeblue.sdk.streams.push;
 import com.ceeblue.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.sdk.http.HttpClient;
 import com.ceeblue.sdk.streams.ApiClient;
-import com.ceeblue.sdk.streams.push.models.CreatedPush;
-import com.ceeblue.sdk.streams.push.models.StreamPush;
+import com.ceeblue.sdk.streams.push.models.push.CreatedPush;
+import com.ceeblue.sdk.streams.push.models.push.Push;
 import com.ceeblue.sdk.utils.ApiCallException;
 import com.ceeblue.sdk.utils.ClientException;
 import com.ceeblue.sdk.utils.JsonParseException;
@@ -33,13 +33,13 @@ public class ApiPushClientImplementation extends ApiClient implements StreamPush
     }
 
     @Override
-    public CreatedPush addPush(StreamPush streamPush) {
+    public CreatedPush createPush(Push push) {
         try {
-            String json = createJson(streamPush);
+            String json = createJson(push);
 
             return exchange(PUSHES, json, POST, CreatedPush.class);
         } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't create stream push: " + streamPush, session + PUSHES, POST, exception);
+            throw new ClientException("Can't create stream push: " + push, session + PUSHES, POST, exception);
         }
     }
 
@@ -50,15 +50,6 @@ public class ApiPushClientImplementation extends ApiClient implements StreamPush
 
         } catch (JsonParseException | ApiCallException exception) {
             throw new ClientException("Can't get stream push", session + PUSHES + id, GET, exception);
-        }
-    }
-
-    @Override
-    public void deleteStreamPush(String id) {
-        try {
-            exchange(PUSHES + id, "", DELETE, Void.class);
-        } catch (RuntimeException exception) {
-            throw new ClientException("Can't delete stream push", session + PUSHES + id, DELETE, exception);
         }
     }
 
@@ -75,5 +66,14 @@ public class ApiPushClientImplementation extends ApiClient implements StreamPush
         }
 
         throw new ClientException("Can't get stream push ids. Id: " + id, session + PUSHES + STREAM, GET, new RuntimeException("No result from server!!!"));
+    }
+
+    @Override
+    public void deleteStreamPush(String id) {
+        try {
+            exchange(PUSHES + id, "", DELETE, Void.class);
+        } catch (RuntimeException exception) {
+            throw new ClientException("Can't delete stream push", session + PUSHES + id, DELETE, exception);
+        }
     }
 }

@@ -1,8 +1,10 @@
 package com.ceeblue.sdk.streams.push.models.output;
 
+import com.ceeblue.sdk.streams.push.models.TrackSelector;
+
 import java.util.List;
 
-public class UDPTSOutput {
+public class UDPTSOutput extends OutputParent{
     String ipAddress;
     int port;
     List<TrackSelector> tracks;

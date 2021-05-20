@@ -3,7 +3,9 @@ package com.ceeblue.sdk.streams.output.models.output;
 import com.ceeblue.sdk.streams.input.models.InputFormat;
 import com.ceeblue.sdk.streams.output.models.Viewer;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+@JsonDeserialize(using = OutputDeserializer.class)
 public class Output {
     @JsonAlias({"streamId"})
     private String streamId;

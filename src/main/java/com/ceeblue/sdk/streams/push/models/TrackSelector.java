@@ -1,4 +1,4 @@
-package com.ceeblue.sdk.streams.push.models.output;
+package com.ceeblue.sdk.streams.push.models;
 
 import com.ceeblue.sdk.streams.input.models.CodecName;
 import com.ceeblue.sdk.streams.input.models.tracks.TrackType;

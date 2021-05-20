@@ -1,4 +1,4 @@
-package com.ceeblue.sdk.streams.push.models.output;
+package com.ceeblue.sdk.streams.push.models;
 
 public class VideoResolutionSelector {
     private Integer width;

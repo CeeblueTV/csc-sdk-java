@@ -1,6 +1,6 @@
 package com.ceeblue.sdk.streams.recording.models;
 
-import com.ceeblue.sdk.streams.push.models.output.TrackSelector;
+import com.ceeblue.sdk.streams.push.models.TrackSelector;
 
 public class Capture {
     private TrackSelector trackSelector;

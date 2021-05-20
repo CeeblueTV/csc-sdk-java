@@ -1,6 +1,8 @@
-package com.ceeblue.sdk.streams.push.models;
+package com.ceeblue.sdk.streams.push.models.push;
 
 import com.ceeblue.sdk.streams.input.models.InputFormat;
+import com.ceeblue.sdk.streams.output.models.output.Output;
+import com.ceeblue.sdk.streams.push.models.Status;
 
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class CreatedPush {
     String id;
     String streamId;
     InputFormat format;
-    String output;
+    Output output;
     Status status;
     List<String> messages;
 
@@ -39,11 +41,11 @@ public class CreatedPush {
         this.format = format;
     }
 
-    public String getOutput() {
+    public Output getOutput() {
         return output;
     }
 
-    public void setOutput(String output) {
+    public void setOutput(Output output) {
         this.output = output;
     }
 
