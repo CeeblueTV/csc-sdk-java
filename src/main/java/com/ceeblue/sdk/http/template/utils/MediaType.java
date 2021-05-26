@@ -1,7 +1,8 @@
 package com.ceeblue.sdk.http.template.utils;
 
 public enum MediaType {
-    JSON("application/json");
+    JSON("application/json"),
+    IMAGE("image/jpg");
 
     private String type;
 

@@ -17,15 +17,15 @@ public class HttpRestTemplate implements HttpClient {
     private final RestTemplate template;
 
     public HttpRestTemplate(@Qualifier("okHttpRestTemplate") RestTemplate template) {
-        this.template =  template;
+        this.template = template;
     }
 
     @Override
-    public String exchange(String uri, RequestInfo payload) throws ApiCallException {
+    public byte[] exchange(String uri, RequestInfo payload) throws ApiCallException {
         try {
             HttpEntity<String> entity = processPayload(payload);
 
-            return template.exchange(uri, HttpMethod.valueOf(payload.getMethod().name()), entity, String.class).getBody();
+            return template.exchange(uri, HttpMethod.valueOf(payload.getMethod().name()), entity, byte[].class).getBody();
         } catch (ResourceAccessException exception) {
             throw new ApiCallException("Timeout", -1, exception.getMessage());
         }

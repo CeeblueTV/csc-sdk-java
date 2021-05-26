@@ -38,22 +38,34 @@ public abstract class ApiClient {
 
     @Nullable
     protected <T> T exchange(String parts, String body, HTTPMethod method, Class<T> type) throws JsonParseException, ApiCallException {
-        return exchange(parts, body, method, type, new HashMap<>());
+        return exchange(parts, body, method, type, new HashMap<>(), MediaType.JSON);
     }
 
     @Nullable
-    protected <T> T exchange(String parts, String body, HTTPMethod method, Class<T> type, Map<String, Object> headers) throws JsonParseException, ApiCallException {
+    protected <T> T exchange(String parts, String body, HTTPMethod method, Class<T> type, Map<String, Object> headers, MediaType mediaType) throws JsonParseException, ApiCallException {
         HashMap<String, Object> authHeader = authenticateIfHaveNot();
         authHeader.putAll(headers);
 
-        String result = template.exchange(session.getEndpoint() + parts, new RequestInfo()
+        byte[] result = template.exchange(session.getEndpoint() + parts, new RequestInfo()
                 .setBody(body)
-                .setMediaType(MediaType.JSON)
+                .setMediaType(mediaType)
                 .setHeaders(authHeader)
                 .setMethod(method)
         );
 
-        return parseJson(type, result);
+        return processRequestResult(type, result);
+    }
+
+    private <T> T processRequestResult(Class<T> type, byte[] result) {
+        if (type != byte[].class) {
+            String json = null;
+            if (type != Void.class) {
+                json = new String(result);
+            }
+            return parseJson(type, json);
+        }
+
+        return (T) result;
     }
 
     @Nullable

@@ -55,15 +55,15 @@ public class AuthenticationClientImplementation implements AuthenticationClient 
 
         String body = getBody();
 
-        String jsonToken = template.exchange(session.getEndpoint() + LOGIN, new RequestInfo()
+        byte[] result = template.exchange(session.getEndpoint() + LOGIN, new RequestInfo()
                 .setBody(body)
                 .setHeaders(new HashMap<>())
                 .setMethod(HTTPMethod.POST)
                 .setMediaType(MediaType.JSON));
         try {
-            return session.setToken(mapper.readValue(jsonToken, typeRef).get(TOKEN));
+            return session.setToken(mapper.readValue(new String(result), typeRef).get(TOKEN));
         } catch (JsonProcessingException e) {
-            throw new AuthorizationException("Invalid response from Server: " + jsonToken);
+            throw new AuthorizationException("Invalid response from Server: " + result);
         }
     }
 

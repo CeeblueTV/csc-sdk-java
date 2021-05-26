@@ -1,8 +1,6 @@
 package com.ceeblue.sdk;
 
 import com.ceeblue.sdk.authentiffication.AuthenticationClient;
-import com.ceeblue.sdk.http.HttpClient;
-import com.ceeblue.sdk.streams.input.InputApiClientImplementation;
 import com.ceeblue.sdk.streams.input.InputStreamClient;
 import com.ceeblue.sdk.streams.input.StreamBuilder;
 import com.ceeblue.sdk.streams.input.models.Access;
@@ -18,14 +16,10 @@ import com.ceeblue.sdk.streams.input.models.tracks.VideoTrack;
 import com.ceeblue.sdk.streams.output.OutputStreamClient;
 import com.ceeblue.sdk.streams.output.models.output.CreatedOutput;
 import com.ceeblue.sdk.streams.output.models.output.Output;
-import com.ceeblue.sdk.streams.push.models.TrackSelector;
 import com.ceeblue.sdk.streams.recording.RecordingClient;
-import com.ceeblue.sdk.streams.recording.models.Capture;
-import com.ceeblue.sdk.streams.recording.models.FileFormat;
-import com.ceeblue.sdk.streams.recording.models.Recording;
 import com.ceeblue.sdk.streams.recording.models.Source;
-import com.ceeblue.sdk.streams.recording.models.created.CreatedRecording;
-import com.ceeblue.sdk.streams.recording.models.created.State;
+import com.ceeblue.sdk.streams.snapshot.SnapshotClient;
+import com.ceeblue.sdk.streams.snapshot.models.Recording;
 import com.ceeblue.sdk.streams.storage.StorageClient;
 import com.ceeblue.sdk.streams.storage.models.storages.AmazonS3;
 import com.ceeblue.sdk.streams.storage.models.storages.AmazonS3Compatible;
@@ -42,13 +36,11 @@ import static com.ceeblue.sdk.streams.input.models.CodecName.AAC;
 import static com.ceeblue.sdk.streams.input.models.CodecName.H264;
 import static com.ceeblue.sdk.streams.input.models.tracks.TrackType.Audio;
 import static com.ceeblue.sdk.streams.input.models.tracks.TrackType.Video;
+import static com.ceeblue.sdk.streams.snapshot.models.SnapshotFormatType.JPEG;
 
 @SpringBootTest
 class IntegrationTests {
-
-    @Autowired
-    HttpClient restTemplate;
-
+    public static final String streamId = "bd49a282-c0e7-4296-bfad-0f718c4b649b";
     @Autowired
     AuthenticationClient authenticationClient;
 
@@ -63,6 +55,9 @@ class IntegrationTests {
 
     @Autowired
     StorageClient storageClient;
+
+    @Autowired
+    SnapshotClient snapshotClient;
 
 
     @Test
@@ -106,9 +101,6 @@ class IntegrationTests {
 
     @Test
     void fullOutputStreamCycle() {
-
-        inputStreamClient = new InputApiClientImplementation(authenticationClient, restTemplate);
-
         StreamBuilder builder = new StreamBuilder(InputFormat.WebRTC)
                 .setOutput(
                         new OutputSettings(true)
@@ -204,6 +196,17 @@ class IntegrationTests {
 //        allStreamRecordings = Assertions.assertDoesNotThrow(() -> recordingClient.getRecordingByStreamId(node));
 //
 //        Assertions.assertEquals(0, allStreamRecordings.size());
+    }
+
+    @Test
+    void fullSnapshotCycle() {
+        //   Assertions.assertDoesNotThrow(() -> snapshotClient.getSnapshotImage(streamId, Source.Incoming), "Try to get image");
+
+        Recording recording = Assertions.assertDoesNotThrow(() -> snapshotClient.getSnapshotSettings(streamId, Source.Incoming), "Try to get snapshot settings");
+        recording.setFormat(JPEG);
+        Assertions.assertDoesNotThrow(() -> snapshotClient.updateSnapshotSettings(recording, streamId, Source.Incoming));
+        Assertions.assertEquals(JPEG, snapshotClient.getSnapshotSettings(streamId, Source.Incoming).getFormat(), "Try to get snapshot settings");
+        Assertions.assertDoesNotThrow(() -> snapshotClient.deleteSnapshotSettings(streamId, Source.Incoming), "Try to get snapshot settings");
     }
 
 }
