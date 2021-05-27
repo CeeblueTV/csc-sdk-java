@@ -3,12 +3,12 @@ package com.ceeblue.streamingcloud.sdk.streams.snapshot;
 import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.http.template.utils.MediaType;
-import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
-import com.ceeblue.streamingcloud.sdk.utils.ClientException;
-import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 import com.ceeblue.streamingcloud.sdk.streams.recording.models.Source;
 import com.ceeblue.streamingcloud.sdk.streams.snapshot.models.Recording;
+import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
+import com.ceeblue.streamingcloud.sdk.utils.ClientException;
+import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -19,11 +19,11 @@ import static com.ceeblue.streamingcloud.sdk.streams.snapshot.utils.Constants.*;
 
 public class SnapshotClientImplementation extends ApiClient implements SnapshotClient {
 
-    protected SnapshotClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
+    public SnapshotClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
     }
 
-    protected SnapshotClientImplementation(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
+    public SnapshotClientImplementation(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
         super(authenticationClient, template, endpoint);
     }
 

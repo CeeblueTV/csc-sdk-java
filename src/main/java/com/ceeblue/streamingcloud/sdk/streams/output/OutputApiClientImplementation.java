@@ -2,12 +2,12 @@ package com.ceeblue.streamingcloud.sdk.streams.output;
 
 import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
+import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.output.CreatedOutput;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.output.Output;
 import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
 import com.ceeblue.streamingcloud.sdk.utils.ClientException;
 import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
-import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,11 +20,11 @@ import static com.ceeblue.streamingcloud.sdk.streams.output.utils.Constants.SESS
 public class OutputApiClientImplementation extends ApiClient implements OutputStreamClient {
 
 
-    protected OutputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
+    public OutputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
     }
 
-    protected OutputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
+    public OutputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
         super(authenticationClient, template, endpoint);
     }
 

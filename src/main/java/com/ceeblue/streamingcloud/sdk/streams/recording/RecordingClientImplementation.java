@@ -2,12 +2,12 @@ package com.ceeblue.streamingcloud.sdk.streams.recording;
 
 import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
-import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
-import com.ceeblue.streamingcloud.sdk.utils.ClientException;
-import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 import com.ceeblue.streamingcloud.sdk.streams.recording.models.Recording;
 import com.ceeblue.streamingcloud.sdk.streams.recording.models.created.CreatedRecording;
+import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
+import com.ceeblue.streamingcloud.sdk.utils.ClientException;
+import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,11 +21,11 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     private static final String STREAM = "/stream/";
     private static final String STOP = "/stop";
 
-    protected RecordingClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
+    public RecordingClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
     }
 
-    protected RecordingClientImplementation(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
+    public RecordingClientImplementation(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
         super(authenticationClient, template, endpoint);
     }
 

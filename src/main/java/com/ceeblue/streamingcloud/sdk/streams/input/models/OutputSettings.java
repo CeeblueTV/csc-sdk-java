@@ -44,32 +44,36 @@ public class OutputSettings {
         return passthrough;
     }
 
-    public void setPassthrough(boolean passthrough) {
+    public OutputSettings setPassthrough(boolean passthrough) {
         this.passthrough = passthrough;
+        return this;
     }
 
     public Integer getVersion() {
         return version;
     }
 
-    public void setVersion(Integer version) {
+    public OutputSettings setVersion(Integer version) {
         this.version = version;
+        return this;
     }
 
     public Overlay getOverlay() {
         return overlay;
     }
 
-    public void setOverlay(Overlay overlay) {
+    public OutputSettings setOverlay(Overlay overlay) {
         this.overlay = overlay;
+        return this;
     }
 
     public List<Track> getTracks() {
         return tracks;
     }
 
-    public void setTracks(List<Track> tracks) {
+    public OutputSettings setTracks(List<Track> tracks) {
         this.tracks = tracks;
+        return this;
     }
 
     @Override

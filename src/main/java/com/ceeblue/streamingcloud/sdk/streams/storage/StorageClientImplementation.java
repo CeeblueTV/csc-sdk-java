@@ -17,7 +17,7 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
 
     private static final String STORAGES = "/storages/";
 
-    protected StorageClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
+    public StorageClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
     }
 
