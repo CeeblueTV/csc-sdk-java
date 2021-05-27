@@ -1,0 +1,29 @@
+package com.ceeblue.streamingcloud.sdk.streams.input;
+
+import com.ceeblue.streamingcloud.sdk.http.HttpClient;
+import com.ceeblue.streamingcloud.sdk.utils.ClientException;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.OutputSettings;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input;
+
+import java.util.List;
+
+public interface InputStreamClient {
+
+    CreatedInput createInput(Input input) throws ClientException;
+
+    List<CreatedInput> getInputs() throws ClientException;
+
+    CreatedInput getInput(String id) throws ClientException;
+
+    CreatedInput updateInput(String id, Access access, String token) throws ClientException;
+
+    void deleteInput(String id) throws ClientException;
+
+    OutputSettings getOutputSettings(String id) throws ClientException;
+
+    OutputSettings updateOutputSettings(String id, OutputSettings output) throws ClientException;
+
+    void setTemplate(HttpClient template);
+}
