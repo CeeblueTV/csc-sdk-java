@@ -3,13 +3,11 @@ package com.ceeblue.sdk.streams.recording;
 import com.ceeblue.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.sdk.http.HttpClient;
 import com.ceeblue.sdk.streams.ApiClient;
-import com.ceeblue.sdk.streams.recording.models.created.CreatedRecording;
 import com.ceeblue.sdk.streams.recording.models.Recording;
+import com.ceeblue.sdk.streams.recording.models.created.CreatedRecording;
 import com.ceeblue.sdk.utils.ApiCallException;
 import com.ceeblue.sdk.utils.ClientException;
 import com.ceeblue.sdk.utils.JsonParseException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,14 +15,12 @@ import java.util.stream.Collectors;
 
 import static com.ceeblue.sdk.http.template.utils.HTTPMethod.*;
 
-@Service
 public class RecordingClientImplementation extends ApiClient implements RecordingClient {
 
     private static final String RECORDINGS = "/recordings/";
     private static final String STREAM = "/stream/";
     private static final String STOP = "/stop";
 
-    @Autowired
     protected RecordingClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
     }

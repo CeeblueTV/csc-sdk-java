@@ -1,8 +1,6 @@
 package com.ceeblue.sdk.authentiffication;
 
-import org.springframework.stereotype.Component;
 
-@Component
 public class Session {
     String endpoint;
     String token;

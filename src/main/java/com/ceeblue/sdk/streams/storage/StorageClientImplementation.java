@@ -7,21 +7,16 @@ import com.ceeblue.sdk.streams.storage.models.storages.AmazonS3;
 import com.ceeblue.sdk.utils.ApiCallException;
 import com.ceeblue.sdk.utils.ClientException;
 import com.ceeblue.sdk.utils.JsonParseException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.ceeblue.sdk.http.template.utils.HTTPMethod.*;
 
-@Service
 public class StorageClientImplementation extends ApiClient implements StorageClient {
 
     private static final String STORAGES = "/storages/";
 
-    @Autowired
     protected StorageClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
     }

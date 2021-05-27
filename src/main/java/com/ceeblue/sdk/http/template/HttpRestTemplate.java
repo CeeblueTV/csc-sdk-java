@@ -3,20 +3,17 @@ package com.ceeblue.sdk.http.template;
 import com.ceeblue.sdk.http.HttpClient;
 import com.ceeblue.sdk.http.RequestInfo;
 import com.ceeblue.sdk.utils.ApiCallException;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-@Component
 public class HttpRestTemplate implements HttpClient {
     private final RestTemplate template;
 
-    public HttpRestTemplate(@Qualifier("okHttpRestTemplate") RestTemplate template) {
+    public HttpRestTemplate(RestTemplate template) {
         this.template = template;
     }
 

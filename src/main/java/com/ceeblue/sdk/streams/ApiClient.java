@@ -10,7 +10,7 @@ import com.ceeblue.sdk.utils.ApiCallException;
 import com.ceeblue.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.lang.Nullable;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,12 +36,10 @@ public abstract class ApiClient {
         session = new Session().setEndpoint(endpoint);
     }
 
-    @Nullable
     protected <T> T exchange(String parts, String body, HTTPMethod method, Class<T> type) throws JsonParseException, ApiCallException {
         return exchange(parts, body, method, type, new HashMap<>(), MediaType.JSON);
     }
 
-    @Nullable
     protected <T> T exchange(String parts, String body, HTTPMethod method, Class<T> type, Map<String, Object> headers, MediaType mediaType) throws JsonParseException, ApiCallException {
         HashMap<String, Object> authHeader = authenticateIfHaveNot();
         authHeader.putAll(headers);
@@ -56,6 +54,7 @@ public abstract class ApiClient {
         return processRequestResult(type, result);
     }
 
+    @SuppressWarnings("unchecked")
     private <T> T processRequestResult(Class<T> type, byte[] result) {
         if (type != byte[].class) {
             String json = null;
@@ -68,7 +67,6 @@ public abstract class ApiClient {
         return (T) result;
     }
 
-    @Nullable
     protected <T> T parseJson(Class<T> type, String result) throws JsonParseException {
         try {
             if (type != Void.class) {
@@ -81,7 +79,6 @@ public abstract class ApiClient {
         return null;
     }
 
-    @Nullable
     protected <T> String createJson(T result) throws JsonParseException {
         try {
             return mapper.writeValueAsString(result);

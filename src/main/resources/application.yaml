@@ -1,8 +1,8 @@
-ceeblue:
-  credentials:
-    username: vladyslav
-    password: sudosugo
-
-spring:
-  main:
-    web-application-type: none
+#ceeblue:
+#  credentials:
+#    username: vladyslav
+#    password: sudosugo
+#
+#spring:
+#  main:
+#    web-application-type: none

@@ -8,8 +8,6 @@ import com.ceeblue.sdk.streams.output.models.output.Output;
 import com.ceeblue.sdk.utils.ApiCallException;
 import com.ceeblue.sdk.utils.ClientException;
 import com.ceeblue.sdk.utils.JsonParseException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,11 +17,9 @@ import static com.ceeblue.sdk.http.template.utils.HTTPMethod.*;
 import static com.ceeblue.sdk.streams.output.utils.Constants.OUTPUTS;
 import static com.ceeblue.sdk.streams.output.utils.Constants.SESSIONS;
 
-@Service
 public class OutputApiClientImplementation extends ApiClient implements OutputStreamClient {
 
 
-    @Autowired
     protected OutputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
     }

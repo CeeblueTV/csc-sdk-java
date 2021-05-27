@@ -4,14 +4,12 @@ import com.ceeblue.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.sdk.http.HttpClient;
 import com.ceeblue.sdk.streams.ApiClient;
 import com.ceeblue.sdk.streams.input.models.Access;
-import com.ceeblue.sdk.streams.input.models.inputs.CreatedInput;
 import com.ceeblue.sdk.streams.input.models.OutputSettings;
+import com.ceeblue.sdk.streams.input.models.inputs.CreatedInput;
 import com.ceeblue.sdk.streams.input.models.inputs.Input;
 import com.ceeblue.sdk.utils.ApiCallException;
 import com.ceeblue.sdk.utils.ClientException;
 import com.ceeblue.sdk.utils.JsonParseException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,13 +19,11 @@ import java.util.stream.Collectors;
 
 import static com.ceeblue.sdk.http.template.utils.HTTPMethod.*;
 
-@Service
 public class InputApiClientImplementation extends ApiClient implements InputStreamClient {
 
     public static final String INPUTS = "/inputs/";
     public static final String OUTPUT = "/output/";
 
-    @Autowired
     public InputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
     }

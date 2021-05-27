@@ -9,8 +9,6 @@ import com.ceeblue.sdk.streams.snapshot.models.Recording;
 import com.ceeblue.sdk.utils.ApiCallException;
 import com.ceeblue.sdk.utils.ClientException;
 import com.ceeblue.sdk.utils.JsonParseException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -19,10 +17,8 @@ import java.util.Locale;
 import static com.ceeblue.sdk.http.template.utils.HTTPMethod.*;
 import static com.ceeblue.sdk.streams.snapshot.utils.Constants.*;
 
-@Service
 public class SnapshotClientImplementation extends ApiClient implements SnapshotClient {
 
-    @Autowired
     protected SnapshotClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
     }

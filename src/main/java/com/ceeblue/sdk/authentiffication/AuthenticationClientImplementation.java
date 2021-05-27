@@ -10,15 +10,12 @@ import com.ceeblue.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.ceeblue.sdk.authentiffication.utils.AuthenticationConstants.*;
 
-@Component
 public class AuthenticationClientImplementation implements AuthenticationClient {
 
     public static final ObjectMapper mapper = new ObjectMapper();
@@ -37,7 +34,6 @@ public class AuthenticationClientImplementation implements AuthenticationClient 
         session.setEndpoint(endpoint);
     }
 
-    @Autowired
     public AuthenticationClientImplementation(Credential credentials, HttpClient template) {
         this.credential = credentials;
         this.template = template;
