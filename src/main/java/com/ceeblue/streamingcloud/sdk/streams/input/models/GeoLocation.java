@@ -4,7 +4,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GeoLocation {
+    /**
+     * Latitude coordinate in decimal degree format
+     */
     private Double latitude;
+    /**
+     * Longitude coordinate in decimal degree format
+     */
     private Double longitude;
 
     public GeoLocation(Double latitude, Double longitude) {

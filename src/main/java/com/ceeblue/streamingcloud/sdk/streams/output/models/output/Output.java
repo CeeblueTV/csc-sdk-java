@@ -7,11 +7,26 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(using = OutputDeserializer.class)
 public class Output {
+    /**
+     * Stream identifier
+     */
     @JsonAlias({"streamId"})
     private String streamId;
+    /**
+     * Output stream format
+     */
     private InputFormat format;
+    /**
+     * Number of concurrent sessions allowed
+     */
     private Integer sessionLimit;
+    /**
+     * Viewer details
+     */
     private Viewer viewer;
+    /**
+     * Invokes on status change
+     */
     private String callbackUri;
 
     public Output(String streamId, InputFormat format) {

@@ -6,8 +6,19 @@ import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Overlay {
+    /**
+     * The data URI image.
+     */
     String data;
+    /**
+     * Horizontal offset of overlay image in pixels from left of video image. For negative value,
+     * horizontal offset of overlay image in pixels from right of video image.
+     */
     Double offsetX;
+    /**
+     * Vertical offset of overlay image in pixels from top of video image. For negative value,
+     * vertical offset of overlay image in pixels from bottom of video image.
+     */
     Double offsetY;
 
     public Overlay(String data, Double offsetX, Double offsetY) {

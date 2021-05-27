@@ -1,8 +1,16 @@
-package com.ceeblue.streamingcloud.sdk.settings;
+package com.ceeblue.streamingcloud.sdk.authentiffication;
 
 public class Credential {
-    String username;
-    String password;
+    private String username;
+    private String password;
+
+    public Credential(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public Credential() {
+    }
 
     public String getUsername() {
         return username;

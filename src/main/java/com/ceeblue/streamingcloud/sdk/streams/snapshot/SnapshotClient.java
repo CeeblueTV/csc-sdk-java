@@ -13,20 +13,16 @@ public interface SnapshotClient {
     /**
      * Fetch stream snapshot
      *
-     * @param streamId id of input stream
-     * @param source   {@link Source} - capturing source [ incoming | outgoing ]
+     * @param streamId id of {@link com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput}
      * @return ByteBuffer with image
-     * @throws ClientException if server return error
      */
     ByteBuffer getSnapshotImage(String streamId, Source source) throws ClientException;
 
     /**
      * fetches a specific snapshot settings
      *
-     * @param streamId id of input stream
-     * @param source   {@link Source} - capturing source [ incoming | outgoing ]
-     * @return ByteBuffer with image
-     * @throws ClientException if server return error
+     * @param streamId id of {@link com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput}
+     * @param source   capturing source
      */
     Recording getSnapshotSettings(String streamId, Source source) throws ClientException;
 
@@ -36,7 +32,6 @@ public interface SnapshotClient {
      * @param streamId  id of input stream
      * @param source    {@link Source} capturing source [ incoming | outgoing ]
      * @param recording {@link Recording} settings for applying
-     * @throws ClientException if server return error
      */
     void updateSnapshotSettings(Recording recording, String streamId, Source source) throws ClientException;
 
@@ -44,8 +39,7 @@ public interface SnapshotClient {
      * Delete snapshot settings
      *
      * @param streamId id of input stream
-     * @param source   {@link Source} capturing source [ incoming | outgoing ]
-     * @throws ClientException if server return error
+     * @param source   {@link Source} capturing source
      */
     void deleteSnapshotSettings(String streamId, Source source) throws ClientException;
 }

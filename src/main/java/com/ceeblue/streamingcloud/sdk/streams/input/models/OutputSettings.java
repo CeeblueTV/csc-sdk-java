@@ -8,9 +8,21 @@ import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OutputSettings {
+    /**
+     * If true, enables a signal to "pass through" unaltered. If false, enables multiprofile transcoding.
+     */
     private boolean passthrough;
+    /**
+     * Output configuration version [ 1 | 2 ] (Version 1 by default)
+     */
     private Integer version;
+    /**
+     * Overlays an picture onto a video track
+     */
     private Overlay overlay;
+    /**
+     * List of video (and audio tracks for the version 2) transcoding tracks
+     */
     private List<Track> tracks;
 
     public OutputSettings() {

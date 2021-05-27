@@ -1,7 +1,7 @@
 package com.ceeblue.streamingcloud.sdk.streams.storage.models.storages;
 
-import com.ceeblue.streamingcloud.sdk.streams.storage.utils.StorageDeserializer;
 import com.ceeblue.streamingcloud.sdk.streams.storage.models.StorageType;
+import com.ceeblue.streamingcloud.sdk.streams.storage.utils.StorageDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -9,11 +9,29 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = StorageDeserializer.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AmazonS3 {
+    /**
+     * Storage name
+     */
     private String name;
+    /**
+     * Storage type
+     */
     private StorageType type;
+    /**
+     * An access key ID (for example AKIAIOSFODNN7EXAMPLE)
+     */
     private String accessKeyId;
+    /**
+     * A secret access key (for example,wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY)
+     */
     private String secretAccessKey;
+    /**
+     * Destination bucket
+     */
     private String bucket;
+    /**
+     * Destination path inside bucket
+     */
     private String path;
 
     public AmazonS3(String name, String accessKeyId, String secretAccessKey, String bucket) {

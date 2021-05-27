@@ -6,7 +6,6 @@ import com.ceeblue.streamingcloud.sdk.http.RequestInfo;
 import com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod;
 import com.ceeblue.streamingcloud.sdk.http.template.utils.MediaType;
 import com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthenticationConstants;
-import com.ceeblue.streamingcloud.sdk.settings.Credential;
 import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

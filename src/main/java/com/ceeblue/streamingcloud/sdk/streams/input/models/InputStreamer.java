@@ -4,7 +4,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class InputStreamer {
+    /**
+     * IP address
+     */
     private String ip;
+    /**
+     * Geographical location
+     */
     private GeoLocation geoLocation;
 
     public String getIp() {

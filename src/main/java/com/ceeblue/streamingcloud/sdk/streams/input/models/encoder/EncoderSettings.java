@@ -17,7 +17,13 @@ import java.util.Objects;
 })
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EncoderSettings {
+    /**
+     * Codec name
+     */
     CodecName codec;
+    /**
+     * Bitrate in kbit/sec (Min 100)
+     */
     Integer bitrate;
 
     public EncoderSettings() {

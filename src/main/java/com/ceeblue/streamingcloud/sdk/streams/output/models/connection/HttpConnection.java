@@ -4,9 +4,15 @@ import com.ceeblue.streamingcloud.sdk.streams.output.utils.HttpConnectionDeseria
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+/**
+ * Input endpoint parameters for streaming
+ */
 @JsonDeserialize(using = HttpConnectionDeserializer.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class HttpConnection {
+    /**
+     * Streaming endpoint
+     */
     private String uri;
 
     public HttpConnection() {

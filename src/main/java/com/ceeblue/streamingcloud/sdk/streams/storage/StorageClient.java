@@ -12,26 +12,19 @@ public interface StorageClient {
     /**
      * Create a new storage
      *
-     * @param amazonS3 Storage type
-     * @return Created storage {@link AmazonS3}
-     * @throws ClientException if server return error
+     * @param amazonS3 Storage to set
      */
     AmazonS3 createStorage(AmazonS3 amazonS3) throws ClientException;
 
     /**
      * Get storage
      *
-     * @param storageId id of storage
-     * @return storage {@link AmazonS3}
-     * @throws ClientException if server return error
+     * @param storageId id of storage to delete {@link AmazonS3}
      */
     AmazonS3 getStorage(String storageId) throws ClientException;
 
     /**
      * Get all storages
-     *
-     * @return list of storage {@link AmazonS3}
-     * @throws ClientException if server return error
      */
     List<AmazonS3> getStorages() throws ClientException;
 
@@ -39,16 +32,13 @@ public interface StorageClient {
      * Update storage
      *
      * @param storage storage settings that will be applied
-     * @return updated storage {@link AmazonS3}
-     * @throws ClientException if server return error
      */
     AmazonS3 updateStorage(AmazonS3 storage) throws ClientException;
 
     /**
      * Delete storage
      *
-     * @param storageId id of storage to delete
-     * @throws ClientException if server return error
+     * @param storageId id of storage to delete {@link AmazonS3}
      */
     void deleteStorage(String storageId) throws ClientException;
 }

@@ -1,7 +1,7 @@
 package com.ceeblue.streamingcloud.sdk.streams.output.models.output;
 
-import com.ceeblue.streamingcloud.sdk.streams.output.models.connection.HttpConnection;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.Viewer;
+import com.ceeblue.streamingcloud.sdk.streams.output.models.connection.HttpConnection;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,12 +13,30 @@ import static com.ceeblue.streamingcloud.sdk.streams.output.utils.Constants.CONN
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CreatedOutput {
 
+    /**
+     * Output active sessions
+     */
     private List<String> sessions;
+    /**
+     * Stream identifier
+     */
     private String id;
+    /**
+     * Output endpoint parameters for viewer
+     */
     @JsonProperty(CONNECTION_JSON_NAME)
     private HttpConnection connection;
+    /**
+     * Viewer details
+     */
     private Viewer viewer;
+    /**
+     * Invokes on status change
+     */
     private String callbackUri;
+    /**
+     * Number of concurrent sessions allowed
+     */
     private Integer sessionLimit;
 
     public CreatedOutput() {

@@ -1,22 +1,59 @@
 package com.ceeblue.streamingcloud.sdk.streams.recording.models.created;
 
 import com.ceeblue.streamingcloud.sdk.streams.recording.models.Capture;
+import com.ceeblue.streamingcloud.sdk.streams.storage.models.storages.AmazonS3;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreatedRecording {
+    /**
+     * Recording identifier
+     */
     String id;
+    /**
+     * Stream identifier
+     */
     String streamId;
+    /**
+     * Target file name
+     */
     String fileName;
+    /**
+     * Target file format [ MKV ]
+     */
     String fileFormat;
+    /**
+     * Storage identifier {@link AmazonS3}
+     */
     String storageId;
+    /**
+     * Capturing settings (Capture)
+     */
     Capture capture;
+    /**
+     * Recording state [ Recording | Uploading | Completed | Error ]
+     */
     State state;
+    /**
+     * Recording duration (seconds)
+     */
     int duration;
+    /**
+     * Recording file length (bytes
+     */
     int length;
+    /**
+     * Amount of recorded file uploaded to storage (bytes)
+     */
     int uploaded;
+    /**
+     * List of messages
+     */
     List<String> messages = new ArrayList<>();
+    /**
+     * Invokes on state change. (HTTP POST)
+     */
     String callbackUri;
 
     public CreatedRecording() {

@@ -15,7 +15,6 @@ public interface OutputStreamClient {
      *
      * @param output output that will be applied. Must contains: streamId, {@link com.ceeblue.streamingcloud.sdk.streams.input.models.InputFormat}
      * @return {@link CreatedOutput}}
-     * @throws ClientException if server return error
      */
     CreatedOutput createOutput(Output output) throws ClientException;
 
@@ -24,23 +23,20 @@ public interface OutputStreamClient {
      *
      * @param streamId id of input stream
      * @return list of {@link CreatedOutput}
-     * @throws ClientException if server return error
      */
     List<CreatedOutput> getOutputs(String streamId) throws ClientException;
 
     /***
      * Invalidate all active sessions
      *
-     * @param outputId id of output to invalidate
-     * @throws ClientException if server return error
+     * @param outputId id of output {@link Output}
      */
     void deleteOutputSessions(String outputId) throws ClientException;
 
     /**
      * delete an output from the Ceeblue Cloud
      *
-     * @param outputId id of output to invalidate
-     * @throws ClientException if server return error
+     * @param outputId id of output {@link Output}
      */
     void deleteOutput(String outputId) throws ClientException;
 }

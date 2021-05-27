@@ -1,13 +1,41 @@
 package com.ceeblue.streamingcloud.sdk.streams.recording.models;
 
+import com.ceeblue.streamingcloud.sdk.streams.storage.models.storages.AmazonS3;
+
 public class Recording {
+    /**
+     * Stream identifier {@link com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input}
+     * Required
+     */
     String streamId;
+    /**
+     * Target file name
+     * Required
+     */
     String fileName;
+    /**
+     * Target file format
+     * Required
+     */
     FileFormat fileFormat;
+    /**
+     * Stream capture settings
+     * Required
+     */
     Capture capture;
+    /**
+     * Storage identifier {@link AmazonS3}
+     * Required
+     */
     String storageId;
+    /**
+     * Invokes on state change. (HTTP POST)
+     */
     String callbackUri;
 
+    /**
+     * Constructor with all required fields
+     */
     public Recording(String streamId, String fileName, FileFormat fileFormat, Capture capture, String storageId) {
         this.streamId = streamId;
         this.fileName = fileName;

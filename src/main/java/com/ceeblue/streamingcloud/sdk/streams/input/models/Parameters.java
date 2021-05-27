@@ -2,6 +2,9 @@ package com.ceeblue.streamingcloud.sdk.streams.input.models;
 
 import java.util.Objects;
 
+/**
+ * Input stream parameters
+ */
 public class Parameters {
     private String signallingUri;
 

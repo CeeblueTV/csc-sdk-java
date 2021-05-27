@@ -1,6 +1,12 @@
 package com.ceeblue.streamingcloud.sdk.streams.input.models;
 
+/**
+ * Streamer details
+ */
 public class Streamer {
+    /**
+     * IP address
+     */
     private String ipAddress;
 
     public String getIpAddress() {

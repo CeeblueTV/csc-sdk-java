@@ -7,8 +7,15 @@ import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Track {
+    /**
+     * Track type
+     */
     TrackType type;
 
+    /**
+     * Encoder settings
+     * Required
+     */
     private EncoderSettings settings;
 
     public Track(TrackType type, EncoderSettings settings) {
