@@ -30,7 +30,7 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     }
 
     @Override
-    public CreatedRecording createRecording(Recording recording) {
+    public CreatedRecording createRecording(Recording recording) throws ClientException {
         try {
             String json = createJson(recording);
 
@@ -41,7 +41,7 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     }
 
     @Override
-    public CreatedRecording getRecording(String recordingId) {
+    public CreatedRecording getRecording(String recordingId) throws ClientException {
         try {
             return exchange(RECORDINGS + recordingId, "", GET, CreatedRecording.class);
 
@@ -51,7 +51,7 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     }
 
     @Override
-    public List<CreatedRecording> getRecordingByStreamId(String streamId) {
+    public List<CreatedRecording> getRecordingByStreamId(String streamId) throws ClientException {
         try {
             CreatedRecording[] result = exchange(RECORDINGS + STREAM + streamId, "", GET, CreatedRecording[].class);
 
@@ -67,7 +67,7 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     }
 
     @Override
-    public List<CreatedRecording> getRecordings() {
+    public List<CreatedRecording> getRecordings() throws ClientException {
         try {
 
             CreatedRecording[] result = exchange(RECORDINGS, "", GET, CreatedRecording[].class);
@@ -83,7 +83,7 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     }
 
     @Override
-    public void stopRecording(String recordingId) {
+    public void stopRecording(String recordingId) throws ClientException {
         try {
             exchange(RECORDINGS + recordingId + STOP, "", PUT, Void.class);
         } catch (JsonParseException | ApiCallException exception) {
@@ -92,7 +92,7 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     }
 
     @Override
-    public void deleteRecording(String recordingId) {
+    public void deleteRecording(String recordingId) throws ClientException {
         try {
             exchange(RECORDINGS + recordingId, "", DELETE, Void.class);
         } catch (RuntimeException exception) {

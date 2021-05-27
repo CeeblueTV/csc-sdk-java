@@ -29,7 +29,7 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
     }
 
     @Override
-    public CreatedOutput createOutput(Output output) {
+    public CreatedOutput createOutput(Output output) throws ClientException {
         try {
             String json = createJson(output);
 
@@ -41,7 +41,7 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
     }
 
     @Override
-    public List<CreatedOutput> getOutputs(String streamId) {
+    public List<CreatedOutput> getOutputs(String streamId) throws ClientException {
         String parts = OUTPUTS + "?streamId=" + streamId;
         try {
             CreatedOutput[] result = exchange(parts, "", GET, CreatedOutput[].class);
@@ -57,7 +57,7 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
     }
 
     @Override
-    public void deleteOutputSessions(String outputId) {
+    public void deleteOutputSessions(String outputId) throws ClientException {
         try {
             exchange(OUTPUTS + "/" + outputId + SESSIONS, "", DELETE, Void.class);
         } catch (RuntimeException exception) {
@@ -66,7 +66,7 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
     }
 
     @Override
-    public void deleteOutput(String outputId) {
+    public void deleteOutput(String outputId) throws ClientException {
         try {
             exchange(OUTPUTS + "/" + outputId, "", DELETE, Void.class);
         } catch (RuntimeException exception) {

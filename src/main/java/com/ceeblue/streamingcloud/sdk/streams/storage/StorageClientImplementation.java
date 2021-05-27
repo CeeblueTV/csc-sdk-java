@@ -26,7 +26,7 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
     }
 
     @Override
-    public AmazonS3 createStorage(AmazonS3 amazonS3) {
+    public AmazonS3 createStorage(AmazonS3 amazonS3) throws ClientException {
         try {
             String json = createJson(amazonS3);
 
@@ -37,7 +37,7 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
     }
 
     @Override
-    public AmazonS3 getStorage(String storageId) {
+    public AmazonS3 getStorage(String storageId) throws ClientException {
         try {
             return exchange(STORAGES + storageId, "", HTTPMethod.GET, AmazonS3.class);
 
@@ -47,7 +47,7 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
     }
 
     @Override
-    public List<AmazonS3> getStorages() {
+    public List<AmazonS3> getStorages() throws ClientException {
         try {
             AmazonS3[] result = exchange(STORAGES, "", HTTPMethod.GET, AmazonS3[].class);
 
@@ -62,7 +62,7 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
     }
 
     @Override
-    public AmazonS3 updateStorage(AmazonS3 storage) {
+    public AmazonS3 updateStorage(AmazonS3 storage) throws ClientException {
         try {
             String body = createJson(storage);
 
@@ -73,7 +73,7 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
     }
 
     @Override
-    public void deleteStorage(String storageId) {
+    public void deleteStorage(String storageId) throws ClientException {
         try {
             exchange(STORAGES + storageId, "", HTTPMethod.DELETE, Void.class);
         } catch (RuntimeException exception) {

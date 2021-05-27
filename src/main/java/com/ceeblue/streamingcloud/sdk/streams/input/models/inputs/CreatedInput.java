@@ -113,15 +113,15 @@ public class CreatedInput {
     @Override
     public String toString() {
         return "CreatedStream{" +
-                "id=" + (id != null ? id : "") +
-                ", format=" + (format != null ? format.toString() : "") +
-                ", streamer=" + (streamer != null ? streamer.toString() : "") +
-                ", status=" + (status != null ? status.toString() : "") +
-                ", access=" + (access != null ? access.toString() : "") +
-                ", accessToken='" + (accessToken != null ? accessToken : "") +
-                ", callbackUri='" + (callbackUri != null ? callbackUri : "") +
-                ", statusMessages=" + (statusMessages != null ? statusMessages.toString() : "") +
-                ", connection=" + (parameters != null ? parameters.toString() : "") +
+                (id != null ? "id=" + id : "") +
+                (format != null ? ", format=" + format : "") +
+                (streamer != null ? ", streamer=" + streamer : "") +
+                (status != null ? ", status=" + status : "") +
+                (access != null ? ", access=" + access : "") +
+                (accessToken != null ? ", accessToken='" + accessToken : "") +
+                (callbackUri != null ? ", callbackUri='" + callbackUri : "") +
+                (statusMessages != null ? ", statusMessages=" + statusMessages : "") +
+                (parameters != null ? ", connection=" + parameters : "") +
                 '}';
     }
 

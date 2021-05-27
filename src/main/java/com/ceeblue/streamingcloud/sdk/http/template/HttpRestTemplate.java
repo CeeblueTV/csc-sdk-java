@@ -10,9 +10,15 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * HttpClient implementation with Rest template inside.
+ */
 public class HttpRestTemplate implements HttpClient {
     private final RestTemplate template;
 
+    /**
+     * Rest template have to handle 4xx and 5xx error and @throw ApiCallException
+     */
     public HttpRestTemplate(RestTemplate template) {
         this.template = template;
     }

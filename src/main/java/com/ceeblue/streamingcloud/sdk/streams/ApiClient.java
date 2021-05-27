@@ -11,12 +11,14 @@ import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthenticationConstants.*;
 
+/**
+ * Helper for all api clients. Contains authorization and utils method for working with json and authentication
+ */
 public abstract class ApiClient {
 
     public static final ObjectMapper mapper = new ObjectMapper();

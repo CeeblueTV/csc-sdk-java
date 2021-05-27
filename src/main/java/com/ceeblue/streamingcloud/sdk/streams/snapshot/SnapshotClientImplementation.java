@@ -28,7 +28,7 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
     }
 
     @Override
-    public ByteBuffer getSnapshotImage(String streamId, Source source) {
+    public ByteBuffer getSnapshotImage(String streamId, Source source) throws ClientException {
         try {
             return ByteBuffer.wrap(exchange(SNAPSHOTS + STREAM + streamId + "/" + source.name().toLowerCase(Locale.ROOT) + "/" + IMAGE, "", GET, byte[].class, new HashMap<>(), MediaType.IMAGE));
         } catch (JsonParseException | ApiCallException exception) {
@@ -37,7 +37,7 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
     }
 
     @Override
-    public void updateSnapshotSettings(Recording recording, String streamId, Source source) {
+    public void updateSnapshotSettings(Recording recording, String streamId, Source source) throws ClientException {
         try {
             String body = createJson(recording);
 
@@ -48,7 +48,7 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
     }
 
     @Override
-    public Recording getSnapshotSettings(String streamId, Source source) {
+    public Recording getSnapshotSettings(String streamId, Source source) throws ClientException {
         try {
             return exchange(SNAPSHOTS + STREAM + streamId + "/" + source, "", GET, Recording.class);
         } catch (JsonParseException | ApiCallException exception) {
@@ -57,7 +57,7 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
     }
 
     @Override
-    public void deleteSnapshotSettings(String streamId, Source source) {
+    public void deleteSnapshotSettings(String streamId, Source source) throws ClientException {
         try {
             exchange(SNAPSHOTS + STREAM + streamId + "/" + source, "", DELETE, Void.class);
         } catch (RuntimeException exception) {
