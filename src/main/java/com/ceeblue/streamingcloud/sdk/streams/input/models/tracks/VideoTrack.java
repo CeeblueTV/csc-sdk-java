@@ -5,44 +5,51 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class VideoTrack extends Track {
+
     /**
      * The width of the output (Min 2)
      */
     private Integer width;
+
     /**
      * The height of the output (Min 2)
      */
     private Integer height;
+
     /**
      * The frame rate of the output
      */
     private Integer framerate;
 
-    public VideoTrack(TrackType type, EncoderSettings settings) {
-        super(type, settings);
+    public VideoTrack(EncoderSettings settings) {
+        super(TrackType.Video, settings);
     }
 
     public Integer getWidth() {
         return width;
     }
 
-    public void setWidth(Integer width) {
+    public VideoTrack setWidth(Integer width) {
         this.width = width;
+        return this;
     }
 
     public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(Integer height) {
+    public VideoTrack setHeight(Integer height) {
         this.height = height;
+        return this;
     }
 
     public Integer getFramerate() {
         return framerate;
     }
 
-    public void setFramerate(Integer framerate) {
+    public VideoTrack setFramerate(Integer framerate) {
         this.framerate = framerate;
+        return this;
     }
+
 }

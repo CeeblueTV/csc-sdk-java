@@ -3,6 +3,7 @@ package com.ceeblue.streamingcloud.sdk.streams.input.models;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.tracks.Track;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class OutputSettings {
     private boolean passthrough;
 
     /**
-     * Output configuration version [ 1 | 2 ] (Version 1 by default)
+     * Output configuration version [ 1 | 2 ] (Version 2 by default)
      */
     private Integer version;
 
@@ -28,13 +29,16 @@ public class OutputSettings {
      * List of video (and audio tracks for the version 2) transcoding tracks
      * required in version 2
      */
-    private List <Track> tracks;
+    private List <Track> tracks = new ArrayList <>();
 
     public OutputSettings() {
+        passthrough = false;
+        version = 2;
     }
 
-    public OutputSettings(boolean passthrough) {
-        this.passthrough = passthrough;
+    public OutputSettings addTrack(Track track) {
+        tracks.add(track);
+        return this;
     }
 
     public OutputSettings passthrough(boolean passthrough) {

@@ -28,7 +28,7 @@ public class Input {
     /**
      * Stream output settings
      */
-    private OutputSettings output = new OutputSettings(true);
+    private OutputSettings output = new OutputSettings();
 
     /**
      * Access mode [
@@ -40,52 +40,62 @@ public class Input {
      */
     private String accessToken;
 
+    public Input(InputFormat format) {
+        this.format = format;
+    }
+
     public InputFormat getFormat() {
         return format;
     }
 
-    public void setFormat(InputFormat format) {
+    public Input setFormat(InputFormat format) {
         this.format = format;
+        return this;
     }
 
     public InputStreamer getStreamer() {
         return streamer;
     }
 
-    public void setStreamer(InputStreamer streamer) {
+    public Input setStreamer(InputStreamer streamer) {
         this.streamer = streamer;
+        return this;
     }
 
     public String getCallbackUri() {
         return callbackUri;
     }
 
-    public void setCallbackUri(String callbackUri) {
+    public Input setCallbackUri(String callbackUri) {
         this.callbackUri = callbackUri;
+        return this;
     }
 
     public OutputSettings getOutput() {
         return output;
     }
 
-    public void setOutput(OutputSettings output) {
+    public Input setOutput(OutputSettings output) {
         this.output = output;
+        return this;
     }
 
     public Access getAccess() {
         return access;
     }
 
-    public void setAccess(Access access) {
+    public Input setAccess(Access access) {
         this.access = access;
+        return this;
     }
 
     public String getAccessToken() {
         return accessToken;
     }
 
-    public void setAccessToken(String accessToken) {
+    public Input setAccessToken(String accessToken) {
         this.accessToken = accessToken;
+        return this;
     }
 
     @Override

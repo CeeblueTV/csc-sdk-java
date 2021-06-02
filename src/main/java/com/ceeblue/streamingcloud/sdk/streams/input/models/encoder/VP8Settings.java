@@ -1,9 +1,10 @@
 package com.ceeblue.streamingcloud.sdk.streams.input.models.encoder;
 
-import com.ceeblue.streamingcloud.sdk.streams.input.models.CodecName;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Objects;
+
+import static com.ceeblue.streamingcloud.sdk.streams.input.models.CodecName.VP8;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class VP8Settings extends EncoderSettings {
@@ -16,10 +17,11 @@ public class VP8Settings extends EncoderSettings {
 
 
     public VP8Settings() {
+        codec = VP8;
     }
 
-    public VP8Settings(CodecName codec, Integer bitrate, Integer keyMaxDist) {
-        super(codec, bitrate);
+    public VP8Settings(Integer bitrate, Integer keyMaxDist) {
+        super(VP8, bitrate);
         this.keyMaxDist = keyMaxDist;
     }
 
@@ -27,8 +29,9 @@ public class VP8Settings extends EncoderSettings {
         return keyMaxDist;
     }
 
-    public void setKeyMaxDist(Integer keyMaxDist) {
+    public VP8Settings setKeyMaxDist(Integer keyMaxDist) {
         this.keyMaxDist = keyMaxDist;
+        return this;
     }
 
     @Override

@@ -1,10 +1,11 @@
 package com.ceeblue.streamingcloud.sdk.streams.input.models.encoder;
 
-import com.ceeblue.streamingcloud.sdk.streams.input.models.CodecName;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.SpeedPreset;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Objects;
+
+import static com.ceeblue.streamingcloud.sdk.streams.input.models.CodecName.H264;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class H264Settings extends EncoderSettings {
@@ -22,10 +23,11 @@ public class H264Settings extends EncoderSettings {
     private Integer keyIntMax;
 
     public H264Settings() {
+        codec = H264;
     }
 
-    public H264Settings(CodecName codec, Integer bitrate, SpeedPreset speedPreset, Integer keyIntMax) {
-        super(codec, bitrate);
+    public H264Settings(Integer bitrate, SpeedPreset speedPreset, Integer keyIntMax) {
+        super(H264, bitrate);
         this.speedPreset = speedPreset;
         this.keyIntMax = keyIntMax;
     }
@@ -34,16 +36,18 @@ public class H264Settings extends EncoderSettings {
         return speedPreset;
     }
 
-    public void setSpeedPreset(SpeedPreset speedPreset) {
+    public H264Settings setSpeedPreset(SpeedPreset speedPreset) {
         this.speedPreset = speedPreset;
+        return this;
     }
 
     public Integer getKeyIntMax() {
         return keyIntMax;
     }
 
-    public void setKeyIntMax(Integer keyIntMax) {
+    public H264Settings setKeyIntMax(Integer keyIntMax) {
         this.keyIntMax = keyIntMax;
+        return this;
     }
 
     @Override

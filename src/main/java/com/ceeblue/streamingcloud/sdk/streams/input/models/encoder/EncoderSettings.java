@@ -22,7 +22,7 @@ public class EncoderSettings {
      * Codec name
      * Required
      */
-    private CodecName codec;
+    protected CodecName codec;
 
     /**
      * Bitrate in kbit/sec (Min 100)
@@ -43,16 +43,18 @@ public class EncoderSettings {
         return codec;
     }
 
-    public void setCodec(CodecName codec) {
+    public EncoderSettings setCodec(CodecName codec) {
         this.codec = codec;
+        return this;
     }
 
     public Integer getBitrate() {
         return bitrate;
     }
 
-    public void setBitrate(Integer bitrate) {
+    public EncoderSettings setBitrate(Integer bitrate) {
         this.bitrate = bitrate;
+        return this;
     }
 
     @Override
