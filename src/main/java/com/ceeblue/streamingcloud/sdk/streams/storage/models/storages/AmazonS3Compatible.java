@@ -3,6 +3,7 @@ package com.ceeblue.streamingcloud.sdk.streams.storage.models.storages;
 import com.ceeblue.streamingcloud.sdk.streams.storage.models.StorageType;
 
 public class AmazonS3Compatible extends AmazonS3 {
+
     /**
      * A URL that is the entry point for a web service
      */
@@ -13,6 +14,12 @@ public class AmazonS3Compatible extends AmazonS3 {
         this.endpoint = endpoint;
         this.setType(StorageType.AmazonS3Compatible);
 
+    }
+
+    public AmazonS3Compatible(String id, String name, String accessKeyId, String secretAccessKey, String bucket, String path, String endpoint) {
+        super(id, name, accessKeyId, secretAccessKey, bucket, path);
+        this.endpoint = endpoint;
+        this.setType(StorageType.AmazonS3Compatible);
     }
 
     public AmazonS3Compatible() {
@@ -34,4 +41,5 @@ public class AmazonS3Compatible extends AmazonS3 {
                 "endpoint='" + endpoint + '\'' +
                 '}';
     }
+
 }

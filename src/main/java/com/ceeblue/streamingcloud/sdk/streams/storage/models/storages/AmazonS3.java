@@ -1,34 +1,49 @@
 package com.ceeblue.streamingcloud.sdk.streams.storage.models.storages;
 
 import com.ceeblue.streamingcloud.sdk.streams.storage.models.StorageType;
-import com.ceeblue.streamingcloud.sdk.streams.storage.utils.StorageDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 
-@JsonDeserialize(using = StorageDeserializer.class)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = AmazonS3.class, name = "AmazonS3"),
+        @JsonSubTypes.Type(value = AmazonS3Compatible.class, name = "AmazonS3Compatible")
+})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AmazonS3 {
+
+    /**
+     * Storage id
+     */
+    private String id;
+
     /**
      * Storage name
      */
     private String name;
+
     /**
      * Storage type
      */
     private StorageType type;
+
     /**
      * An access key ID (for example AKIAIOSFODNN7EXAMPLE)
      */
     private String accessKeyId;
+
     /**
      * A secret access key (for example,wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY)
      */
     private String secretAccessKey;
+
     /**
      * Destination bucket
      */
     private String bucket;
+
     /**
      * Destination path inside bucket
      */
@@ -40,6 +55,16 @@ public class AmazonS3 {
         this.secretAccessKey = secretAccessKey;
         this.bucket = bucket;
         type = StorageType.AmazonS3;
+    }
+
+    public AmazonS3(String id, String name, String accessKeyId, String secretAccessKey, String bucket, String path) {
+        this.id = id;
+        this.name = name;
+        type = StorageType.AmazonS3;
+        this.accessKeyId = accessKeyId;
+        this.secretAccessKey = secretAccessKey;
+        this.bucket = bucket;
+        this.path = path;
     }
 
     public AmazonS3() {
@@ -100,6 +125,15 @@ public class AmazonS3 {
         return this;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public AmazonS3 setId(String id) {
+        this.id = id;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "AmazonS3{" +
@@ -111,4 +145,5 @@ public class AmazonS3 {
                 ", path='" + path + '\'' +
                 '}';
     }
+
 }
