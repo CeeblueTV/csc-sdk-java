@@ -166,7 +166,8 @@ public class CreatedInput {
                 (parameters != null ? ", parameters=" + parameters : "") +
                 (callbackUri != null ? ", callbackUri='" + callbackUri : "") +
                 (statusMessages != null ? ", statusMessages=" + statusMessages : "") +
-                (parameters != null ? ", connection=" + parameters : "") +
+                (connection != null ? ", connection=" + connection : "") +
+                (parameters != null ? ", parameters=" + parameters : "") +
                 '}';
     }
 
