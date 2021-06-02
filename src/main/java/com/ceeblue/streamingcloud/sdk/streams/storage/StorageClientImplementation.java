@@ -47,7 +47,7 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
     }
 
     @Override
-    public List<AmazonS3> getStorages() throws ClientException {
+    public List <AmazonS3> getStorages() throws ClientException {
         try {
             AmazonS3[] result = exchange(STORAGES, "", HTTPMethod.GET, AmazonS3[].class);
 
@@ -80,4 +80,5 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
             throw new ClientException("Can't delete storage", session + STORAGES + storageId, HTTPMethod.DELETE, exception);
         }
     }
+
 }

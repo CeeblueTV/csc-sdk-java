@@ -9,6 +9,7 @@ import java.util.List;
  * Service for managing storage
  */
 public interface StorageClient {
+
     /**
      * Create a new storage
      *
@@ -26,7 +27,7 @@ public interface StorageClient {
     /**
      * Get all storages
      */
-    List<AmazonS3> getStorages() throws ClientException;
+    List <AmazonS3> getStorages() throws ClientException;
 
     /**
      * Update storage
@@ -41,4 +42,5 @@ public interface StorageClient {
      * @param storageId id of storage to delete {@link AmazonS3}
      */
     void deleteStorage(String storageId) throws ClientException;
+
 }

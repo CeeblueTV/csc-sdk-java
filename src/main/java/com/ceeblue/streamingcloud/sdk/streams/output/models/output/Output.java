@@ -2,28 +2,31 @@ package com.ceeblue.streamingcloud.sdk.streams.output.models.output;
 
 import com.ceeblue.streamingcloud.sdk.streams.input.models.InputFormat;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.Viewer;
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-@JsonDeserialize(using = OutputDeserializer.class)
 public class Output {
+
     /**
      * Stream identifier
+     * Required
      */
-    @JsonAlias({"streamId"})
     private String streamId;
+
     /**
      * Output stream format
+     * Required
      */
     private InputFormat format;
+
     /**
      * Number of concurrent sessions allowed
      */
     private Integer sessionLimit;
+
     /**
      * Viewer details
      */
     private Viewer viewer;
+
     /**
      * Invokes on status change
      */
