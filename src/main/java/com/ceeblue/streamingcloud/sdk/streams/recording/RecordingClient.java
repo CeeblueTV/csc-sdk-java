@@ -11,6 +11,7 @@ import java.util.List;
  * Client for recording manipulation
  */
 public interface RecordingClient {
+
     /**
      * Create a new recording
      *
@@ -32,14 +33,14 @@ public interface RecordingClient {
      * @param streamId input stream id {@link com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput}
      * @return list of records
      */
-    List<CreatedRecording> getRecordingByStreamId(String streamId) throws ClientException;
+    List <CreatedRecording> getRecordingByStreamId(String streamId) throws ClientException;
 
     /**
      * Fetch all recordings from server
      *
      * @return list of records
      */
-    List<CreatedRecording> getRecordings() throws ClientException;
+    List <CreatedRecording> getRecordings() throws ClientException;
 
     /**
      * Stop recording
@@ -54,4 +55,5 @@ public interface RecordingClient {
      * @param recordingId id of record {@link CreatedRecording}
      */
     void deleteRecording(String recordingId) throws ClientException;
+
 }

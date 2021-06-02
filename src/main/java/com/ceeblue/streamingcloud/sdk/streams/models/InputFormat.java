@@ -1,4 +1,4 @@
-package com.ceeblue.streamingcloud.sdk.streams.input.models;
+package com.ceeblue.streamingcloud.sdk.streams.models;
 
 /**
  * Protocol for streaming

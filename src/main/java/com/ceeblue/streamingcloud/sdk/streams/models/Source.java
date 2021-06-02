@@ -1,4 +1,4 @@
-package com.ceeblue.streamingcloud.sdk.streams.recording.models;
+package com.ceeblue.streamingcloud.sdk.streams.models;
 
 /**
  * Capturing source

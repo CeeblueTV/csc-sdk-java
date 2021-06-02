@@ -1,12 +1,13 @@
 package com.ceeblue.streamingcloud.sdk.streams.input;
 
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
-import com.ceeblue.streamingcloud.sdk.streams.input.models.InputFormat;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.InputStreamer;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.OutputSettings;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input;
+import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
 
 public class StreamBuilder {
+
     Input input = new Input();
 
     public StreamBuilder(InputFormat format) {
@@ -40,4 +41,5 @@ public class StreamBuilder {
     public Input build() {
         return input;
     }
+
 }

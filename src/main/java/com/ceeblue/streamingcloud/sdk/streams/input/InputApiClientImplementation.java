@@ -2,14 +2,14 @@ package com.ceeblue.streamingcloud.sdk.streams.input;
 
 import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
-import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
-import com.ceeblue.streamingcloud.sdk.utils.ClientException;
-import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.OutputSettings;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input;
+import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
+import com.ceeblue.streamingcloud.sdk.utils.ClientException;
+import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,6 +22,7 @@ import static com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod.*;
 public class InputApiClientImplementation extends ApiClient implements InputStreamClient {
 
     public static final String INPUTS = "/inputs/";
+
     public static final String OUTPUT = "/output/";
 
     public InputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
@@ -44,7 +45,7 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     }
 
     @Override
-    public List<CreatedInput> getInputs() {
+    public List <CreatedInput> getInputs() {
         try {
 
             CreatedInput[] result = exchange(INPUTS, "", GET, CreatedInput[].class);
@@ -73,7 +74,7 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     @Override
     public CreatedInput updateInput(String id, Access access, String token) {
         try {
-            Map<String, Object> updated = new HashMap<>();
+            Map <String, Object> updated = new HashMap <>();
             if (id == null) {
                 throw new IllegalArgumentException("Id must be nonnull");
             }
@@ -127,4 +128,5 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     public void setTemplate(HttpClient template) {
         this.template = template;
     }
+
 }

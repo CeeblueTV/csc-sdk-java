@@ -1,11 +1,11 @@
 package com.ceeblue.streamingcloud.sdk.authentiffication;
 
+import com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthenticationConstants;
 import com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthorizationException;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.http.RequestInfo;
 import com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod;
 import com.ceeblue.streamingcloud.sdk.http.template.utils.MediaType;
-import com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthenticationConstants;
 import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -17,10 +17,13 @@ import java.util.Map;
 public class AuthenticationClientImplementation implements AuthenticationClient {
 
     public static final ObjectMapper mapper = new ObjectMapper();
+
     public static final String TOKEN = "token";
 
     final Credential credential;
+
     private final Session session = new Session();
+
     private final HttpClient template;
 
     public AuthenticationClientImplementation(Credential credentials, HttpClient template, String endpoint) {
@@ -44,14 +47,14 @@ public class AuthenticationClientImplementation implements AuthenticationClient 
             return session;
         }
 
-        TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
+        TypeReference <HashMap <String, String>> typeRef = new TypeReference <HashMap <String, String>>() {
         };
 
         String body = getBody();
 
         byte[] result = template.exchange(session.getEndpoint() + AuthenticationConstants.LOGIN, new RequestInfo()
                 .setBody(body)
-                .setHeaders(new HashMap<>())
+                .setHeaders(new HashMap <>())
                 .setMethod(HTTPMethod.POST)
                 .setMediaType(MediaType.JSON));
         try {
@@ -62,7 +65,7 @@ public class AuthenticationClientImplementation implements AuthenticationClient 
     }
 
     private String getBody() {
-        Map<String, Object> payload = new HashMap<>();
+        Map <String, Object> payload = new HashMap <>();
         payload.put(AuthenticationConstants.USERNAME, credential.getUsername());
         payload.put(AuthenticationConstants.PASSWORD, credential.getPassword());
 
@@ -72,4 +75,5 @@ public class AuthenticationClientImplementation implements AuthenticationClient 
             throw new JsonParseException("Can't parse passed stream for creation. Stream: " + payload, e);
         }
     }
+
 }

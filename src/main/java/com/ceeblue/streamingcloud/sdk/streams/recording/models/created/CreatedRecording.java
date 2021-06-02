@@ -7,50 +7,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreatedRecording {
+
     /**
      * Recording identifier
      */
     String id;
+
     /**
      * Stream identifier
      */
     String streamId;
+
     /**
      * Target file name
      */
     String fileName;
+
     /**
      * Target file format [ MKV ]
      */
     String fileFormat;
+
     /**
      * Storage identifier {@link AmazonS3}
      */
     String storageId;
+
     /**
      * Capturing settings (Capture)
      */
     Capture capture;
+
     /**
      * Recording state [ Recording | Uploading | Completed | Error ]
      */
     State state;
+
     /**
      * Recording duration (seconds)
      */
     int duration;
+
     /**
      * Recording file length (bytes
      */
     int length;
+
     /**
      * Amount of recorded file uploaded to storage (bytes)
      */
     int uploaded;
+
     /**
      * List of messages
      */
-    List<String> messages = new ArrayList<>();
+    List <String> messages = new ArrayList <>();
+
     /**
      * Invokes on state change. (HTTP POST)
      */
@@ -149,11 +161,11 @@ public class CreatedRecording {
         return this;
     }
 
-    public List<String> getMessages() {
+    public List <String> getMessages() {
         return messages;
     }
 
-    public CreatedRecording setMessages(List<String> messages) {
+    public CreatedRecording setMessages(List <String> messages) {
         this.messages = messages;
         return this;
     }
@@ -166,4 +178,5 @@ public class CreatedRecording {
         this.callbackUri = callbackUri;
         return this;
     }
+
 }

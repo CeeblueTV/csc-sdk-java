@@ -1,7 +1,9 @@
 package com.ceeblue.streamingcloud.sdk.authentiffication;
 
 public class Credential {
+
     private String username;
+
     private String password;
 
     public Credential(String username, String password) {
@@ -27,4 +29,5 @@ public class Credential {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

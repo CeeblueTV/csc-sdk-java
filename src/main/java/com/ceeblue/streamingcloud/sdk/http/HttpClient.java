@@ -10,15 +10,16 @@ import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
  * Implementation must handle timeout, 5xx and 4xx errors and throw {@link ApiCallException}.
  */
 public interface HttpClient {
+
     /**
      * method to send request
      *
      * @param uri     URI of api call
      * @param payload request info e.g. http method, body, headers etc
      * @return Return result from server in byte[]
-     *
      * @throws ApiCallException In case when couldn't perform request. Some error on server were occurred, timeout or
      *                          authentication problem
      */
     byte[] exchange(String uri, RequestInfo payload) throws ApiCallException;
+
 }

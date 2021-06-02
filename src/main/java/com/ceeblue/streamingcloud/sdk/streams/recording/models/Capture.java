@@ -1,16 +1,19 @@
 package com.ceeblue.streamingcloud.sdk.streams.recording.models;
 
+import com.ceeblue.streamingcloud.sdk.streams.models.Source;
 import com.ceeblue.streamingcloud.sdk.streams.push.models.TrackSelector;
 
 /**
  * Stream capture settings
  */
 public class Capture {
+
     /**
      * List of track selectors (capture all if empty)
      * Required
      */
     private TrackSelector trackSelector;
+
     /**
      * Capturing source [ Incoming | Outgoing ]
      * Required
@@ -42,4 +45,5 @@ public class Capture {
         this.trackSelector = trackSelector;
         return this;
     }
+
 }

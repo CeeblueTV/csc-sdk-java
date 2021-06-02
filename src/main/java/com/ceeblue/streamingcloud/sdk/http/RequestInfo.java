@@ -7,12 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestInfo {
+
     private HTTPMethod method;
+
     private String body = "";
-    private Map<String, Object> headers;
+
+    private Map <String, Object> headers;
+
     private MediaType mediaType;
 
-    public RequestInfo(HTTPMethod method, String body, Map<String, Object> headers, MediaType mediaType) {
+    public RequestInfo(HTTPMethod method, String body, Map <String, Object> headers, MediaType mediaType) {
         this.method = method;
         this.body = body;
         this.headers = headers;
@@ -20,7 +24,7 @@ public class RequestInfo {
     }
 
     public RequestInfo() {
-        headers = new HashMap<>();
+        headers = new HashMap <>();
     }
 
     public String getBody() {
@@ -32,11 +36,11 @@ public class RequestInfo {
         return this;
     }
 
-    public Map<String, Object> getHeaders() {
+    public Map <String, Object> getHeaders() {
         return headers;
     }
 
-    public RequestInfo setHeaders(Map<String, Object> headers) {
+    public RequestInfo setHeaders(Map <String, Object> headers) {
         this.headers = headers;
         return this;
     }
@@ -58,4 +62,5 @@ public class RequestInfo {
         this.method = method;
         return this;
     }
+
 }

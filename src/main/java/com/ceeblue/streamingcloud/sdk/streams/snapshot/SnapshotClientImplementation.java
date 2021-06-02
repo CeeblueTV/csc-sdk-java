@@ -4,7 +4,7 @@ import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.http.template.utils.MediaType;
 import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
-import com.ceeblue.streamingcloud.sdk.streams.recording.models.Source;
+import com.ceeblue.streamingcloud.sdk.streams.models.Source;
 import com.ceeblue.streamingcloud.sdk.streams.snapshot.models.Snapshot;
 import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
 import com.ceeblue.streamingcloud.sdk.utils.ClientException;

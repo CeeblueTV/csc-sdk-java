@@ -1,6 +1,6 @@
 package com.ceeblue.streamingcloud.sdk.streams.snapshot;
 
-import com.ceeblue.streamingcloud.sdk.streams.recording.models.Source;
+import com.ceeblue.streamingcloud.sdk.streams.models.Source;
 import com.ceeblue.streamingcloud.sdk.streams.snapshot.models.Snapshot;
 import com.ceeblue.streamingcloud.sdk.utils.ClientException;
 

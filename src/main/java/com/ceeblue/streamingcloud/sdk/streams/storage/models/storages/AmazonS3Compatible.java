@@ -35,11 +35,10 @@ public class AmazonS3Compatible extends AmazonS3 {
         return this;
     }
 
+
     @Override
     public String toString() {
-        return "AmazonS3Compatible{" +
-                "endpoint='" + endpoint + '\'' +
-                '}';
+        return super.toString() + " endpoint='" + endpoint + '\'';
     }
 
 }

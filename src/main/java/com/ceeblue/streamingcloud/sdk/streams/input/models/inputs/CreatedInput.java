@@ -1,6 +1,7 @@
 package com.ceeblue.streamingcloud.sdk.streams.input.models.inputs;
 
 import com.ceeblue.streamingcloud.sdk.streams.input.models.*;
+import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.connection.HttpConnection;
 import com.fasterxml.jackson.annotation.JsonInclude;
 

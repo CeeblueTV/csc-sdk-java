@@ -1,6 +1,5 @@
 package com.ceeblue.streamingcloud.sdk.streams.input;
 
-import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.OutputSettings;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput;
@@ -27,7 +26,7 @@ public interface InputStreamClient {
      *
      * @return list of input stream
      */
-    List<CreatedInput> getInputs() throws ClientException;
+    List <CreatedInput> getInputs() throws ClientException;
 
     /**
      * Fetch input by id
@@ -66,4 +65,5 @@ public interface InputStreamClient {
      * @return output settings
      */
     OutputSettings updateOutputSettings(String id, OutputSettings output) throws ClientException;
+
 }

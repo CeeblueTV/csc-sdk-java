@@ -1,6 +1,6 @@
 package com.ceeblue.streamingcloud.sdk.streams.push.models.push;
 
-import com.ceeblue.streamingcloud.sdk.streams.input.models.InputFormat;
+import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.output.Output;
 import com.ceeblue.streamingcloud.sdk.streams.push.models.Status;
 
