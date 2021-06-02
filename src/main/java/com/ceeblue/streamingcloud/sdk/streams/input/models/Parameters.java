@@ -1,5 +1,6 @@
 package com.ceeblue.streamingcloud.sdk.streams.input.models;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -7,24 +8,26 @@ import java.util.Objects;
  */
 public class Parameters {
 
-    private String signallingUri;
+    /**
+     * Dynamic input stream parameters
+     */
+    private Map <String, Object> parameters;
 
     public Parameters() {
     }
 
-    public String getSignallingUri() {
-        return signallingUri;
+
+    private Map <String, Object> getParameters() {
+        return parameters;
     }
 
-    public void setSignallingUri(String signallingUri) {
-        this.signallingUri = signallingUri;
+    private void setParameters(Map <String, Object> parameters) {
+        this.parameters = parameters;
     }
 
     @Override
     public String toString() {
-        return "Parameters{" +
-                "signallingUri='" + signallingUri + '\'' +
-                '}';
+        return parameters.toString();
     }
 
     @Override
@@ -32,12 +35,12 @@ public class Parameters {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Parameters that = (Parameters) o;
-        return signallingUri.equals(that.signallingUri);
+        return Objects.equals(parameters, that.parameters);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(signallingUri);
+        return Objects.hash(parameters);
     }
 
 }

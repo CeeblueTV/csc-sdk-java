@@ -1,6 +1,9 @@
 package com.ceeblue.streamingcloud.sdk.streams.input.models.inputs;
 
-import com.ceeblue.streamingcloud.sdk.streams.input.models.*;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.Parameters;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.Status;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.Streamer;
 import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.connection.HttpConnection;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -160,6 +163,7 @@ public class CreatedInput {
                 (status != null ? ", status=" + status : "") +
                 (access != null ? ", access=" + access : "") +
                 (accessToken != null ? ", accessToken='" + accessToken : "") +
+                (parameters != null ? ", parameters=" + parameters : "") +
                 (callbackUri != null ? ", callbackUri='" + callbackUri : "") +
                 (statusMessages != null ? ", statusMessages=" + statusMessages : "") +
                 (parameters != null ? ", connection=" + parameters : "") +
