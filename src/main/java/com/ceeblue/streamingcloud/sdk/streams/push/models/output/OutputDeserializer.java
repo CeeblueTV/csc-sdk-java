@@ -1,9 +1,6 @@
-package com.ceeblue.streamingcloud.sdk.streams.output.models.output;
+package com.ceeblue.streamingcloud.sdk.streams.push.models.output;
 
-import com.ceeblue.streamingcloud.sdk.streams.push.models.output.CMAFOutput;
-import com.ceeblue.streamingcloud.sdk.streams.push.models.output.OutputParent;
-import com.ceeblue.streamingcloud.sdk.streams.push.models.output.RTMPOutput;
-import com.ceeblue.streamingcloud.sdk.streams.push.models.output.UDPTSOutput;
+import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -13,7 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 
 
-public class OutputDeserializer extends JsonDeserializer<OutputParent> {
+public class OutputDeserializer extends JsonDeserializer <OutputParent> {
 
     @Override
     public OutputParent deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
@@ -30,7 +27,10 @@ public class OutputDeserializer extends JsonDeserializer<OutputParent> {
                     .setUnifiedStreamingPlatform(getBoolean("unifiedStreamingPlatform", node));
         }
 
-        return new UDPTSOutput(getString("ipAddress", node), getInteger("port", node));
+        if (node.has("ipAddress")) {
+            return new UDPTSOutput(getString("ipAddress", node), getInteger("port", node));
+        }
+        throw new JsonParseException("Couldn't find suitable representation of output");
     }
 
     String getString(String jsonName, JsonNode node) {
