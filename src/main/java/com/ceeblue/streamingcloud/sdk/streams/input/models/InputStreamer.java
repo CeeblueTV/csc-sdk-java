@@ -19,16 +19,18 @@ public class InputStreamer {
         return ip;
     }
 
-    public void setIp(String ip) {
+    public InputStreamer setIp(String ip) {
         this.ip = ip;
+        return this;
     }
 
     public GeoLocation getGeiLocation() {
         return geoLocation;
     }
 
-    public void setGeiLocation(GeoLocation geoLocation) {
+    public InputStreamer setGeiLocation(GeoLocation geoLocation) {
         this.geoLocation = geoLocation;
+        return this;
     }
 
 }
