@@ -3,7 +3,7 @@ package com.ceeblue.streamingcloud.sdk.streams.push;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.streams.push.models.push.CreatedPush;
 import com.ceeblue.streamingcloud.sdk.streams.push.models.push.Push;
-import com.ceeblue.streamingcloud.sdk.utils.ClientException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 
 import java.util.List;
 

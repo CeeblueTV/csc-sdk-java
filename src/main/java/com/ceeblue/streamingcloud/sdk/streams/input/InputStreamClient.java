@@ -4,7 +4,7 @@ import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.OutputSettings;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input;
-import com.ceeblue.streamingcloud.sdk.utils.ClientException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 
 import java.util.List;
 

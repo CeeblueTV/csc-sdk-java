@@ -7,9 +7,9 @@ import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.OutputSettings;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input;
-import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
-import com.ceeblue.streamingcloud.sdk.utils.ClientException;
-import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
 
 import java.util.Arrays;
 import java.util.HashMap;

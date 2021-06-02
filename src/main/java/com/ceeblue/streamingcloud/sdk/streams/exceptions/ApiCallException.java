@@ -1,4 +1,4 @@
-package com.ceeblue.streamingcloud.sdk.utils;
+package com.ceeblue.streamingcloud.sdk.streams.exceptions;
 
 public class ApiCallException extends RuntimeException {
 

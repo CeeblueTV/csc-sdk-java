@@ -1,4 +1,4 @@
-package com.ceeblue.streamingcloud.sdk.utils;
+package com.ceeblue.streamingcloud.sdk.authentiffication;
 
 public class AuthorizationException extends RuntimeException {
 

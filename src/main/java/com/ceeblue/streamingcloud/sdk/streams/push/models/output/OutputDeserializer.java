@@ -1,6 +1,6 @@
 package com.ceeblue.streamingcloud.sdk.streams.push.models.output;
 
-import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;

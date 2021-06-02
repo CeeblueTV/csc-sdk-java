@@ -5,9 +5,9 @@ import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.http.HTTPMethod;
 import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 import com.ceeblue.streamingcloud.sdk.streams.storage.models.storages.AmazonS3;
-import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
-import com.ceeblue.streamingcloud.sdk.utils.ClientException;
-import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
 
 import java.util.Arrays;
 import java.util.List;

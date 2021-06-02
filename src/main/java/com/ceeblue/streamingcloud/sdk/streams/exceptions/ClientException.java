@@ -1,4 +1,4 @@
-package com.ceeblue.streamingcloud.sdk.utils;
+package com.ceeblue.streamingcloud.sdk.streams.exceptions;
 
 import com.ceeblue.streamingcloud.sdk.http.HTTPMethod;
 

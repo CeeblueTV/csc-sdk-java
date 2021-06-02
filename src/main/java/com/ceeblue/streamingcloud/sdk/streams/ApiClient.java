@@ -6,8 +6,8 @@ import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.http.RequestInfo;
 import com.ceeblue.streamingcloud.sdk.http.HTTPMethod;
 import com.ceeblue.streamingcloud.sdk.http.MediaType;
-import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
-import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

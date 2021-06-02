@@ -1,7 +1,7 @@
 package com.ceeblue.streamingcloud.sdk.http.clients;
 
 
-import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;

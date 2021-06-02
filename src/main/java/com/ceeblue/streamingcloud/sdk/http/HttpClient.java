@@ -1,6 +1,6 @@
 package com.ceeblue.streamingcloud.sdk.http;
 
-import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
 
 /**
  * Synchronous client to perform HTTP requests, exposing a simple,
