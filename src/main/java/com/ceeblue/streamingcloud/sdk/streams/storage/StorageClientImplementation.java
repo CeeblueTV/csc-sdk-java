@@ -1,13 +1,13 @@
 package com.ceeblue.streamingcloud.sdk.streams.storage;
 
 import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
-import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.http.HTTPMethod;
+import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
-import com.ceeblue.streamingcloud.sdk.streams.storage.models.storages.AmazonS3;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
+import com.ceeblue.streamingcloud.sdk.streams.storage.models.storages.AmazonS3;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,8 +31,10 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
             String json = createJson(amazonS3);
 
             return exchange(STORAGES, json, HTTPMethod.POST, AmazonS3.class);
-        } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't create storage: " + amazonS3, STORAGES, HTTPMethod.POST, exception);
+        } catch (JsonParseException exception) {
+            throw new ClientException("Can't create storage: " + amazonS3, exception);
+        } catch (ApiCallException exception) {
+            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't create storage: " + amazonS3, exception);
         }
     }
 
@@ -41,8 +43,10 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
         try {
             return exchange(STORAGES + storageId, "", HTTPMethod.GET, AmazonS3.class);
 
-        } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't get storage: " + storageId, STORAGES + storageId, HTTPMethod.GET, exception);
+        } catch (JsonParseException exception) {
+            throw new ClientException("Can't get storage: " + storageId, exception);
+        } catch (ApiCallException exception) {
+            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get storage: " + storageId, exception);
         }
     }
 
@@ -55,10 +59,10 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
                 return Arrays.stream(result).collect(Collectors.toList());
             }
         } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't get storages", session + STORAGES, HTTPMethod.GET, exception);
+            throw new ClientException("Can't get storages", exception);
         }
 
-        throw new ClientException("Can't get storages", session + STORAGES, HTTPMethod.GET, new RuntimeException("No result from server!!!"));
+        throw new ClientException("Can't get storages", new RuntimeException("No result from server!!!"));
     }
 
     @Override
@@ -67,8 +71,10 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
             String body = createJson(storage);
 
             return exchange(STORAGES + storage.getName(), body, HTTPMethod.PUT, AmazonS3.class);
-        } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't update storage: " + storage, STORAGES + storage.getName(), HTTPMethod.PUT, exception);
+        } catch (JsonParseException exception) {
+            throw new ClientException("Can't update storage: " + storage, exception);
+        } catch (ApiCallException exception) {
+            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't update storage: " + storage, exception);
         }
     }
 
@@ -77,7 +83,7 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
         try {
             exchange(STORAGES + storageId, "", HTTPMethod.DELETE, Void.class);
         } catch (RuntimeException exception) {
-            throw new ClientException("Can't delete storage", session + STORAGES + storageId, HTTPMethod.DELETE, exception);
+            throw new ClientException("Can't delete storage", exception);
         }
     }
 

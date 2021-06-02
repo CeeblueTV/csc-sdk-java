@@ -2,12 +2,12 @@ package com.ceeblue.streamingcloud.sdk.streams.push;
 
 import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
-import com.ceeblue.streamingcloud.sdk.streams.push.models.push.CreatedPush;
-import com.ceeblue.streamingcloud.sdk.streams.push.models.push.Push;
+import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
-import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
+import com.ceeblue.streamingcloud.sdk.streams.push.models.push.CreatedPush;
+import com.ceeblue.streamingcloud.sdk.streams.push.models.push.Push;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +18,7 @@ import static com.ceeblue.streamingcloud.sdk.http.HTTPMethod.*;
 public class ApiPushClientImplementation extends ApiClient implements StreamPushClient {
 
     private static final String PUSHES = "/pushes/";
+
     private static final String STREAM = "/stream/";
 
     public ApiPushClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
@@ -35,7 +36,7 @@ public class ApiPushClientImplementation extends ApiClient implements StreamPush
 
             return exchange(PUSHES, json, POST, CreatedPush.class);
         } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't create stream push: " + push, session + PUSHES, POST, exception);
+            throw new ClientException(exception.getMessage() != null ? exception.getMessage() : "Can't create stream push: " + push, exception);
         }
     }
 
@@ -45,12 +46,12 @@ public class ApiPushClientImplementation extends ApiClient implements StreamPush
             return exchange(PUSHES + id, "", GET, CreatedPush.class);
 
         } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't get stream push", session + PUSHES + id, GET, exception);
+            throw new ClientException(exception.getMessage() != null ? exception.getMessage() : "Can't get stream push", exception);
         }
     }
 
     @Override
-    public List<String> retrieveStreamPush(String id) {
+    public List <String> retrieveStreamPush(String id) {
         try {
             String[] result = exchange(PUSHES + STREAM, "", GET, String[].class);
 
@@ -58,10 +59,11 @@ public class ApiPushClientImplementation extends ApiClient implements StreamPush
                 return Arrays.stream(result).collect(Collectors.toList());
             }
         } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't get stream push ids. Id: " + id, session + PUSHES + STREAM, GET, exception);
+            throw new ClientException(exception.getMessage() != null ? exception.getMessage() : "Can't get stream push ids. Id: " + id, exception);
         }
 
-        throw new ClientException("Can't get stream push ids. Id: " + id, session + PUSHES + STREAM, GET, new RuntimeException("No result from server!!!"));
+        throw new ClientException(
+                "Can't get stream push ids. Id: " + id, new RuntimeException("No result from server!!!"));
     }
 
     @Override
@@ -69,7 +71,8 @@ public class ApiPushClientImplementation extends ApiClient implements StreamPush
         try {
             exchange(PUSHES + id, "", DELETE, Void.class);
         } catch (RuntimeException exception) {
-            throw new ClientException("Can't delete stream push", session + PUSHES + id, DELETE, exception);
+            throw new ClientException(exception.getMessage() != null ? exception.getMessage() : "Can't delete stream push", exception);
         }
     }
+
 }

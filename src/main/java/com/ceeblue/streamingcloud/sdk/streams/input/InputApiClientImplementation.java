@@ -3,13 +3,13 @@ package com.ceeblue.streamingcloud.sdk.streams.input;
 import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.OutputSettings;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input;
-import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
-import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
-import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -39,8 +39,10 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
             String json = createJson(input);
 
             return exchange(INPUTS, json, POST, CreatedInput.class);
-        } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't create input stream: " + input, session + INPUTS, POST, exception);
+        } catch (JsonParseException exception) {
+            throw new ClientException("Can't create input stream: " + input, exception);
+        } catch (ApiCallException exception) {
+            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't create input stream: " + input, exception);
         }
     }
 
@@ -53,20 +55,23 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
                 return Arrays.stream(result)
                         .collect(Collectors.toList());
             }
-        } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't get stream", session + INPUTS, GET, exception);
+        } catch (JsonParseException exception) {
+            throw new ClientException("Can't get stream", exception);
+        } catch (ApiCallException exception) {
+            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get stream", exception);
         }
 
-        throw new ClientException("Can't get stream", session + INPUTS, GET, new RuntimeException("No result from server!!!"));
+        throw new ClientException("Can't get stream", new RuntimeException("No result from server!!!"));
     }
 
     @Override
     public CreatedInput getInput(String id) {
         try {
             return exchange(INPUTS + id, "", GET, CreatedInput.class);
-
-        } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't get stream input", session + INPUTS + id, GET, exception);
+        } catch (JsonParseException exception) {
+            throw new ClientException("Can't get stream input", exception);
+        } catch (ApiCallException exception) {
+            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get stream input", exception);
         }
     }
 
@@ -79,10 +84,6 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
                 throw new IllegalArgumentException("Id must be nonnull");
             }
             if (access != null) {
-                if (token == null) {
-                    throw new ClientException("Can't update stream. Token should be passed to private stream", INPUTS + id + INPUTS + id);
-                }
-
                 updated.put("access", access);
                 updated.put("accessToken", token);
             }
@@ -90,8 +91,10 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
             String body = createJson(updated);
 
             return exchange(INPUTS + id, body, PUT, CreatedInput.class);
-        } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't update stream", INPUTS + id + INPUTS + id, PUT, exception);
+        } catch (JsonParseException exception) {
+            throw new ClientException("Can't update stream", exception);
+        } catch (ApiCallException exception) {
+            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't update stream", exception);
         }
     }
 
@@ -100,7 +103,7 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
         try {
             exchange(INPUTS + id, "", DELETE, Void.class);
         } catch (RuntimeException exception) {
-            throw new ClientException("Can't delete stream", session + INPUTS + id, DELETE, exception);
+            throw new ClientException("Can't delete stream", exception);
         }
     }
 
@@ -109,8 +112,10 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
         try {
             return exchange(INPUTS + id + OUTPUT, "", GET, OutputSettings.class);
 
-        } catch (JsonParseException | ApiCallException exception) {
-            throw new ClientException("Can't get output", session + INPUTS + id + OUTPUT, GET, exception);
+        } catch (JsonParseException exception) {
+            throw new ClientException("Can't get output", exception);
+        } catch (ApiCallException exception) {
+            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get output", exception);
         }
     }
 
@@ -120,8 +125,10 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
             String body = createJson(output);
             return exchange(INPUTS + id + OUTPUT, body, PUT, OutputSettings.class);
 
-        } catch (ApiCallException | JsonParseException exception) {
-            throw new ClientException("Can't update output. New output: " + output, session.getEndpoint() + INPUTS + id + OUTPUT, PUT, exception);
+        } catch (ApiCallException exception) {
+            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't update output. New output: " + output, exception);
+        } catch (JsonParseException exception) {
+            throw new ClientException("Can't update output. New output: " + output, exception);
         }
     }
 

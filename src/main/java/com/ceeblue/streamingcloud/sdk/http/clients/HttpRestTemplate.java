@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
  * HttpClient implementation with RestTemplate inside.
  */
 public class HttpRestTemplate implements HttpClient {
+
     private final RestTemplate template;
 
     /**
@@ -26,21 +27,24 @@ public class HttpRestTemplate implements HttpClient {
     @Override
     public byte[] exchange(String uri, RequestInfo payload) throws ApiCallException {
         try {
-            HttpEntity<String> entity = processPayload(payload);
+            HttpEntity <String> entity = processPayload(payload);
 
             return template.exchange(uri, HttpMethod.valueOf(payload.getMethod().name()), entity, byte[].class).getBody();
         } catch (ResourceAccessException exception) {
             throw new ApiCallException("Timeout", -1, exception.getMessage());
+        } catch (ApiCallException e) {
+            throw e.setApi(uri).setMethod(payload.getMethod());
         }
     }
 
-    private HttpEntity<String> processPayload(RequestInfo payload) {
+    private HttpEntity <String> processPayload(RequestInfo payload) {
         HttpHeaders httpHeaders = new HttpHeaders();
 
         payload.getHeaders().forEach((headerName, headerValue) -> httpHeaders.set(headerName, headerValue.toString()));
 
         httpHeaders.setContentType(MediaType.valueOf(payload.getMediaType().getType()));
 
-        return new HttpEntity<>(payload.getBody(), httpHeaders);
+        return new HttpEntity <>(payload.getBody(), httpHeaders);
     }
+
 }
