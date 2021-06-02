@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import static com.ceeblue.streamingcloud.sdk.http.HTTPMethod.*;
+import static com.ceeblue.streamingcloud.sdk.streams.utils.StingFormatter.getServerMessage;
 
 public class SnapshotClientImplementation extends ApiClient implements SnapshotClient {
 
@@ -39,7 +40,8 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get snapshot", exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get snapshot", exception);
+             String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't get snapshot", exception);
         }
     }
 
@@ -52,7 +54,8 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
         } catch (JsonParseException exception) {
             throw new ClientException("Can't update snapshot settings", exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't update snapshot settings", exception);
+             String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't update snapshot settings", exception);
         }
     }
 
@@ -63,7 +66,8 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get snapshot settings", exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get snapshot settings", exception);
+             String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't get snapshot settings", exception);
         }
     }
 

@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.ceeblue.streamingcloud.sdk.streams.utils.StingFormatter.getServerMessage;
+
 public class StorageClientImplementation extends ApiClient implements StorageClient {
 
     private static final String STORAGES = "/storages/";
@@ -34,7 +36,8 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
         } catch (JsonParseException exception) {
             throw new ClientException("Can't create storage: " + amazonS3, exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't create storage: " + amazonS3, exception);
+            String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't create storage: " + amazonS3, exception);
         }
     }
 
@@ -46,7 +49,8 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get storage: " + storageId, exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get storage: " + storageId, exception);
+            String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't get storage: " + storageId, exception);
         }
     }
 
@@ -74,7 +78,8 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
         } catch (JsonParseException exception) {
             throw new ClientException("Can't update storage: " + storage, exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't update storage: " + storage, exception);
+            String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't update storage: " + storage, exception);
         }
     }
 

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.ceeblue.streamingcloud.sdk.http.HTTPMethod.*;
+import static com.ceeblue.streamingcloud.sdk.streams.utils.StingFormatter.getServerMessage;
 
 public class RecordingClientImplementation extends ApiClient implements RecordingClient {
 
@@ -40,7 +41,8 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
         } catch (JsonParseException exception) {
             throw new ClientException("Can't add recording: " + recording, exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't add recording: " + recording, exception);
+             String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't add recording: " + recording, exception);
         }
     }
 
@@ -52,7 +54,8 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get recordings: ", exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get recordings: ", exception);
+             String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't get recordings: ", exception);
         }
     }
 
@@ -68,7 +71,8 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get recordings for Stream: " + streamId, exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get recordings for Stream: " + streamId, exception);
+             String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't get recordings for Stream: " + streamId, exception);
         }
 
         throw new ClientException("Can't get stream recordings", new RuntimeException("No result from server!!!"));
@@ -86,7 +90,8 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get recordings", exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get recordings", exception);
+             String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't get recordings", exception);
         }
 
         throw new ClientException("Can't get recordings", new RuntimeException("No result from server!!!"));
@@ -99,7 +104,8 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
         } catch (JsonParseException exception) {
             throw new ClientException("Can't stop recording", exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't stop recording", exception);
+             String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't stop recording", exception);
         }
     }
 

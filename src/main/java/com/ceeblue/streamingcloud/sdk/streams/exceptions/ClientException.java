@@ -18,7 +18,7 @@ public class ClientException extends RuntimeException {
     @Override
     public String toString() {
         return "ClientException:" +
-                (message != null ? "Message='" + message : "") + '\n' +
+                (message != null ? "Message=" + message : "") + '\n' +
                 (exception != null ? "Exception=" + exception : "") + "\n" +
                 '}';
     }

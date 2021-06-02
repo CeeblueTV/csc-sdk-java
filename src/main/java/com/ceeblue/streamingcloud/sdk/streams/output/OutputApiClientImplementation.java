@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.ceeblue.streamingcloud.sdk.http.HTTPMethod.*;
+import static com.ceeblue.streamingcloud.sdk.streams.utils.StingFormatter.getServerMessage;
 
 
 public class OutputApiClientImplementation extends ApiClient implements OutputStreamClient {
@@ -39,7 +40,8 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
         } catch (JsonParseException exception) {
             throw new ClientException("Can't create output stream: " + output, exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't create output stream: " + output, exception);
+             String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't create output stream: " + output, exception);
         }
 
     }
@@ -56,7 +58,8 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get output stream", exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get output stream", exception);
+             String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't get output stream", exception);
         }
 
         throw new ClientException("Can't get output stream", new RuntimeException("No result from server!!!"));

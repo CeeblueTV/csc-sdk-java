@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.ceeblue.streamingcloud.sdk.http.HTTPMethod.*;
+import static com.ceeblue.streamingcloud.sdk.streams.utils.StingFormatter.getServerMessage;
 
 public class InputApiClientImplementation extends ApiClient implements InputStreamClient {
 
@@ -42,7 +43,8 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
         } catch (JsonParseException exception) {
             throw new ClientException("Can't create input stream: " + input, exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't create input stream: " + input, exception);
+            String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't create input stream: " + input, exception);
         }
     }
 
@@ -58,7 +60,8 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get stream", exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get stream", exception);
+            String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't get stream", exception);
         }
 
         throw new ClientException("Can't get stream", new RuntimeException("No result from server!!!"));
@@ -71,7 +74,8 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get stream input", exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get stream input", exception);
+            String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't get stream input", exception);
         }
     }
 
@@ -94,7 +98,8 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
         } catch (JsonParseException exception) {
             throw new ClientException("Can't update stream", exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't update stream", exception);
+            String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't update stream", exception);
         }
     }
 
@@ -115,7 +120,8 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get output", exception);
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't get output", exception);
+            String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't get output", exception);
         }
     }
 
@@ -126,7 +132,8 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
             return exchange(INPUTS + id + OUTPUT, body, PUT, OutputSettings.class);
 
         } catch (ApiCallException exception) {
-            throw new ClientException(exception.getServerResponse() != null ? exception.getServerResponse() : "Can't update output. New output: " + output, exception);
+            String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't update output. New output: " + output, exception);
         } catch (JsonParseException exception) {
             throw new ClientException("Can't update output. New output: " + output, exception);
         }
