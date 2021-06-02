@@ -8,36 +8,36 @@ public class Recording {
      * Stream identifier {@link com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input}
      * Required
      */
-    String streamId;
+    private String streamId;
 
     /**
      * Target file name
      * Required
      */
-    String fileName;
+    private String fileName;
 
     /**
      * Target file format
      * Required
      */
-    FileFormat fileFormat;
+    private FileFormat fileFormat;
 
     /**
      * Stream capture settings
      * Required
      */
-    Capture capture;
+    private Capture capture;
 
     /**
      * Storage identifier {@link AmazonS3}
      * Required
      */
-    String storageId;
+    private String storageId;
 
     /**
      * Invokes on state change. (HTTP POST)
      */
-    String callbackUri;
+    private String callbackUri;
 
     /**
      * Constructor with all required fields

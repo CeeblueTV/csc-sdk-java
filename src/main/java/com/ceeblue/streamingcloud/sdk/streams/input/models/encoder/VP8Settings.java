@@ -33,11 +33,7 @@ public class VP8Settings extends EncoderSettings {
 
     @Override
     public String toString() {
-        return "VP8Settings{" +
-                "codec=" + codec +
-                ", bitrate=" + bitrate +
-                ", keyMaxDist=" + keyMaxDist +
-                '}';
+        return super.toString() + ", keyMaxDist=" + keyMaxDist;
     }
 
     @Override

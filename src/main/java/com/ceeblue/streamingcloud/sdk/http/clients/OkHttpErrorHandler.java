@@ -1,4 +1,4 @@
-package com.ceeblue.streamingcloud.sdk.http.template.utils;
+package com.ceeblue.streamingcloud.sdk.http.clients;
 
 import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
 import okhttp3.Interceptor;

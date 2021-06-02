@@ -10,15 +10,13 @@ public class AmazonS3Compatible extends AmazonS3 {
     private String endpoint;
 
     public AmazonS3Compatible(String name, String accessKeyId, String secretAccessKey, String bucket, String endpoint) {
-        super(name, accessKeyId, secretAccessKey, bucket);
-        this.endpoint = endpoint;
-        this.setType(StorageType.AmazonS3Compatible);
-
+        this(name, accessKeyId, secretAccessKey, bucket, null, endpoint);
     }
 
-    public AmazonS3Compatible(String id, String name, String accessKeyId, String secretAccessKey, String bucket, String path, String endpoint) {
-        super(id, name, accessKeyId, secretAccessKey, bucket, path);
+    public AmazonS3Compatible(String name, String accessKeyId, String secretAccessKey, String bucket, String path, String endpoint) {
+        super(name, accessKeyId, secretAccessKey, bucket, path);
         this.endpoint = endpoint;
+
         this.setType(StorageType.AmazonS3Compatible);
     }
 

@@ -4,8 +4,8 @@ import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.authentiffication.Session;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.http.RequestInfo;
-import com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod;
-import com.ceeblue.streamingcloud.sdk.http.template.utils.MediaType;
+import com.ceeblue.streamingcloud.sdk.http.HTTPMethod;
+import com.ceeblue.streamingcloud.sdk.http.MediaType;
 import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
 import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,14 +14,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthenticationConstants.*;
+import static com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthenticationConstants.DEFAULT_ENDPOINT;
 
 /**
- * Helper for all api clients. Contains authorization and utils method for working with json and authentication.
+ * Helper for all API clients. Contains authorization and utils methods for working with json and authentication
  */
 public abstract class ApiClient {
 
-    public static final ObjectMapper mapper = new ObjectMapper();
+    private static final String AUTHORIZATION_HEADER = "Authorization";
+
+    private static final String BEARER = "Bearer ";
+
+    private final ObjectMapper mapper = new ObjectMapper();
 
     private final AuthenticationClient authenticationClient;
 
@@ -36,8 +40,8 @@ public abstract class ApiClient {
     }
 
     protected ApiClient(AuthenticationClient authenticationClient, HttpClient template, String endpoint) {
-        this.authenticationClient = authenticationClient;
-        this.template = template;
+        this(authenticationClient, template);
+
         session = new Session().setEndpoint(endpoint);
     }
 

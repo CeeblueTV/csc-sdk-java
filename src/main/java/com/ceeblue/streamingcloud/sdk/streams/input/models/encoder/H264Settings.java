@@ -48,12 +48,8 @@ public class H264Settings extends EncoderSettings {
 
     @Override
     public String toString() {
-        return "H264Settings{" +
-                "codec=" + codec +
-                ", bitrate=" + bitrate +
-                ", speedPreset=" + speedPreset +
-                ", keyIntMax=" + keyIntMax +
-                '}';
+        return super.toString() + ", speedPreset=" + speedPreset +
+                ", keyIntMax=" + keyIntMax;
     }
 
     @Override

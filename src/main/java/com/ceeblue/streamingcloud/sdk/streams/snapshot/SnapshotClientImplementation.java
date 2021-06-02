@@ -2,7 +2,7 @@ package com.ceeblue.streamingcloud.sdk.streams.snapshot;
 
 import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
-import com.ceeblue.streamingcloud.sdk.http.template.utils.MediaType;
+import com.ceeblue.streamingcloud.sdk.http.MediaType;
 import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 import com.ceeblue.streamingcloud.sdk.streams.models.Source;
 import com.ceeblue.streamingcloud.sdk.streams.snapshot.models.Snapshot;
@@ -14,11 +14,14 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Locale;
 
-import static com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod.*;
+import static com.ceeblue.streamingcloud.sdk.http.HTTPMethod.*;
 
 public class SnapshotClientImplementation extends ApiClient implements SnapshotClient {
+
     private static final String SNAPSHOTS = "/snapshots/";
+
     private static final String STREAM = "stream/";
+
     private static final String IMAGE = "image";
 
     public SnapshotClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
@@ -32,7 +35,7 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
     @Override
     public ByteBuffer getSnapshotImage(String streamId, Source source) throws ClientException {
         try {
-            return ByteBuffer.wrap(exchange(SNAPSHOTS + STREAM + streamId + "/" + source.name().toLowerCase(Locale.ROOT) + "/" + IMAGE, "", GET, byte[].class, new HashMap<>(), MediaType.IMAGE));
+            return ByteBuffer.wrap(exchange(SNAPSHOTS + STREAM + streamId + "/" + source.name().toLowerCase(Locale.ROOT) + "/" + IMAGE, "", GET, byte[].class, new HashMap <>(), MediaType.IMAGE));
         } catch (JsonParseException | ApiCallException exception) {
             throw new ClientException("Can't get snapshot", SNAPSHOTS + STREAM + streamId + "/" + source.name().toLowerCase(Locale.ROOT) + "/" + IMAGE, GET, exception);
         }
@@ -66,4 +69,5 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
             throw new ClientException("Can't delete snapshot settings", session + SNAPSHOTS + STREAM + streamId + "/" + source, DELETE, exception);
         }
     }
+
 }

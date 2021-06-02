@@ -1,4 +1,4 @@
-package com.ceeblue.streamingcloud.sdk.http.template;
+package com.ceeblue.streamingcloud.sdk.http.clients;
 
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.http.RequestInfo;
@@ -11,7 +11,7 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * HttpClient implementation with Rest template inside.
+ * HttpClient implementation with RestTemplate inside.
  */
 public class HttpRestTemplate implements HttpClient {
     private final RestTemplate template;

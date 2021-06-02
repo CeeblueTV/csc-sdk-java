@@ -1,10 +1,12 @@
 package com.ceeblue.streamingcloud.sdk.utils;
 
 public class ApiCallException extends RuntimeException {
+
     /**
      * Response code of server or -1 in timeout case
      */
     private final int exceptionCode;
+
     /**
      * Server response
      */
@@ -33,4 +35,5 @@ public class ApiCallException extends RuntimeException {
                 ", message='" + getMessage() + '\'' +
                 '}';
     }
+
 }

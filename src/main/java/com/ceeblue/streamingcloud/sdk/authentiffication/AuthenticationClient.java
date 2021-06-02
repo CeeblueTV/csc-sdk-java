@@ -1,6 +1,6 @@
 package com.ceeblue.streamingcloud.sdk.authentiffication;
 
-import com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthorizationException;
+import com.ceeblue.streamingcloud.sdk.utils.AuthorizationException;
 
 /**
  * Client that provide authentication to cloud

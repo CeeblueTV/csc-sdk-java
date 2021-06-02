@@ -50,20 +50,15 @@ public class AmazonS3 {
     private String path;
 
     public AmazonS3(String name, String accessKeyId, String secretAccessKey, String bucket) {
+        this();
         this.name = name;
         this.accessKeyId = accessKeyId;
         this.secretAccessKey = secretAccessKey;
         this.bucket = bucket;
-        type = StorageType.AmazonS3;
     }
 
-    public AmazonS3(String id, String name, String accessKeyId, String secretAccessKey, String bucket, String path) {
-        this.id = id;
-        this.name = name;
-        type = StorageType.AmazonS3;
-        this.accessKeyId = accessKeyId;
-        this.secretAccessKey = secretAccessKey;
-        this.bucket = bucket;
+    public AmazonS3(String name, String accessKeyId, String secretAccessKey, String bucket, String path) {
+        this(name, accessKeyId, secretAccessKey, bucket);
         this.path = path;
     }
 

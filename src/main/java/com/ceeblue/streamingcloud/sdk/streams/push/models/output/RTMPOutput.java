@@ -1,7 +1,9 @@
 package com.ceeblue.streamingcloud.sdk.streams.push.models.output;
 
 public class RTMPOutput extends OutputParent {
+
     String server;
+
     String key;
 
     public RTMPOutput(String server) {
@@ -25,4 +27,5 @@ public class RTMPOutput extends OutputParent {
         this.key = key;
         return this;
     }
+
 }

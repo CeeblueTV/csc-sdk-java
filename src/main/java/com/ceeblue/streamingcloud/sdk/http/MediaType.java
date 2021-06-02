@@ -1,4 +1,4 @@
-package com.ceeblue.streamingcloud.sdk.http.template.utils;
+package com.ceeblue.streamingcloud.sdk.http;
 
 public enum MediaType {
     JSON("application/json"),

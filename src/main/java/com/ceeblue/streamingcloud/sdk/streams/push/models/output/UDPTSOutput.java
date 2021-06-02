@@ -4,10 +4,13 @@ import com.ceeblue.streamingcloud.sdk.streams.push.models.TrackSelector;
 
 import java.util.List;
 
-public class UDPTSOutput extends OutputParent{
+public class UDPTSOutput extends OutputParent {
+
     String ipAddress;
+
     int port;
-    List<TrackSelector> tracks;
+
+    List <TrackSelector> tracks;
 
     public UDPTSOutput(String ipAddress, int port) {
         this.ipAddress = ipAddress;
@@ -30,11 +33,12 @@ public class UDPTSOutput extends OutputParent{
         this.port = port;
     }
 
-    public List<TrackSelector> getTracks() {
+    public List <TrackSelector> getTracks() {
         return tracks;
     }
 
-    public void setTracks(List<TrackSelector> tracks) {
+    public void setTracks(List <TrackSelector> tracks) {
         this.tracks = tracks;
     }
+
 }

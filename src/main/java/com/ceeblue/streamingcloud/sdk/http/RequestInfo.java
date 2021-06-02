@@ -1,8 +1,5 @@
 package com.ceeblue.streamingcloud.sdk.http;
 
-import com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod;
-import com.ceeblue.streamingcloud.sdk.http.template.utils.MediaType;
-
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,7 +1,9 @@
 package com.ceeblue.streamingcloud.sdk.streams.push.models.output;
 
 public class CMAFOutput extends OutputParent {
+
     private String endpoint;
+
     private Boolean unifiedStreamingPlatform;
 
     public CMAFOutput(String endpoint) {
@@ -24,4 +26,5 @@ public class CMAFOutput extends OutputParent {
         this.unifiedStreamingPlatform = unifiedStreamingPlatform;
         return this;
     }
+
 }

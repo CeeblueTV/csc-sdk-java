@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod.*;
+import static com.ceeblue.streamingcloud.sdk.http.HTTPMethod.*;
 
 public class InputApiClientImplementation extends ApiClient implements InputStreamClient {
 

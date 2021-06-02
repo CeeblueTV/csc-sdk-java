@@ -1,7 +1,9 @@
 package com.ceeblue.streamingcloud.sdk.utils;
 
 public class JsonParseException extends RuntimeException {
-    String message;
+
+    private final String message;
+
     private Throwable originalError;
 
     public JsonParseException(String message, Throwable originalError) {
@@ -24,4 +26,5 @@ public class JsonParseException extends RuntimeException {
                 (message != null ? ", message='" + message : "") + '\'' +
                 '}';
     }
+
 }

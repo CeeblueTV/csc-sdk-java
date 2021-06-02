@@ -3,15 +3,9 @@ package com.ceeblue.streamingcloud.sdk.authentiffication;
 
 public class Session {
 
-    /**
-     * endpoint of api server e.g shark.ceeblue.tv
-     */
-    String endpoint;
+    private String token;
 
-    /***
-     * Auth token that server return's when authenticated
-     */
-    String token;
+    private String endpoint;
 
     public Session(String endpoint, String token) {
         this.endpoint = endpoint;
@@ -21,6 +15,10 @@ public class Session {
     public Session() {
     }
 
+
+    /**
+     * Endpoint of API cloud e.g shark.ceeblue.tv
+     */
     public String getEndpoint() {
         return endpoint;
     }
@@ -30,6 +28,9 @@ public class Session {
         return this;
     }
 
+    /**
+     * Auth token that cloud return's when authenticated
+     */
     public String getToken() {
         return token;
     }

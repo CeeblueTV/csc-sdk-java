@@ -8,7 +8,7 @@ import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
 
 public class StreamBuilder {
 
-    Input input = new Input();
+    private final Input input = new Input();
 
     public StreamBuilder(InputFormat format) {
         input.setFormat(format);

@@ -2,7 +2,7 @@ package com.ceeblue.streamingcloud.sdk.streams.storage;
 
 import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
-import com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod;
+import com.ceeblue.streamingcloud.sdk.http.HTTPMethod;
 import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 import com.ceeblue.streamingcloud.sdk.streams.storage.models.storages.AmazonS3;
 import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;

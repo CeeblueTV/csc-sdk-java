@@ -22,13 +22,13 @@ public class EncoderSettings {
      * Codec name
      * Required
      */
-    CodecName codec;
+    private CodecName codec;
 
     /**
      * Bitrate in kbit/sec (Min 100)
      * Required
      */
-    Integer bitrate;
+    private Integer bitrate;
 
     public EncoderSettings() {
 
@@ -57,10 +57,8 @@ public class EncoderSettings {
 
     @Override
     public String toString() {
-        return "EncoderSettings{" +
-                "codec=" + codec +
-                ", bitrate=" + bitrate +
-                '}';
+        return "codec=" + codec +
+                ", bitrate=" + bitrate;
     }
 
     @Override

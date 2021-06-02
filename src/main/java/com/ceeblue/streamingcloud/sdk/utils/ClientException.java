@@ -1,12 +1,16 @@
 package com.ceeblue.streamingcloud.sdk.utils;
 
-import com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod;
+import com.ceeblue.streamingcloud.sdk.http.HTTPMethod;
 
 public class ClientException extends RuntimeException {
-    String api;
-    HTTPMethod method;
-    RuntimeException exception;
-    String message;
+
+    private final String api;
+
+    private final String message;
+
+    private HTTPMethod method;
+
+    private RuntimeException exception;
 
     public ClientException(String message, String api, HTTPMethod method, RuntimeException exception) {
         this.message = message;
@@ -29,5 +33,6 @@ public class ClientException extends RuntimeException {
                 (message != null ? "Message='" + message : "") + '\'' +
                 '}';
     }
+
 }
 

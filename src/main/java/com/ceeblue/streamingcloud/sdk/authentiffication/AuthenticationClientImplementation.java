@@ -1,11 +1,10 @@
 package com.ceeblue.streamingcloud.sdk.authentiffication;
 
-import com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthenticationConstants;
-import com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthorizationException;
+import com.ceeblue.streamingcloud.sdk.http.HTTPMethod;
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
+import com.ceeblue.streamingcloud.sdk.http.MediaType;
 import com.ceeblue.streamingcloud.sdk.http.RequestInfo;
-import com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod;
-import com.ceeblue.streamingcloud.sdk.http.template.utils.MediaType;
+import com.ceeblue.streamingcloud.sdk.utils.AuthorizationException;
 import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -14,31 +13,38 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthenticationConstants.DEFAULT_ENDPOINT;
+
 public class AuthenticationClientImplementation implements AuthenticationClient {
 
-    public static final ObjectMapper mapper = new ObjectMapper();
+    private static final String TOKEN = "token";
 
-    public static final String TOKEN = "token";
+    private static final String LOGIN = "/login";
 
-    final Credential credential;
+    private static final String USERNAME = "username";
+
+    private static final String PASSWORD = "password";
+
+    private final Credentials credentials;
+
+    private final ObjectMapper mapper = new ObjectMapper();
 
     private final Session session = new Session();
 
     private final HttpClient template;
 
-    public AuthenticationClientImplementation(Credential credentials, HttpClient template, String endpoint) {
-        this.credential = credentials;
-        this.template = template;
-        if (endpoint == null) {
-            endpoint = AuthenticationConstants.DEFAULT_ENDPOINT;
+    public AuthenticationClientImplementation(Credentials credentials, HttpClient template, String endpoint) {
+        this(credentials, template);
+
+        if (endpoint != null) {
+            session.setEndpoint(endpoint);
         }
-        session.setEndpoint(endpoint);
     }
 
-    public AuthenticationClientImplementation(Credential credentials, HttpClient template) {
-        this.credential = credentials;
+    public AuthenticationClientImplementation(Credentials credentials, HttpClient template) {
+        this.credentials = credentials;
         this.template = template;
-        session.setEndpoint(AuthenticationConstants.DEFAULT_ENDPOINT);
+        session.setEndpoint(DEFAULT_ENDPOINT);
     }
 
     @Override
@@ -52,7 +58,7 @@ public class AuthenticationClientImplementation implements AuthenticationClient 
 
         String body = getBody();
 
-        byte[] result = template.exchange(session.getEndpoint() + AuthenticationConstants.LOGIN, new RequestInfo()
+        byte[] result = template.exchange(session.getEndpoint() + LOGIN, new RequestInfo()
                 .setBody(body)
                 .setHeaders(new HashMap <>())
                 .setMethod(HTTPMethod.POST)
@@ -60,14 +66,14 @@ public class AuthenticationClientImplementation implements AuthenticationClient 
         try {
             return session.setToken(mapper.readValue(new String(result), typeRef).get(TOKEN));
         } catch (JsonProcessingException e) {
-            throw new AuthorizationException("Invalid response from Server: " + result);
+            throw new AuthorizationException("Invalid response from Server: " + new String(result));
         }
     }
 
     private String getBody() {
         Map <String, Object> payload = new HashMap <>();
-        payload.put(AuthenticationConstants.USERNAME, credential.getUsername());
-        payload.put(AuthenticationConstants.PASSWORD, credential.getPassword());
+        payload.put(USERNAME, credentials.getUsername());
+        payload.put(PASSWORD, credentials.getPassword());
 
         try {
             return mapper.writeValueAsString(payload);

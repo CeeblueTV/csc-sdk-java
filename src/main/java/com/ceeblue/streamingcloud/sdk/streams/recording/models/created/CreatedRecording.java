@@ -11,62 +11,62 @@ public class CreatedRecording {
     /**
      * Recording identifier
      */
-    String id;
+    private String id;
 
     /**
      * Stream identifier
      */
-    String streamId;
+    private String streamId;
 
     /**
      * Target file name
      */
-    String fileName;
+    private String fileName;
 
     /**
      * Target file format [ MKV ]
      */
-    String fileFormat;
+    private String fileFormat;
 
     /**
      * Storage identifier {@link AmazonS3}
      */
-    String storageId;
+    private String storageId;
 
     /**
      * Capturing settings (Capture)
      */
-    Capture capture;
+    private Capture capture;
 
     /**
      * Recording state [ Recording | Uploading | Completed | Error ]
      */
-    State state;
+    private State state;
 
     /**
      * Recording duration (seconds)
      */
-    int duration;
+    private int duration;
 
     /**
      * Recording file length (bytes
      */
-    int length;
+    private int length;
 
     /**
      * Amount of recorded file uploaded to storage (bytes)
      */
-    int uploaded;
+    private int uploaded;
 
     /**
      * List of messages
      */
-    List <String> messages = new ArrayList <>();
+    private List <String> messages = new ArrayList <>();
 
     /**
      * Invokes on state change. (HTTP POST)
      */
-    String callbackUri;
+    private String callbackUri;
 
     public CreatedRecording() {
     }

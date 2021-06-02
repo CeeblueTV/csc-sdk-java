@@ -1,9 +1,9 @@
 package com.ceeblue.streamingcloud.sdk.streams.input.models.inputs;
 
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
-import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.InputStreamer;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.OutputSettings;
+import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -13,32 +13,32 @@ public class Input {
      * Input stream format
      * Required
      */
-    InputFormat format;
+    private InputFormat format;
 
     /**
      * Streamer details
      */
-    InputStreamer streamer;
+    private InputStreamer streamer;
 
     /**
      * Invokes on status change
      */
-    String callbackUri;
+    private String callbackUri;
 
     /**
      * Stream output settings
      */
-    OutputSettings output = new OutputSettings(true);
+    private OutputSettings output = new OutputSettings(true);
 
     /**
      * Access mode [
      */
-    Access access = Access.Public;
+    private Access access = Access.Public;
 
     /**
      * Access token. Will be generated automatically if empty. (Private access mode)
      */
-    String accessToken;
+    private String accessToken;
 
     public InputFormat getFormat() {
         return format;
