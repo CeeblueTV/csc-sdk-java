@@ -1,12 +1,16 @@
 package com.ceeblue.streamingcloud.sdk.utils;
 
 public class JsonParseException extends RuntimeException {
-    private final Throwable originalError;
     String message;
+    private Throwable originalError;
 
     public JsonParseException(String message, Throwable originalError) {
         this.message = message;
         this.originalError = originalError;
+    }
+
+    public JsonParseException(String message) {
+        this.message = message;
     }
 
     public Throwable getOriginalError() {
@@ -16,8 +20,8 @@ public class JsonParseException extends RuntimeException {
     @Override
     public String toString() {
         return "JsonParseException{" +
-                "originalError=" + originalError +
-                ", message='" + message + '\'' +
+                (originalError != null ? "originalError=" + originalError : "") +
+                (message != null ? ", message='" + message : "") + '\'' +
                 '}';
     }
 }

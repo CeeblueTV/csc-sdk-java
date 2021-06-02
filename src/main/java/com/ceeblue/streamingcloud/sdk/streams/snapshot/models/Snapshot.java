@@ -1,6 +1,6 @@
 package com.ceeblue.streamingcloud.sdk.streams.snapshot.models;
 
-public class Recording {
+public class Snapshot {
     /**
      * Target file format
      * Required
@@ -17,20 +17,20 @@ public class Recording {
      */
     private int interval;
 
-    public Recording(SnapshotFormatType format, SnapshotQualityType quality, int interval) {
+    public Snapshot(SnapshotFormatType format, SnapshotQualityType quality, int interval) {
         this.format = format;
         this.quality = quality;
         this.interval = interval;
     }
 
-    public Recording() {
+    public Snapshot() {
     }
 
     public SnapshotFormatType getFormat() {
         return format;
     }
 
-    public Recording setFormat(SnapshotFormatType format) {
+    public Snapshot setFormat(SnapshotFormatType format) {
         this.format = format;
         return this;
     }
@@ -39,7 +39,7 @@ public class Recording {
         return quality;
     }
 
-    public Recording setQuality(SnapshotQualityType quality) {
+    public Snapshot setQuality(SnapshotQualityType quality) {
         this.quality = quality;
         return this;
     }
@@ -48,7 +48,7 @@ public class Recording {
         return interval;
     }
 
-    public Recording setInterval(int interval) {
+    public Snapshot setInterval(int interval) {
         this.interval = interval;
         return this;
     }

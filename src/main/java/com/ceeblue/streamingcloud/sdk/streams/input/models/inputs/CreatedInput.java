@@ -9,42 +9,52 @@ import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CreatedInput {
+
     /**
      * Stream identifier
      */
     private String id;
+
     /**
      * Input stream format
      */
     private InputFormat format;
+
     /**
      * Streamer details
      */
     private Streamer streamer;
+
     /**
      * Stream  status
      */
     private Status status;
+
     /**
      * Stream access status
      */
     private Access access;
+
     /**
      * Access token. Will be generated automatically if empty.
      */
     private String accessToken;
+
     /**
      * Invokes on status change.
      */
     private String callbackUri;
+
     /**
      * List of messages
      */
-    private List<String> statusMessages;
+    private List <String> statusMessages;
+
     /**
      * Input endpoint parameters for streaming
      */
     private HttpConnection connection;
+
     /**
      * Input stream parameters
      */
@@ -113,11 +123,11 @@ public class CreatedInput {
         return this;
     }
 
-    public List<String> getStatusMessages() {
+    public List <String> getStatusMessages() {
         return statusMessages;
     }
 
-    public CreatedInput setStatusMessages(List<String> statusMessages) {
+    public CreatedInput setStatusMessages(List <String> statusMessages) {
         this.statusMessages = statusMessages;
         return this;
     }
@@ -167,4 +177,5 @@ public class CreatedInput {
     public int hashCode() {
         return Objects.hash(id, format, streamer, status, access, accessToken, callbackUri, statusMessages, parameters);
     }
+
 }

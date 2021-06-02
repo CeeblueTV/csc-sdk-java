@@ -1,6 +1,5 @@
 package com.ceeblue.streamingcloud.sdk.streams.output.models.connection;
 
-import com.ceeblue.streamingcloud.sdk.streams.output.utils.HttpConnectionDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -10,6 +9,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = HttpConnectionDeserializer.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class HttpConnection {
+
     /**
      * Streaming endpoint
      */
@@ -30,4 +30,12 @@ public class HttpConnection {
         this.uri = uri;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "HttpConnection{" +
+                "uri='" + uri + '\'' +
+                '}';
+    }
+
 }

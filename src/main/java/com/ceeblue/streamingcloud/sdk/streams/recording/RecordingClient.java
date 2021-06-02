@@ -8,13 +8,14 @@ import com.ceeblue.streamingcloud.sdk.utils.ClientException;
 import java.util.List;
 
 /**
- * Service for stream recording operations
+ * Client for recording manipulation
  */
 public interface RecordingClient {
     /**
      * Create a new recording
      *
      * @param recording recording settings
+     * @return created recording
      */
     CreatedRecording createRecording(Recording recording) throws ClientException;
 
@@ -29,13 +30,14 @@ public interface RecordingClient {
      * Fetching recording by input stream id
      *
      * @param streamId input stream id {@link com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput}
+     * @return list of records
      */
     List<CreatedRecording> getRecordingByStreamId(String streamId) throws ClientException;
 
     /**
      * Fetch all recordings from server
      *
-     * @return list of {@link CreatedRecording}
+     * @return list of records
      */
     List<CreatedRecording> getRecordings() throws ClientException;
 

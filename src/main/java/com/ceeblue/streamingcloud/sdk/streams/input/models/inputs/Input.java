@@ -8,27 +8,33 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Input {
+
     /**
      * Input stream format
      * Required
      */
     InputFormat format;
+
     /**
      * Streamer details
      */
     InputStreamer streamer;
+
     /**
      * Invokes on status change
      */
     String callbackUri;
+
     /**
      * Stream output settings
      */
     OutputSettings output = new OutputSettings(true);
+
     /**
      * Access mode [
      */
     Access access = Access.Public;
+
     /**
      * Access token. Will be generated automatically if empty. (Private access mode)
      */
@@ -93,4 +99,5 @@ public class Input {
                 ", accessToken='" + accessToken + '\'' +
                 '}';
     }
+
 }

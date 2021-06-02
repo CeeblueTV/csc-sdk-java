@@ -8,22 +8,27 @@ import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OutputSettings {
+
     /**
      * If true, enables a signal to "pass through" unaltered. If false, enables multiprofile transcoding.
      */
     private boolean passthrough;
+
     /**
      * Output configuration version [ 1 | 2 ] (Version 1 by default)
      */
     private Integer version;
+
     /**
      * Overlays an picture onto a video track
      */
     private Overlay overlay;
+
     /**
      * List of video (and audio tracks for the version 2) transcoding tracks
+     * required in version 2
      */
-    private List<Track> tracks;
+    private List <Track> tracks;
 
     public OutputSettings() {
     }
@@ -47,7 +52,7 @@ public class OutputSettings {
         return this;
     }
 
-    public OutputSettings tracks(List<Track> tracks) {
+    public OutputSettings tracks(List <Track> tracks) {
         this.tracks = tracks;
         return this;
     }
@@ -79,11 +84,11 @@ public class OutputSettings {
         return this;
     }
 
-    public List<Track> getTracks() {
+    public List <Track> getTracks() {
         return tracks;
     }
 
-    public OutputSettings setTracks(List<Track> tracks) {
+    public OutputSettings setTracks(List <Track> tracks) {
         this.tracks = tracks;
         return this;
     }
@@ -110,4 +115,5 @@ public class OutputSettings {
     public int hashCode() {
         return Objects.hash(passthrough, version, overlay, tracks);
     }
+
 }

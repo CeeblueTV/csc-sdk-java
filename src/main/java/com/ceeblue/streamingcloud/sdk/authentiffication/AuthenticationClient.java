@@ -3,13 +3,13 @@ package com.ceeblue.streamingcloud.sdk.authentiffication;
 import com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthorizationException;
 
 /**
- * Client that provide auth logic. It's used on all ApiClients
+ * Client that provide authentication to cloud
  */
 public interface AuthenticationClient {
     /**
-     * Get api token from server
+     * Perform authentication
      *
-     * @return Session with set token
+     * @return Session filled to use in api call
      * @throws AuthorizationException if server deny or endpoint doesn't set
      */
     Session authenticate() throws AuthorizationException;

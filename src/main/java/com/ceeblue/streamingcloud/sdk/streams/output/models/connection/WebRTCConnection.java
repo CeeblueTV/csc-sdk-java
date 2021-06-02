@@ -1,10 +1,12 @@
 package com.ceeblue.streamingcloud.sdk.streams.output.models.connection;
 
 public class WebRTCConnection extends HttpConnection {
+
     /**
      * STUN server endpoint
      */
     private String stun;
+
     /**
      * TURN endpoint
      */
@@ -31,4 +33,5 @@ public class WebRTCConnection extends HttpConnection {
         this.turn = turn;
         return this;
     }
+
 }

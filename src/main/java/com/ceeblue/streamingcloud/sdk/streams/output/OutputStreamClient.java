@@ -7,7 +7,7 @@ import com.ceeblue.streamingcloud.sdk.utils.ClientException;
 import java.util.List;
 
 /**
- * Service for operations with output stream
+ * Client for input output manipulation
  */
 public interface OutputStreamClient {
     /**
@@ -22,21 +22,21 @@ public interface OutputStreamClient {
      * Fetch output of certain stream
      *
      * @param streamId id of input stream
-     * @return list of {@link CreatedOutput}
+     * @return output list
      */
     List<CreatedOutput> getOutputs(String streamId) throws ClientException;
 
     /***
      * Invalidate all active sessions
      *
-     * @param outputId id of output {@link Output}
+     * @param outputId id of output stream
      */
     void deleteOutputSessions(String outputId) throws ClientException;
 
     /**
      * delete an output from the Ceeblue Cloud
      *
-     * @param outputId id of output {@link Output}
+     * @param outputId id of output
      */
     void deleteOutput(String outputId) throws ClientException;
 }

@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Track {
     /**
      * Track type
+     * Required
      */
     TrackType type;
 

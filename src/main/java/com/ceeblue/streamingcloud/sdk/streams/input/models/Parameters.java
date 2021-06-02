@@ -6,6 +6,7 @@ import java.util.Objects;
  * Input stream parameters
  */
 public class Parameters {
+
     private String signallingUri;
 
     public Parameters() {
@@ -38,4 +39,5 @@ public class Parameters {
     public int hashCode() {
         return Objects.hash(signallingUri);
     }
+
 }

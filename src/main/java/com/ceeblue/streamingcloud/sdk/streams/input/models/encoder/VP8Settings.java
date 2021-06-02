@@ -7,8 +7,10 @@ import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class VP8Settings extends EncoderSettings {
+
     /**
      * Maximal distance between two key-frames (Min 2)
+     * Required
      */
     private Integer keyMaxDist;
 
@@ -51,4 +53,5 @@ public class VP8Settings extends EncoderSettings {
     public int hashCode() {
         return Objects.hash(super.hashCode(), keyMaxDist);
     }
+
 }

@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class InputStreamer {
+
     /**
      * IP address
      */
     private String ip;
+
     /**
      * Geographical location
      */
@@ -28,4 +30,5 @@ public class InputStreamer {
     public void setGeiLocation(GeoLocation geoLocation) {
         this.geoLocation = geoLocation;
     }
+
 }

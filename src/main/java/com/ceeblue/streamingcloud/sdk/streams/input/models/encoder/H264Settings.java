@@ -8,12 +8,16 @@ import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class H264Settings extends EncoderSettings {
+
     /**
      * Preset name for speed/quality tradeoff options
+     * Required
      */
     private SpeedPreset speedPreset;
+
     /**
      * Maximal distance between two key-frames (Min 2)
+     * Required
      */
     private Integer keyIntMax;
 
@@ -65,4 +69,5 @@ public class H264Settings extends EncoderSettings {
     public int hashCode() {
         return Objects.hash(super.hashCode(), speedPreset, keyIntMax);
     }
+
 }

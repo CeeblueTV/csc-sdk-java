@@ -4,6 +4,7 @@ package com.ceeblue.streamingcloud.sdk.streams.input.models;
  * Streamer details
  */
 public class Streamer {
+
     /**
      * IP address
      */
@@ -23,5 +24,6 @@ public class Streamer {
                 "ipAddress='" + ipAddress + '\'' +
                 '}';
     }
+
 }
 

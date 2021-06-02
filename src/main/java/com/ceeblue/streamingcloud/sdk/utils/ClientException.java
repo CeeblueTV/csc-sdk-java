@@ -15,13 +15,18 @@ public class ClientException extends RuntimeException {
         this.exception = exception;
     }
 
+    public ClientException(String api, String message) {
+        this.api = api;
+        this.message = message;
+    }
+
     @Override
     public String toString() {
         return "ClientException: \n" +
-                "api='" + api + '\n' +
-                "Method=" + method + "\n" +
-                "Exception=" + exception + "\n" +
-                "Message='" + message + '\'' +
+                (api != null ? "api='" + api : "") + '\n' +
+                (method != null ? "Method=" + method : "") + "\n" +
+                (exception != null ? "Exception=" + exception : "") + "\n" +
+                (message != null ? "Message='" + message : "") + '\'' +
                 '}';
     }
 }
