@@ -14,11 +14,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod.*;
-import static com.ceeblue.streamingcloud.sdk.streams.output.utils.Constants.OUTPUTS;
-import static com.ceeblue.streamingcloud.sdk.streams.output.utils.Constants.SESSIONS;
+
 
 public class OutputApiClientImplementation extends ApiClient implements OutputStreamClient {
 
+    public static final String OUTPUTS = "/outputs";
+
+    public static final String SESSIONS = "/sessions";
 
     public OutputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
@@ -41,7 +43,7 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
     }
 
     @Override
-    public List<CreatedOutput> getOutputs(String streamId) throws ClientException {
+    public List <CreatedOutput> getOutputs(String streamId) throws ClientException {
         String parts = OUTPUTS + "?streamId=" + streamId;
         try {
             CreatedOutput[] result = exchange(parts, "", GET, CreatedOutput[].class);
@@ -73,4 +75,5 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
             throw new ClientException("Can't delete stream", session + OUTPUTS + outputId, DELETE, exception);
         }
     }
+
 }

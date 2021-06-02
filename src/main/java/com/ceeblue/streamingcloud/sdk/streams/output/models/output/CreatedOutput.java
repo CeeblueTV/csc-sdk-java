@@ -3,11 +3,8 @@ package com.ceeblue.streamingcloud.sdk.streams.output.models.output;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.Viewer;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.connection.HttpConnection;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
-
-import static com.ceeblue.streamingcloud.sdk.streams.output.utils.Constants.CONNECTION_JSON_NAME;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -16,24 +13,28 @@ public class CreatedOutput {
     /**
      * Output active sessions
      */
-    private List<String> sessions;
+    private List <String> sessions;
+
     /**
      * Stream identifier
      */
     private String id;
+
     /**
      * Output endpoint parameters for viewer
      */
-    @JsonProperty(CONNECTION_JSON_NAME)
     private HttpConnection connection;
+
     /**
      * Viewer details
      */
     private Viewer viewer;
+
     /**
      * Invokes on status change
      */
     private String callbackUri;
+
     /**
      * Number of concurrent sessions allowed
      */
@@ -87,12 +88,25 @@ public class CreatedOutput {
         return this;
     }
 
-    public List<String> getSessions() {
+    public List <String> getSessions() {
         return sessions;
     }
 
-    public CreatedOutput setSessions(List<String> sessions) {
+    public CreatedOutput setSessions(List <String> sessions) {
         this.sessions = sessions;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "CreatedOutput{" +
+                (sessions != null ? "sessions=" + sessions : "") +
+                (id != null ? " id='" + id + '\'' : "") +
+                (connection != null ? " connection=" + connection : "") +
+                (viewer != null ? " viewer=" + viewer : "") +
+                (callbackUri != null ? " callbackUri='" + callbackUri + '\'' : "") +
+                (sessionLimit != null ? " sessionLimit=" + sessionLimit : "") +
+                '}';
+    }
+
 }

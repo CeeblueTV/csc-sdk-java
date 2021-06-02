@@ -2,7 +2,3 @@
 #  credentials:
 #    username: vladyslav
 #    password: sudosugo
-#
-#spring:
-#  main:
-#    web-application-type: none

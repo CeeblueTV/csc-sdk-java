@@ -5,7 +5,7 @@ import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.http.template.utils.MediaType;
 import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 import com.ceeblue.streamingcloud.sdk.streams.recording.models.Source;
-import com.ceeblue.streamingcloud.sdk.streams.snapshot.models.Recording;
+import com.ceeblue.streamingcloud.sdk.streams.snapshot.models.Snapshot;
 import com.ceeblue.streamingcloud.sdk.utils.ApiCallException;
 import com.ceeblue.streamingcloud.sdk.utils.ClientException;
 import com.ceeblue.streamingcloud.sdk.utils.JsonParseException;
@@ -15,9 +15,11 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import static com.ceeblue.streamingcloud.sdk.http.template.utils.HTTPMethod.*;
-import static com.ceeblue.streamingcloud.sdk.streams.snapshot.utils.Constants.*;
 
 public class SnapshotClientImplementation extends ApiClient implements SnapshotClient {
+    private static final String SNAPSHOTS = "/snapshots/";
+    private static final String STREAM = "stream/";
+    private static final String IMAGE = "image";
 
     public SnapshotClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);
@@ -37,9 +39,9 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
     }
 
     @Override
-    public void updateSnapshotSettings(Recording recording, String streamId, Source source) throws ClientException {
+    public void updateSnapshotSettings(Snapshot snapshot, String streamId, Source source) throws ClientException {
         try {
-            String body = createJson(recording);
+            String body = createJson(snapshot);
 
             exchange(SNAPSHOTS + STREAM + streamId + "/" + source, body, PUT, Void.class);
         } catch (JsonParseException | ApiCallException exception) {
@@ -48,9 +50,9 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
     }
 
     @Override
-    public Recording getSnapshotSettings(String streamId, Source source) throws ClientException {
+    public Snapshot getSnapshotSettings(String streamId, Source source) throws ClientException {
         try {
-            return exchange(SNAPSHOTS + STREAM + streamId + "/" + source, "", GET, Recording.class);
+            return exchange(SNAPSHOTS + STREAM + streamId + "/" + source, "", GET, Snapshot.class);
         } catch (JsonParseException | ApiCallException exception) {
             throw new ClientException("Can't get snapshot settings", SNAPSHOTS + STREAM + streamId + "/" + source, GET, exception);
         }

@@ -78,9 +78,11 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
                 throw new IllegalArgumentException("Id must be nonnull");
             }
             if (access != null) {
+                if (token == null) {
+                    throw new ClientException("Can't update stream. Token should be passed to private stream", INPUTS + id + INPUTS + id);
+                }
+
                 updated.put("access", access);
-            }
-            if (access != null) {
                 updated.put("accessToken", token);
             }
 
