@@ -19,9 +19,9 @@ import static com.ceeblue.streamingcloud.sdk.streams.utils.StingFormatter.getSer
 
 public class OutputApiClientImplementation extends ApiClient implements OutputStreamClient {
 
-    public static final String OUTPUTS = "/outputs";
+    private static final String OUTPUTS = "/outputs";
 
-    public static final String SESSIONS = "/sessions";
+    private static final String SESSIONS = "/sessions";
 
     public OutputApiClientImplementation(AuthenticationClient authenticationClient, HttpClient template) {
         super(authenticationClient, template);

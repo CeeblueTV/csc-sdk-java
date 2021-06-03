@@ -5,7 +5,7 @@ public class WebRTCConnection extends Connection {
     /**
      * Streaming endpoint
      */
-    String signallingUri;
+    private String signallingUri;
 
     /**
      * STUN server endpoint

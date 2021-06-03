@@ -19,8 +19,6 @@ public class HttpConnectionDeserializer extends JsonDeserializer <Connection> {
 
     private static final String TURN_JSON_NAME = "turn";
 
-    private static final String CONNECTION_JSON_NAME = "connection";
-
     @Override
     public Connection deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
         ObjectCodec oc = jp.getCodec();

@@ -35,7 +35,7 @@ public interface OutputStreamClient {
     void deleteOutputSessions(String outputId) throws ClientException;
 
     /**
-     * delete an output from the Ceeblue Cloud
+     * Delete an output from the Ceeblue Cloud
      *
      * @param outputId id of output
      */
