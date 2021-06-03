@@ -6,7 +6,7 @@ import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
-import com.ceeblue.streamingcloud.sdk.streams.output.models.output.CreatedOutput;
+import com.ceeblue.streamingcloud.sdk.streams.output.models.output.OutputEndpoint;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.output.Output;
 
 import java.util.Arrays;
@@ -32,11 +32,11 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
     }
 
     @Override
-    public CreatedOutput createOutput(Output output) throws ClientException {
+    public OutputEndpoint createOutput(Output output) throws ClientException {
         try {
             String json = createJson(output);
 
-            return exchange(OUTPUTS, json, POST, CreatedOutput.class);
+            return exchange(OUTPUTS, json, POST, OutputEndpoint.class);
         } catch (JsonParseException exception) {
             throw new ClientException("Can't create output stream: " + output, exception);
         } catch (ApiCallException exception) {
@@ -47,10 +47,10 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
     }
 
     @Override
-    public List <CreatedOutput> getOutputs(String streamId) throws ClientException {
+    public List <OutputEndpoint> getOutputs(String streamId) throws ClientException {
         String parts = OUTPUTS + "?streamId=" + streamId;
         try {
-            CreatedOutput[] result = exchange(parts, "", GET, CreatedOutput[].class);
+            OutputEndpoint[] result = exchange(parts, "", GET, OutputEndpoint[].class);
 
             if (result != null) {
                 return Arrays.stream(result).collect(Collectors.toList());

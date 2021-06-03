@@ -5,14 +5,14 @@ import com.ceeblue.streamingcloud.sdk.streams.input.models.Parameters;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Status;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Streamer;
 import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
-import com.ceeblue.streamingcloud.sdk.streams.output.models.connection.HttpConnection;
+import com.ceeblue.streamingcloud.sdk.streams.output.models.connection.Connection;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CreatedInput {
+public class InputEndpoint {
 
     /**
      * Stream identifier
@@ -57,7 +57,7 @@ public class CreatedInput {
     /**
      * Input endpoint parameters for streaming
      */
-    private HttpConnection connection;
+    private Connection connection;
 
     /**
      * Input stream parameters
@@ -68,7 +68,7 @@ public class CreatedInput {
         return id;
     }
 
-    public CreatedInput setId(String id) {
+    public InputEndpoint setId(String id) {
         this.id = id;
         return this;
     }
@@ -77,7 +77,7 @@ public class CreatedInput {
         return format;
     }
 
-    public CreatedInput setFormat(InputFormat format) {
+    public InputEndpoint setFormat(InputFormat format) {
         this.format = format;
         return this;
     }
@@ -86,7 +86,7 @@ public class CreatedInput {
         return streamer;
     }
 
-    public CreatedInput setStreamer(Streamer streamer) {
+    public InputEndpoint setStreamer(Streamer streamer) {
         this.streamer = streamer;
         return this;
     }
@@ -95,7 +95,7 @@ public class CreatedInput {
         return status;
     }
 
-    public CreatedInput setStatus(Status status) {
+    public InputEndpoint setStatus(Status status) {
         this.status = status;
         return this;
     }
@@ -104,7 +104,7 @@ public class CreatedInput {
         return access;
     }
 
-    public CreatedInput setAccess(Access access) {
+    public InputEndpoint setAccess(Access access) {
         this.access = access;
         return this;
     }
@@ -113,7 +113,7 @@ public class CreatedInput {
         return accessToken;
     }
 
-    public CreatedInput setAccessToken(String accessToken) {
+    public InputEndpoint setAccessToken(String accessToken) {
         this.accessToken = accessToken;
         return this;
     }
@@ -122,7 +122,7 @@ public class CreatedInput {
         return callbackUri;
     }
 
-    public CreatedInput setCallbackUri(String callbackUri) {
+    public InputEndpoint setCallbackUri(String callbackUri) {
         this.callbackUri = callbackUri;
         return this;
     }
@@ -131,7 +131,7 @@ public class CreatedInput {
         return statusMessages;
     }
 
-    public CreatedInput setStatusMessages(List <String> statusMessages) {
+    public InputEndpoint setStatusMessages(List <String> statusMessages) {
         this.statusMessages = statusMessages;
         return this;
     }
@@ -140,16 +140,16 @@ public class CreatedInput {
         return parameters;
     }
 
-    public CreatedInput setParameters(Parameters parameters) {
+    public InputEndpoint setParameters(Parameters parameters) {
         this.parameters = parameters;
         return this;
     }
 
-    public HttpConnection getConnection() {
+    public Connection getConnection() {
         return connection;
     }
 
-    public CreatedInput setConnection(HttpConnection connection) {
+    public InputEndpoint setConnection(Connection connection) {
         this.connection = connection;
         return this;
     }
@@ -175,7 +175,7 @@ public class CreatedInput {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CreatedInput that = (CreatedInput) o;
+        InputEndpoint that = (InputEndpoint) o;
         return Objects.equals(id, that.id) && format == that.format && Objects.equals(streamer, that.streamer) && status == that.status && access == that.access && Objects.equals(accessToken, that.accessToken) && Objects.equals(callbackUri, that.callbackUri) && Objects.equals(statusMessages, that.statusMessages) && Objects.equals(parameters, that.parameters);
     }
 

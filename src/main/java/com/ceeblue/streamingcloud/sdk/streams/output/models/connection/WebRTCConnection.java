@@ -1,6 +1,11 @@
 package com.ceeblue.streamingcloud.sdk.streams.output.models.connection;
 
-public class WebRTCConnection extends HttpConnection {
+public class WebRTCConnection extends Connection {
+
+    /**
+     * Streaming endpoint
+     */
+    String signallingUri;
 
     /**
      * STUN server endpoint
@@ -13,7 +18,7 @@ public class WebRTCConnection extends HttpConnection {
     private String turn;
 
     public WebRTCConnection(String uri) {
-        super(uri);
+        signallingUri = uri;
     }
 
     public String getStun() {
@@ -31,6 +36,15 @@ public class WebRTCConnection extends HttpConnection {
 
     public WebRTCConnection setTurn(String turn) {
         this.turn = turn;
+        return this;
+    }
+
+    private String getSignallingUri() {
+        return signallingUri;
+    }
+
+    private WebRTCConnection setSignallingUri(String signallingUri) {
+        this.signallingUri = signallingUri;
         return this;
     }
 

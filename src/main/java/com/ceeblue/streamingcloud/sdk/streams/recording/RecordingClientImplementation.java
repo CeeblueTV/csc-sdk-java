@@ -7,7 +7,7 @@ import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
 import com.ceeblue.streamingcloud.sdk.streams.recording.models.Recording;
-import com.ceeblue.streamingcloud.sdk.streams.recording.models.created.CreatedRecording;
+import com.ceeblue.streamingcloud.sdk.streams.recording.models.created.RecordingModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,11 +33,11 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     }
 
     @Override
-    public CreatedRecording createRecording(Recording recording) throws ClientException {
+    public RecordingModel createRecording(Recording recording) throws ClientException {
         try {
             String json = createJson(recording);
 
-            return exchange(RECORDINGS, json, POST, CreatedRecording.class);
+            return exchange(RECORDINGS, json, POST, RecordingModel.class);
         } catch (JsonParseException exception) {
             throw new ClientException("Can't add recording: " + recording, exception);
         } catch (ApiCallException exception) {
@@ -47,9 +47,9 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     }
 
     @Override
-    public CreatedRecording getRecording(String recordingId) throws ClientException {
+    public RecordingModel getRecording(String recordingId) throws ClientException {
         try {
-            return exchange(RECORDINGS + recordingId, "", GET, CreatedRecording.class);
+            return exchange(RECORDINGS + recordingId, "", GET, RecordingModel.class);
 
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get recordings: ", exception);
@@ -60,9 +60,9 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     }
 
     @Override
-    public List <CreatedRecording> getRecordingByStreamId(String streamId) throws ClientException {
+    public List <RecordingModel> getRecordingByStreamId(String streamId) throws ClientException {
         try {
-            CreatedRecording[] result = exchange(RECORDINGS + STREAM + streamId, "", GET, CreatedRecording[].class);
+            RecordingModel[] result = exchange(RECORDINGS + STREAM + streamId, "", GET, RecordingModel[].class);
 
             if (result != null) {
                 return Arrays.stream(result)
@@ -79,10 +79,10 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     }
 
     @Override
-    public List <CreatedRecording> getRecordings() throws ClientException {
+    public List <RecordingModel> getRecordings() throws ClientException {
         try {
 
-            CreatedRecording[] result = exchange(RECORDINGS, "", GET, CreatedRecording[].class);
+            RecordingModel[] result = exchange(RECORDINGS, "", GET, RecordingModel[].class);
             if (result != null) {
                 return Arrays.stream(result)
                         .collect(Collectors.toList());

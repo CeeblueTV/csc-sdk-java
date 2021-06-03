@@ -6,7 +6,7 @@ import com.ceeblue.streamingcloud.sdk.streams.storage.models.storages.AmazonS3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreatedRecording {
+public class RecordingModel {
 
     /**
      * Recording identifier
@@ -68,14 +68,14 @@ public class CreatedRecording {
      */
     private String callbackUri;
 
-    public CreatedRecording() {
+    public RecordingModel() {
     }
 
     public String getId() {
         return id;
     }
 
-    public CreatedRecording setId(String id) {
+    public RecordingModel setId(String id) {
         this.id = id;
         return this;
     }
@@ -84,7 +84,7 @@ public class CreatedRecording {
         return streamId;
     }
 
-    public CreatedRecording setStreamId(String streamId) {
+    public RecordingModel setStreamId(String streamId) {
         this.streamId = streamId;
         return this;
     }
@@ -93,7 +93,7 @@ public class CreatedRecording {
         return fileName;
     }
 
-    public CreatedRecording setFileName(String fileName) {
+    public RecordingModel setFileName(String fileName) {
         this.fileName = fileName;
         return this;
     }
@@ -102,7 +102,7 @@ public class CreatedRecording {
         return fileFormat;
     }
 
-    public CreatedRecording setFileFormat(String fileFormat) {
+    public RecordingModel setFileFormat(String fileFormat) {
         this.fileFormat = fileFormat;
         return this;
     }
@@ -111,7 +111,7 @@ public class CreatedRecording {
         return storageId;
     }
 
-    public CreatedRecording setStorageId(String storageId) {
+    public RecordingModel setStorageId(String storageId) {
         this.storageId = storageId;
         return this;
     }
@@ -120,7 +120,7 @@ public class CreatedRecording {
         return capture;
     }
 
-    public CreatedRecording setCapture(Capture capture) {
+    public RecordingModel setCapture(Capture capture) {
         this.capture = capture;
         return this;
     }
@@ -129,7 +129,7 @@ public class CreatedRecording {
         return state;
     }
 
-    public CreatedRecording setState(State state) {
+    public RecordingModel setState(State state) {
         this.state = state;
         return this;
     }
@@ -138,7 +138,7 @@ public class CreatedRecording {
         return duration;
     }
 
-    public CreatedRecording setDuration(int duration) {
+    public RecordingModel setDuration(int duration) {
         this.duration = duration;
         return this;
     }
@@ -147,7 +147,7 @@ public class CreatedRecording {
         return length;
     }
 
-    public CreatedRecording setLength(int length) {
+    public RecordingModel setLength(int length) {
         this.length = length;
         return this;
     }
@@ -156,7 +156,7 @@ public class CreatedRecording {
         return uploaded;
     }
 
-    public CreatedRecording setUploaded(int uploaded) {
+    public RecordingModel setUploaded(int uploaded) {
         this.uploaded = uploaded;
         return this;
     }
@@ -165,7 +165,7 @@ public class CreatedRecording {
         return messages;
     }
 
-    public CreatedRecording setMessages(List <String> messages) {
+    public RecordingModel setMessages(List <String> messages) {
         this.messages = messages;
         return this;
     }
@@ -174,7 +174,7 @@ public class CreatedRecording {
         return callbackUri;
     }
 
-    public CreatedRecording setCallbackUri(String callbackUri) {
+    public RecordingModel setCallbackUri(String callbackUri) {
         this.callbackUri = callbackUri;
         return this;
     }

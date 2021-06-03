@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CreatedOutput {
+public class OutputEndpoint {
 
     /**
      * Output active sessions
@@ -40,14 +40,14 @@ public class CreatedOutput {
      */
     private Integer sessionLimit;
 
-    public CreatedOutput() {
+    public OutputEndpoint() {
     }
 
     public HttpConnection getConnection() {
         return connection;
     }
 
-    public CreatedOutput setConnection(HttpConnection connection) {
+    public OutputEndpoint setConnection(HttpConnection connection) {
         this.connection = connection;
         return this;
     }
@@ -56,7 +56,7 @@ public class CreatedOutput {
         return id;
     }
 
-    public CreatedOutput setId(String id) {
+    public OutputEndpoint setId(String id) {
         this.id = id;
         return this;
     }
@@ -65,7 +65,7 @@ public class CreatedOutput {
         return viewer;
     }
 
-    public CreatedOutput setViewer(Viewer viewer) {
+    public OutputEndpoint setViewer(Viewer viewer) {
         this.viewer = viewer;
         return this;
     }
@@ -74,7 +74,7 @@ public class CreatedOutput {
         return callbackUri;
     }
 
-    public CreatedOutput setCallbackUri(String callbackUri) {
+    public OutputEndpoint setCallbackUri(String callbackUri) {
         this.callbackUri = callbackUri;
         return this;
     }
@@ -83,7 +83,7 @@ public class CreatedOutput {
         return sessionLimit;
     }
 
-    public CreatedOutput setSessionLimit(Integer sessionLimit) {
+    public OutputEndpoint setSessionLimit(Integer sessionLimit) {
         this.sessionLimit = sessionLimit;
         return this;
     }
@@ -92,7 +92,7 @@ public class CreatedOutput {
         return sessions;
     }
 
-    public CreatedOutput setSessions(List <String> sessions) {
+    public OutputEndpoint setSessions(List <String> sessions) {
         this.sessions = sessions;
         return this;
     }

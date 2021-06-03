@@ -1,8 +1,9 @@
 package com.ceeblue.streamingcloud.sdk.streams.recording;
 
 
+import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.InputEndpoint;
 import com.ceeblue.streamingcloud.sdk.streams.recording.models.Recording;
-import com.ceeblue.streamingcloud.sdk.streams.recording.models.created.CreatedRecording;
+import com.ceeblue.streamingcloud.sdk.streams.recording.models.created.RecordingModel;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 
 import java.util.List;
@@ -18,41 +19,41 @@ public interface RecordingClient {
      * @param recording recording settings
      * @return created recording
      */
-    CreatedRecording createRecording(Recording recording) throws ClientException;
+    RecordingModel createRecording(Recording recording) throws ClientException;
 
     /**
      * Fetching recording
      *
-     * @param recordingId id of record {@link CreatedRecording}
+     * @param recordingId id of record {@link RecordingModel}
      */
-    CreatedRecording getRecording(String recordingId) throws ClientException;
+    RecordingModel getRecording(String recordingId) throws ClientException;
 
     /**
      * Fetching recording by input stream id
      *
-     * @param streamId input stream id {@link com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput}
+     * @param streamId input stream id {@link InputEndpoint}
      * @return list of records
      */
-    List <CreatedRecording> getRecordingByStreamId(String streamId) throws ClientException;
+    List <RecordingModel> getRecordingByStreamId(String streamId) throws ClientException;
 
     /**
      * Fetch all recordings from server
      *
      * @return list of records
      */
-    List <CreatedRecording> getRecordings() throws ClientException;
+    List <RecordingModel> getRecordings() throws ClientException;
 
     /**
      * Stop recording
      *
-     * @param recordingId id of record {@link CreatedRecording}
+     * @param recordingId id of record {@link RecordingModel}
      */
     void stopRecording(String recordingId) throws ClientException;
 
     /**
      * Delete recording
      *
-     * @param recordingId id of record {@link CreatedRecording}
+     * @param recordingId id of record {@link RecordingModel}
      */
     void deleteRecording(String recordingId) throws ClientException;
 

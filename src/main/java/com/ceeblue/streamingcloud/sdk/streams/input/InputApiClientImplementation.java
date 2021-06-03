@@ -8,7 +8,7 @@ import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.OutputSettings;
-import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.InputEndpoint;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input;
 
 import java.util.Arrays;
@@ -35,11 +35,11 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     }
 
     @Override
-    public CreatedInput createInput(Input input) {
+    public InputEndpoint createInput(Input input) {
         try {
             String json = createJson(input);
 
-            return exchange(INPUTS, json, POST, CreatedInput.class);
+            return exchange(INPUTS, json, POST, InputEndpoint.class);
         } catch (JsonParseException exception) {
             throw new ClientException("Can't create input stream: " + input, exception);
         } catch (ApiCallException exception) {
@@ -49,10 +49,10 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     }
 
     @Override
-    public List <CreatedInput> getInputs() {
+    public List <InputEndpoint> getInputs() {
         try {
 
-            CreatedInput[] result = exchange(INPUTS, "", GET, CreatedInput[].class);
+            InputEndpoint[] result = exchange(INPUTS, "", GET, InputEndpoint[].class);
             if (result != null) {
                 return Arrays.stream(result)
                         .collect(Collectors.toList());
@@ -68,9 +68,9 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     }
 
     @Override
-    public CreatedInput getInput(String id) {
+    public InputEndpoint getInput(String id) {
         try {
-            return exchange(INPUTS + id, "", GET, CreatedInput.class);
+            return exchange(INPUTS + id, "", GET, InputEndpoint.class);
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get stream input", exception);
         } catch (ApiCallException exception) {
@@ -81,7 +81,7 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
 
 
     @Override
-    public CreatedInput updateInput(String id, Access access, String token) {
+    public InputEndpoint updateInput(String id, Access access, String token) {
         try {
             Map <String, Object> updated = new HashMap <>();
             if (id == null) {
@@ -94,7 +94,7 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
 
             String body = createJson(updated);
 
-            return exchange(INPUTS + id, body, PUT, CreatedInput.class);
+            return exchange(INPUTS + id, body, PUT, InputEndpoint.class);
         } catch (JsonParseException exception) {
             throw new ClientException("Can't update stream", exception);
         } catch (ApiCallException exception) {

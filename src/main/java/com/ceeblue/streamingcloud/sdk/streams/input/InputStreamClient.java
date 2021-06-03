@@ -2,7 +2,7 @@ package com.ceeblue.streamingcloud.sdk.streams.input;
 
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.OutputSettings;
-import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.CreatedInput;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.InputEndpoint;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 
@@ -19,30 +19,30 @@ public interface InputStreamClient {
      * @param input parameter of InputStream.
      * @return created input
      */
-    CreatedInput createInput(Input input) throws ClientException;
+    InputEndpoint createInput(Input input) throws ClientException;
 
     /**
      * Fetch all input stream from server
      *
      * @return list of input stream
      */
-    List <CreatedInput> getInputs() throws ClientException;
+    List <InputEndpoint> getInputs() throws ClientException;
 
     /**
      * Fetch input by id
      *
      * @return input stream
      */
-    CreatedInput getInput(String id) throws ClientException;
+    InputEndpoint getInput(String id) throws ClientException;
 
     /**
      * Update stream state
      *
      * @param access is stream Public or Private
      * @param token  if stream private will set access token on stream
-     * @return Created stream {@link CreatedInput}
+     * @return Created stream {@link InputEndpoint}
      */
-    CreatedInput updateInput(String id, Access access, String token) throws ClientException;
+    InputEndpoint updateInput(String id, Access access, String token) throws ClientException;
 
     /***
      * Delete input

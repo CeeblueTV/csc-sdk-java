@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  */
 @JsonDeserialize(using = HttpConnectionDeserializer.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class HttpConnection {
+public class HttpConnection extends Connection {
 
     /**
      * Streaming endpoint
