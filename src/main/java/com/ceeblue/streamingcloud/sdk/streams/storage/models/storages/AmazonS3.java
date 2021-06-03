@@ -132,13 +132,13 @@ public class AmazonS3 {
     @Override
     public String toString() {
         return "Storage: " +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", type=" + type +
-                ", accessKeyId='" + accessKeyId + '\'' +
-                ", secretAccessKey='" + secretAccessKey + '\'' +
-                ", bucket='" + bucket + '\'' +
-                ", path='" + path + '\'';
+                (id != null ? "id=" + id : "") +
+                (name != null ? ", name=" + name : "") +
+                (type != null ? ", type=" + type : "") +
+                (accessKeyId != null ? ", accessKeyId=" + accessKeyId : "") +
+                (secretAccessKey != null ? ", secretAccessKey=" + secretAccessKey : "") +
+                (bucket != null ? ", bucket=" + bucket : "") +
+                (path != null ? ", path=" + path : "");
     }
 
 }

@@ -10,21 +10,21 @@ public class Overlay {
     /**
      * The data URI image.
      */
-    String data;
+    private final String data;
 
     /**
      * Horizontal offset of overlay image in pixels from left of video image. For negative value,
      * horizontal offset of overlay image in pixels from right of video image.
      */
-    Double offsetX;
+    private final Integer offsetX;
 
     /**
      * Vertical offset of overlay image in pixels from top of video image. For negative value,
      * vertical offset of overlay image in pixels from bottom of video image.
      */
-    Double offsetY;
+    private final Integer offsetY;
 
-    public Overlay(String data, Double offsetX, Double offsetY) {
+    public Overlay(String data, Integer offsetX, Integer offsetY) {
         this.data = data;
         this.offsetX = offsetX;
         this.offsetY = offsetY;

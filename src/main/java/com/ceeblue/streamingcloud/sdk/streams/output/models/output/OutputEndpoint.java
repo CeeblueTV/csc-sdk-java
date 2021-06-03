@@ -1,7 +1,7 @@
 package com.ceeblue.streamingcloud.sdk.streams.output.models.output;
 
 import com.ceeblue.streamingcloud.sdk.streams.output.models.Viewer;
-import com.ceeblue.streamingcloud.sdk.streams.output.models.connection.HttpConnection;
+import com.ceeblue.streamingcloud.sdk.streams.output.models.connection.Connection;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class OutputEndpoint {
     /**
      * Output endpoint parameters for viewer
      */
-    private HttpConnection connection;
+    private Connection connection;
 
     /**
      * Viewer details
@@ -43,11 +43,11 @@ public class OutputEndpoint {
     public OutputEndpoint() {
     }
 
-    public HttpConnection getConnection() {
+    public Connection getConnection() {
         return connection;
     }
 
-    public OutputEndpoint setConnection(HttpConnection connection) {
+    public OutputEndpoint setConnection(Connection connection) {
         this.connection = connection;
         return this;
     }
@@ -99,7 +99,7 @@ public class OutputEndpoint {
 
     @Override
     public String toString() {
-        return "CreatedOutput{" +
+        return "OutputEndpoint{" +
                 (sessions != null ? "sessions=" + sessions : "") +
                 (id != null ? " id='" + id + '\'' : "") +
                 (connection != null ? " connection=" + connection : "") +

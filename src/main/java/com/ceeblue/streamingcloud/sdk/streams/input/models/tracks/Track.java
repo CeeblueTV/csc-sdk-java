@@ -2,16 +2,24 @@ package com.ceeblue.streamingcloud.sdk.streams.input.models.tracks;
 
 import com.ceeblue.streamingcloud.sdk.streams.input.models.encoder.EncoderSettings;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.util.Objects;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = VideoTrack.class, name = "Video"),
+        @JsonSubTypes.Type(value = AudioTrack.class, name = "Audio")
+})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Track {
+
     /**
      * Track type
      * Required
      */
-    TrackType type;
+    private TrackType type;
 
     /**
      * Encoder settings
@@ -45,10 +53,9 @@ public class Track {
 
     @Override
     public String toString() {
-        return "Track{" +
+        return "Track: " +
                 "type=" + type +
-                ", settings=" + settings +
-                '}';
+                ", settings=" + settings;
     }
 
     @Override
@@ -63,4 +70,5 @@ public class Track {
     public int hashCode() {
         return Objects.hash(type, settings);
     }
+
 }

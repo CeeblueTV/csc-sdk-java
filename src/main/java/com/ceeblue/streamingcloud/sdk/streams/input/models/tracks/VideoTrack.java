@@ -21,6 +21,9 @@ public class VideoTrack extends Track {
      */
     private Integer framerate;
 
+    private VideoTrack() {
+    }
+
     public VideoTrack(EncoderSettings settings) {
         super(TrackType.Video, settings);
     }
@@ -50,6 +53,15 @@ public class VideoTrack extends Track {
     public VideoTrack setFramerate(Integer framerate) {
         this.framerate = framerate;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", width=" + width +
+                ", height=" + height +
+                ", framerate=" + framerate +
+                '}';
     }
 
 }

@@ -1,6 +1,5 @@
 package com.ceeblue.streamingcloud.sdk.streams.input.models.encoder;
 
-import com.ceeblue.streamingcloud.sdk.streams.input.models.SpeedPreset;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Objects;

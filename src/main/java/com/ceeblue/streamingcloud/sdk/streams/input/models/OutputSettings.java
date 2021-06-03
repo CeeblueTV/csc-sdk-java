@@ -101,9 +101,9 @@ public class OutputSettings {
     public String toString() {
         return "Output{" +
                 "passthrough=" + passthrough +
-                ", version=" + version +
-                ", overlay=" + overlay +
-                ", tracks=" + tracks +
+                (version != null ? ", version=" + version : "") +
+                (overlay != null ? ", overlay=" + overlay : "") +
+                (tracks != null ? ", tracks=" + tracks : "") +
                 '}';
     }
 

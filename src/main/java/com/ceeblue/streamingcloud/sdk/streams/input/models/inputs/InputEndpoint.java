@@ -156,7 +156,7 @@ public class InputEndpoint {
 
     @Override
     public String toString() {
-        return "CreatedStream{" +
+        return "InputEndpoint: " +
                 (id != null ? "id=" + id : "") +
                 (format != null ? ", format=" + format : "") +
                 (streamer != null ? ", streamer=" + streamer : "") +

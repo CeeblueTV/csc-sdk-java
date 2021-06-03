@@ -9,7 +9,7 @@ import com.ceeblue.streamingcloud.sdk.streams.input.models.tracks.VideoTrack;
 
 import static com.ceeblue.streamingcloud.sdk.streams.input.models.CodecName.AAC;
 import static com.ceeblue.streamingcloud.sdk.streams.input.models.CodecName.Opus;
-import static com.ceeblue.streamingcloud.sdk.streams.input.models.SpeedPreset.superfast;
+import static com.ceeblue.streamingcloud.sdk.streams.input.models.encoder.SpeedPreset.superfast;
 
 public class Presets {
 

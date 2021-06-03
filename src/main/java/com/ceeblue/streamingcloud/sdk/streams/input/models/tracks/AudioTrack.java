@@ -22,6 +22,9 @@ public class AudioTrack extends Track {
         super(Audio, settings);
     }
 
+    private AudioTrack() {
+    }
+
     public Integer getRate() {
         return rate;
     }
@@ -38,6 +41,13 @@ public class AudioTrack extends Track {
     public AudioTrack setChannels(Integer channels) {
         this.channels = channels;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", rate=" + rate +
+                ", channels=" + channels;
     }
 
 }

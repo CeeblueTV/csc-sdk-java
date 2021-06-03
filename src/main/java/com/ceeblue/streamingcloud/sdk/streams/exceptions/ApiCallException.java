@@ -7,7 +7,7 @@ public class ApiCallException extends RuntimeException {
     /**
      * Response code of server or -1 in timeout case
      */
-    public final int exceptionCode;
+    private final int exceptionCode;
 
     /**
      * Server response
@@ -19,8 +19,14 @@ public class ApiCallException extends RuntimeException {
      */
     public String api;
 
+    /**
+     * Http method
+     */
     public HTTPMethod method;
 
+    /**
+     * Error message
+     */
     private String message;
 
     public ApiCallException(String message, int exceptionCode, String serverResponse) {

@@ -1,4 +1,4 @@
-package com.ceeblue.streamingcloud.sdk.streams.input.models;
+package com.ceeblue.streamingcloud.sdk.streams.input.models.encoder;
 
 /**
  * Preset name for speed/quality tradeoff options

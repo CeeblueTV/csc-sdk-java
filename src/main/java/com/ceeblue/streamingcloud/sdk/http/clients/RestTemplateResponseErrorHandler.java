@@ -23,23 +23,25 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
     public void handleError(ClientHttpResponse httpResponse) throws IOException {
         String body = "";
         if (httpResponse.getStatusCode().series().value() == HttpStatus.Series.CLIENT_ERROR.value()) {
-            if (httpResponse.getBody() != null) {
 
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getBody()))) {
-                    body = reader.lines().collect(Collectors.joining(""));
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getBody()))) {
+                body = reader.lines().collect(Collectors.joining(""));
 
-                }
+            } catch (IOException e) {
+                throw new ApiCallException("Can't evaluate request", httpResponse.getStatusCode().value(), "{\"message\" : \"Not found\"}");
             }
 
             throw new ApiCallException("Can't evaluate request", httpResponse.getStatusCode().value(), body);
         } else if (httpResponse.getStatusCode().series() == HttpStatus.Series.SERVER_ERROR) {
-            if (httpResponse.getBody() != null) {
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getBody()))) {
-                    body = reader.lines().collect(Collectors.joining(""));
-                }
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getBody()))) {
+                body = reader.lines().collect(Collectors.joining(""));
+            } catch (IOException e) {
+                throw new ApiCallException("Can't evaluate request", httpResponse.getStatusCode().value(), "{\"message\" : \"Not found\"}");
             }
 
             throw new ApiCallException("Internal error on remote server", httpResponse.getStatusCode().value(), body);
         }
     }
+
 }
