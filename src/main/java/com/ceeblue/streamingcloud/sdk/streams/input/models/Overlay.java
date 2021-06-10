@@ -43,4 +43,13 @@ public class Overlay {
         return Objects.hash(data, offsetX, offsetY);
     }
 
+    @Override
+    public String toString() {
+        return "Overlay{" +
+                (data != null ? "data=" + data : "") +
+                (offsetX != null ? ", offsetX=" + offsetX : "") +
+                (offsetY != null ? ", offsetY=" + offsetY : "") +
+                '}';
+    }
+
 }

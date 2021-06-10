@@ -39,23 +39,26 @@ public class Track {
         return type;
     }
 
-    public void setType(TrackType type) {
+    public Track setType(TrackType type) {
         this.type = type;
+        return this;
     }
 
     public EncoderSettings getSettings() {
         return settings;
     }
 
-    public void setSettings(EncoderSettings settings) {
+    public Track setSettings(EncoderSettings settings) {
         this.settings = settings;
+        return this;
     }
 
     @Override
     public String toString() {
-        return "Track: " +
-                "type=" + type +
-                ", settings=" + settings;
+        return "Track:{ " +
+                (type != null ? "type=" + type : "") +
+                (type != null ? ", settings=" + settings : "") +
+                (this.getClass() == Track.class ? "}" : "");
     }
 
     @Override

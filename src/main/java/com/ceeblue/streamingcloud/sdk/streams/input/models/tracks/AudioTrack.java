@@ -47,7 +47,8 @@ public class AudioTrack extends Track {
     public String toString() {
         return super.toString() +
                 ", rate=" + rate +
-                ", channels=" + channels;
+                ", channels=" + channels +
+                "}";
     }
 
 }

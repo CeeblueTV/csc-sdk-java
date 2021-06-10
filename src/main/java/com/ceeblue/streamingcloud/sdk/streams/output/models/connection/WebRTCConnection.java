@@ -50,10 +50,11 @@ public class WebRTCConnection extends Connection {
 
     @Override
     public String toString() {
-        return "WebRTCConnection: " +
+        return "WebRTCConnection:{ " +
                 (signallingUri != null ? "signallingUri=" + signallingUri : "") +
                 (stun != null ? ", stun='" + stun : "") +
-                (turn != null ? ", turn='" : "");
+                (turn != null ? ", turn='" : "") +
+                "}";
     }
 
 }

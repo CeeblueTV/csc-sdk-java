@@ -100,14 +100,14 @@ public class Input {
 
     @Override
     public String toString() {
-        return "Stream{" +
-                "format=" + format +
-                ", streamer=" + streamer +
-                ", callbackUri='" + callbackUri + '\'' +
-                ", output=" + output +
-                ", access=" + access +
-                ", accessToken='" + accessToken + '\'' +
-                '}';
+        return "Stream{ " +
+                (format != null ? "format=" + format : "") +
+                (format != null ? ", streamer=" + streamer : "") +
+                (format != null ? ", callbackUri=" + callbackUri : "") +
+                (format != null ? ", output=" + output : "") +
+                (format != null ? ", access=" + access : "") +
+                (format != null ? ", accessToken=" + accessToken : "") +
+                " }";
     }
 
 }

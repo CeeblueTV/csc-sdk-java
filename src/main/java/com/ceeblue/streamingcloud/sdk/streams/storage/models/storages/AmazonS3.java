@@ -21,26 +21,31 @@ public class AmazonS3 {
 
     /**
      * Storage name
+     * Required
      */
     private String name;
 
     /**
      * Storage type
+     * Required
      */
     private StorageType type;
 
     /**
      * An access key ID (for example AKIAIOSFODNN7EXAMPLE)
+     * Required
      */
     private String accessKeyId;
 
     /**
      * A secret access key (for example,wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY)
+     * Required
      */
     private String secretAccessKey;
 
     /**
      * Destination bucket
+     * Required
      */
     private String bucket;
 
@@ -131,14 +136,15 @@ public class AmazonS3 {
 
     @Override
     public String toString() {
-        return "Storage: " +
+        return "Storage:{ " +
                 (id != null ? "id=" + id : "") +
                 (name != null ? ", name=" + name : "") +
                 (type != null ? ", type=" + type : "") +
                 (accessKeyId != null ? ", accessKeyId=" + accessKeyId : "") +
                 (secretAccessKey != null ? ", secretAccessKey=" + secretAccessKey : "") +
                 (bucket != null ? ", bucket=" + bucket : "") +
-                (path != null ? ", path=" + path : "");
+                (path != null ? ", path=" + path : "") +
+                (this.getClass() == AmazonS3.class ? " }" : "");
     }
 
 }

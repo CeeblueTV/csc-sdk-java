@@ -1,4 +1,4 @@
-package com.ceeblue.streamingcloud.sdk.streams.input.utils;
+package com.ceeblue.streamingcloud.sdk.streams.utils;
 
 import com.ceeblue.streamingcloud.sdk.streams.input.models.encoder.EncoderSettings;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.encoder.H264Settings;

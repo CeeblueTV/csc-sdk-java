@@ -156,19 +156,19 @@ public class InputEndpoint {
 
     @Override
     public String toString() {
-        return "InputEndpoint: " +
+        return "InputEndpoint: {" +
                 (id != null ? "id=" + id : "") +
                 (format != null ? ", format=" + format : "") +
                 (streamer != null ? ", streamer=" + streamer : "") +
                 (status != null ? ", status=" + status : "") +
                 (access != null ? ", access=" + access : "") +
-                (accessToken != null ? ", accessToken='" + accessToken : "") +
+                (accessToken != null ? ", accessToken=" + accessToken : "") +
                 (parameters != null ? ", parameters=" + parameters : "") +
-                (callbackUri != null ? ", callbackUri='" + callbackUri : "") +
+                (callbackUri != null ? ", callbackUri=" + callbackUri : "") +
                 (statusMessages != null ? ", statusMessages=" + statusMessages : "") +
                 (connection != null ? ", connection=" + connection : "") +
                 (parameters != null ? ", parameters=" + parameters : "") +
-                '}';
+                "}";
     }
 
     @Override

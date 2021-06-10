@@ -6,6 +6,7 @@ public class AmazonS3Compatible extends AmazonS3 {
 
     /**
      * A URL that is the entry point for a web service
+     * Required
      */
     private String endpoint;
 
@@ -36,7 +37,7 @@ public class AmazonS3Compatible extends AmazonS3 {
 
     @Override
     public String toString() {
-        return super.toString() + " endpoint='" + endpoint + '\'';
+        return super.toString() + " endpoint=" + endpoint + " }";
     }
 
 }

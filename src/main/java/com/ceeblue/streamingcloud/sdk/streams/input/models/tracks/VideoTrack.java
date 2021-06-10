@@ -58,9 +58,9 @@ public class VideoTrack extends Track {
     @Override
     public String toString() {
         return super.toString() +
-                ", width=" + width +
-                ", height=" + height +
-                ", framerate=" + framerate +
+                (width != null ? ", width=" + width : "") +
+                (width != null ? ", height=" + height : "") +
+                (width != null ? ", framerate=" + framerate : "") +
                 '}';
     }
 
