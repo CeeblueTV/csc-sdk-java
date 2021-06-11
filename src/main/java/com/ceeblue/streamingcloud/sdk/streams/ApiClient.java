@@ -91,7 +91,6 @@ public abstract class ApiClient {
     protected <T> String createJson(T result) throws JsonParseException {
         try {
             return mapper.writeValueAsString(result);
-
         } catch (JsonProcessingException e) {
             throw new JsonParseException("Can't create json: " + result, e);
         }

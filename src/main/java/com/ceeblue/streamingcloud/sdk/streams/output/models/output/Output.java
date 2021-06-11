@@ -2,7 +2,9 @@ package com.ceeblue.streamingcloud.sdk.streams.output.models.output;
 
 import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.Viewer;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Output {
 
     /**
@@ -31,6 +33,9 @@ public class Output {
      * Invokes on status change
      */
     private String callbackUri;
+
+    private Output() {
+    }
 
     public Output(String streamId, InputFormat format) {
         this.streamId = streamId;
