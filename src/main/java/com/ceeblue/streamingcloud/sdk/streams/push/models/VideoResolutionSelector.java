@@ -1,9 +1,26 @@
 package com.ceeblue.streamingcloud.sdk.streams.push.models;
 
 public class VideoResolutionSelector {
+
+    /**
+     * Picture width
+     * Required
+     */
     private Integer width;
+
+    /**
+     * Picture height
+     * Required
+     */
     private Integer height;
-    private boolean approximate;
+
+    /**
+     * Choose the track closest to the given pixel surface area
+     */
+    private Boolean approximate;
+
+    private VideoResolutionSelector() {
+    }
 
     public VideoResolutionSelector(Integer width, Integer height) {
         this.width = width;
@@ -32,8 +49,18 @@ public class VideoResolutionSelector {
         return approximate;
     }
 
-    public VideoResolutionSelector setApproximate(boolean approximate) {
+    public VideoResolutionSelector setApproximate(Boolean approximate) {
         this.approximate = approximate;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "VideoResolutionSelector{" +
+                (width != null ? " width=" + width : "") +
+                (height != null ? ", height=" + height : "") +
+                (approximate != null ? ", approximate=" + approximate : "") +
+                '}';
+    }
+
 }

@@ -1,16 +1,26 @@
 package com.ceeblue.streamingcloud.sdk.streams.push.models.output;
 
-import com.ceeblue.streamingcloud.sdk.streams.push.models.TrackSelector;
-
 import java.util.List;
 
 public class UDPTSOutput extends OutputParent {
 
-    String ipAddress;
+    /**
+     * Streaming endpoint IP adress
+     */
+    private String ipAddress;
 
-    int port;
+    /**
+     * Streaming endpoint port
+     */
+    private Integer port;
 
-    List <TrackSelector> tracks;
+    /**
+     * List of track selectors (capture all if empty)
+     */
+    private List <TrackSelector> tracks;
+
+    private UDPTSOutput() {
+    }
 
     public UDPTSOutput(String ipAddress, int port) {
         this.ipAddress = ipAddress;
@@ -21,24 +31,36 @@ public class UDPTSOutput extends OutputParent {
         return ipAddress;
     }
 
-    public void setIpAddress(String ipAddress) {
+    public UDPTSOutput setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
+        return this;
     }
 
     public int getPort() {
         return port;
     }
 
-    public void setPort(int port) {
+    public UDPTSOutput setPort(int port) {
         this.port = port;
+        return this;
     }
 
     public List <TrackSelector> getTracks() {
         return tracks;
     }
 
-    public void setTracks(List <TrackSelector> tracks) {
+    public UDPTSOutput setTracks(List <TrackSelector> tracks) {
         this.tracks = tracks;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "UDPTSOutput{" +
+                (ipAddress != null ? "ipAddress='" + ipAddress + '\'' : "") +
+                (port != null ? ", port=" + port : "") +
+                (tracks != null ? ", tracks=" + tracks : "") +
+                "} ";
     }
 
 }

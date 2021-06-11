@@ -18,8 +18,9 @@ public class OutputDeserializer extends JsonDeserializer <OutputParent> {
         JsonNode node = oc.readTree(jp);
 
         if (node.has("server")) {
-            return new RTMPOutput(getString("server", node))
-                    .setServer(getString("key", node));
+            return new RTMPOutput()
+                    .setServer(getString("server", node))
+                    .setKey(getString("key", node));
         }
 
         if (node.has("endpoint")) {
@@ -30,6 +31,7 @@ public class OutputDeserializer extends JsonDeserializer <OutputParent> {
         if (node.has("ipAddress")) {
             return new UDPTSOutput(getString("ipAddress", node), getInteger("port", node));
         }
+
         throw new JsonParseException("Couldn't find suitable representation of output");
     }
 

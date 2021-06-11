@@ -1,13 +1,31 @@
-package com.ceeblue.streamingcloud.sdk.streams.push.models;
+package com.ceeblue.streamingcloud.sdk.streams.push.models.output;
 
 import com.ceeblue.streamingcloud.sdk.streams.input.models.CodecName;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.tracks.TrackType;
+import com.ceeblue.streamingcloud.sdk.streams.push.models.VideoResolutionSelector;
 
 public class TrackSelector {
-    TrackType type;
-    int idx;
-    CodecName codecName;
-    VideoResolutionSelector resolution;
+
+    /**
+     * Track type [ Video | Audio ]
+     * Required
+     */
+    private TrackType type;
+
+    /**
+     * Track identifier
+     */
+    private Integer idx;
+
+    /**
+     * Codec type [ H264 | VP8 | VP9 | AAC | MP3| Opus ]
+     */
+    private CodecName codecName;
+
+    /**
+     * Video track selector by resolution
+     */
+    private VideoResolutionSelector resolution;
 
     public TrackSelector() {
     }
@@ -51,4 +69,15 @@ public class TrackSelector {
         this.resolution = resolution;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "TrackSelector{ " +
+                (type != null ? "type=" + type : "") +
+                (idx != null ? ", idx=" + idx : "") +
+                (codecName != null ? ", codecName=" + codecName : "") +
+                (resolution != null ? ", resolution=" + resolution : "") +
+                "}";
+    }
+
 }

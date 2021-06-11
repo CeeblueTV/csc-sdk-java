@@ -2,12 +2,23 @@ package com.ceeblue.streamingcloud.sdk.streams.push.models.output;
 
 public class RTMPOutput extends OutputParent {
 
-    String server;
+    /**
+     * RTMP server URL
+     * Required
+     */
+    private String server;
 
-    String key;
+    /**
+     * RTMP stream key
+     */
+    private String key;
 
-    public RTMPOutput(String server) {
+    public RTMPOutput() {
+    }
+
+    public RTMPOutput(String server, String key) {
         this.server = server;
+        this.key = key;
     }
 
     public String getServer() {
@@ -26,6 +37,14 @@ public class RTMPOutput extends OutputParent {
     public RTMPOutput setKey(String key) {
         this.key = key;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "RTMPOutput{ " +
+                (server != null ? "server=" + server : "") +
+                (server != null ? ", key=" + key : "") +
+                " }";
     }
 
 }

@@ -2,9 +2,19 @@ package com.ceeblue.streamingcloud.sdk.streams.push.models.output;
 
 public class CMAFOutput extends OutputParent {
 
+    /**
+     * Streaming endpoint
+     * Required
+     */
     private String endpoint;
 
+    /**
+     * Enable unified streaming platform support
+     */
     private Boolean unifiedStreamingPlatform;
+
+    private CMAFOutput() {
+    }
 
     public CMAFOutput(String endpoint) {
         this.endpoint = endpoint;
@@ -14,8 +24,9 @@ public class CMAFOutput extends OutputParent {
         return endpoint;
     }
 
-    public void setEndpoint(String endpoint) {
+    public CMAFOutput setEndpoint(String endpoint) {
         this.endpoint = endpoint;
+        return this;
     }
 
     public boolean isUnifiedStreamingPlatform() {
@@ -25,6 +36,14 @@ public class CMAFOutput extends OutputParent {
     public CMAFOutput setUnifiedStreamingPlatform(Boolean unifiedStreamingPlatform) {
         this.unifiedStreamingPlatform = unifiedStreamingPlatform;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "CMAFOutput{" +
+                (endpoint != null ? endpoint : "") +
+                (endpoint != null ? ", unifiedStreamingPlatform=" + unifiedStreamingPlatform : "") +
+                " } ";
     }
 
 }
