@@ -183,5 +183,4 @@ public class InputEndpoint {
     public int hashCode() {
         return Objects.hash(id, format, streamer, status, access, accessToken, callbackUri, statusMessages, parameters);
     }
-
 }

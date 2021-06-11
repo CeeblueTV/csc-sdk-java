@@ -119,5 +119,4 @@ public class OutputSettings {
     public int hashCode() {
         return Objects.hash(passthrough, version, overlay, tracks);
     }
-
 }

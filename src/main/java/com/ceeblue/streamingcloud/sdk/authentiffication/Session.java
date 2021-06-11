@@ -1,6 +1,5 @@
 package com.ceeblue.streamingcloud.sdk.authentiffication;
 
-
 public class Session {
 
     private String token;
@@ -14,7 +13,6 @@ public class Session {
 
     public Session() {
     }
-
 
     /**
      * Endpoint of API cloud e.g shark.ceeblue.tv
@@ -44,5 +42,4 @@ public class Session {
     public String toString() {
         return endpoint;
     }
-
 }

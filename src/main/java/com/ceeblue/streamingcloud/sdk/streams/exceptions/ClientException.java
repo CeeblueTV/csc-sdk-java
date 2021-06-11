@@ -22,6 +22,5 @@ public class ClientException extends RuntimeException {
                 (exception != null ? "Exception=" + exception : "") + "\n" +
                 '}';
     }
-
 }
 

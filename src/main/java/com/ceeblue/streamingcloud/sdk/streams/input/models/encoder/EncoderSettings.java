@@ -75,5 +75,4 @@ public class EncoderSettings {
     public int hashCode() {
         return Objects.hash(codec, bitrate);
     }
-
 }

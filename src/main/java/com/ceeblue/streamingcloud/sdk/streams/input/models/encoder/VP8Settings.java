@@ -15,7 +15,6 @@ public class VP8Settings extends EncoderSettings {
      */
     private Integer keyMaxDist;
 
-
     public VP8Settings() {
         codec = VP8;
     }
@@ -52,5 +51,4 @@ public class VP8Settings extends EncoderSettings {
     public int hashCode() {
         return Objects.hash(super.hashCode(), keyMaxDist);
     }
-
 }

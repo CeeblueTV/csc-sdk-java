@@ -86,5 +86,4 @@ public class ApiPushClientImplementation extends ApiClient implements StreamPush
             throw new ClientException(serverMessage != null ? serverMessage : "Can't delete stream push", exception);
         }
     }
-
 }

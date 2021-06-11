@@ -68,5 +68,4 @@ public class H264Settings extends EncoderSettings {
     public int hashCode() {
         return Objects.hash(super.hashCode(), speedPreset, keyIntMax);
     }
-
 }

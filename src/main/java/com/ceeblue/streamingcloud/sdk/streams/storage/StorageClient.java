@@ -1,7 +1,7 @@
 package com.ceeblue.streamingcloud.sdk.streams.storage;
 
-import com.ceeblue.streamingcloud.sdk.streams.storage.models.storages.AmazonS3;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
+import com.ceeblue.streamingcloud.sdk.streams.storage.models.storages.AmazonS3;
 
 import java.util.List;
 

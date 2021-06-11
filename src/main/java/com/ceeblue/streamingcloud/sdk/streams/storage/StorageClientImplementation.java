@@ -91,5 +91,4 @@ public class StorageClientImplementation extends ApiClient implements StorageCli
             throw new ClientException("Can't delete storage", exception);
         }
     }
-
 }

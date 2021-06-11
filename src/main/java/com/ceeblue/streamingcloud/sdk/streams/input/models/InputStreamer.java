@@ -32,5 +32,4 @@ public class InputStreamer {
         this.geoLocation = geoLocation;
         return this;
     }
-
 }

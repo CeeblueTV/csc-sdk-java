@@ -45,5 +45,4 @@ public class CMAFOutput extends OutputParent {
                 (endpoint != null ? ", unifiedStreamingPlatform=" + unifiedStreamingPlatform : "") +
                 " } ";
     }
-
 }

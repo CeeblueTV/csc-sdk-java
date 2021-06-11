@@ -80,5 +80,4 @@ public class AuthenticationClientImplementation implements AuthenticationClient 
             throw new JsonParseException("Can't parse passed stream for creation. Stream: " + payload, e);
         }
     }
-
 }

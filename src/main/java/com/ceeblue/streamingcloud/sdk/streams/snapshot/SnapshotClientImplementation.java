@@ -40,7 +40,7 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get snapshot", exception);
         } catch (ApiCallException exception) {
-             String serverMessage = getServerMessage(exception.getServerResponse());
+            String serverMessage = getServerMessage(exception.getServerResponse());
             throw new ClientException(serverMessage != null ? serverMessage : "Can't get snapshot", exception);
         }
     }
@@ -54,7 +54,7 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
         } catch (JsonParseException exception) {
             throw new ClientException("Can't update snapshot settings", exception);
         } catch (ApiCallException exception) {
-             String serverMessage = getServerMessage(exception.getServerResponse());
+            String serverMessage = getServerMessage(exception.getServerResponse());
             throw new ClientException(serverMessage != null ? serverMessage : "Can't update snapshot settings", exception);
         }
     }
@@ -66,7 +66,7 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get snapshot settings", exception);
         } catch (ApiCallException exception) {
-             String serverMessage = getServerMessage(exception.getServerResponse());
+            String serverMessage = getServerMessage(exception.getServerResponse());
             throw new ClientException(serverMessage != null ? serverMessage : "Can't get snapshot settings", exception);
         }
     }
@@ -79,5 +79,4 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
             throw new ClientException("Can't delete snapshot settings", exception);
         }
     }
-
 }

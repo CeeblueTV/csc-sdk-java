@@ -16,7 +16,6 @@ public class Parameters {
     public Parameters() {
     }
 
-
     private Map <String, Object> getParameters() {
         return parameters;
     }
@@ -42,5 +41,4 @@ public class Parameters {
     public int hashCode() {
         return Objects.hash(parameters);
     }
-
 }

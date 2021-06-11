@@ -2,10 +2,10 @@ package com.ceeblue.streamingcloud.sdk.streams;
 
 import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.authentiffication.Session;
-import com.ceeblue.streamingcloud.sdk.http.HttpClient;
-import com.ceeblue.streamingcloud.sdk.http.RequestInfo;
 import com.ceeblue.streamingcloud.sdk.http.HTTPMethod;
+import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.http.MediaType;
+import com.ceeblue.streamingcloud.sdk.http.RequestInfo;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -96,7 +96,6 @@ public abstract class ApiClient {
         }
     }
 
-
     public HashMap <String, Object> authenticateIfHaveNot() {
         if (session == null || session.getToken() == null) {
             session = authenticationClient.authenticate();
@@ -111,5 +110,4 @@ public abstract class ApiClient {
     public void setTemplate(HttpClient template) {
         this.template = template;
     }
-
 }

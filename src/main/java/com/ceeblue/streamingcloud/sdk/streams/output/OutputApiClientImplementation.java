@@ -6,8 +6,8 @@ import com.ceeblue.streamingcloud.sdk.streams.ApiClient;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
-import com.ceeblue.streamingcloud.sdk.streams.output.models.output.OutputEndpoint;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.output.Output;
+import com.ceeblue.streamingcloud.sdk.streams.output.models.output.OutputEndpoint;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 import static com.ceeblue.streamingcloud.sdk.http.HTTPMethod.*;
 import static com.ceeblue.streamingcloud.sdk.streams.utils.StingFormatter.getServerMessage;
-
 
 public class OutputApiClientImplementation extends ApiClient implements OutputStreamClient {
 
@@ -40,7 +39,7 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
         } catch (JsonParseException exception) {
             throw new ClientException("Can't create output stream: " + output, exception);
         } catch (ApiCallException exception) {
-             String serverMessage = getServerMessage(exception.getServerResponse());
+            String serverMessage = getServerMessage(exception.getServerResponse());
             throw new ClientException(serverMessage != null ? serverMessage : "Can't create output stream: " + output, exception);
         }
 
@@ -58,7 +57,7 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get output stream", exception);
         } catch (ApiCallException exception) {
-             String serverMessage = getServerMessage(exception.getServerResponse());
+            String serverMessage = getServerMessage(exception.getServerResponse());
             throw new ClientException(serverMessage != null ? serverMessage : "Can't get output stream", exception);
         }
 
@@ -82,5 +81,4 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
             throw new ClientException("Can't delete stream", exception);
         }
     }
-
 }

@@ -1,10 +1,10 @@
 package com.ceeblue.streamingcloud.sdk.streams.input;
 
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.OutputSettings;
-import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.InputEndpoint;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input;
-import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.InputEndpoint;
 
 import java.util.List;
 

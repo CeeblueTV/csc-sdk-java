@@ -1,9 +1,9 @@
 package com.ceeblue.streamingcloud.sdk.streams.output;
 
-import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
-import com.ceeblue.streamingcloud.sdk.streams.output.models.output.OutputEndpoint;
-import com.ceeblue.streamingcloud.sdk.streams.output.models.output.Output;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
+import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
+import com.ceeblue.streamingcloud.sdk.streams.output.models.output.Output;
+import com.ceeblue.streamingcloud.sdk.streams.output.models.output.OutputEndpoint;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import java.util.List;
  * Client for output manipulation
  */
 public interface OutputStreamClient {
+
     /**
      * Create output for {@link com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input}
      *
@@ -25,7 +26,7 @@ public interface OutputStreamClient {
      * @param streamId id of input stream
      * @return output list
      */
-    List<OutputEndpoint> getOutputs(String streamId) throws ClientException;
+    List <OutputEndpoint> getOutputs(String streamId) throws ClientException;
 
     /**
      * Invalidate all active sessions

@@ -26,5 +26,4 @@ public class JsonParseException extends RuntimeException {
                 (message != null ? ", message='" + message : "") + '\'' +
                 '}';
     }
-
 }

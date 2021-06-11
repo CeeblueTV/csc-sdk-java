@@ -119,5 +119,4 @@ public class PushEndpoint {
                 (messages != null ? ", messages=" + messages : "") +
                 '}';
     }
-
 }

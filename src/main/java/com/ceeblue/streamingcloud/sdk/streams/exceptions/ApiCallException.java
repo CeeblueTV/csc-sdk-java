@@ -92,5 +92,4 @@ public class ApiCallException extends RuntimeException {
                 ", method=" + method +
                 '}';
     }
-
 }

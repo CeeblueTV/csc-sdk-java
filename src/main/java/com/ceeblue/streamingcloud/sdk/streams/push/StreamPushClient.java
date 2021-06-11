@@ -1,6 +1,5 @@
 package com.ceeblue.streamingcloud.sdk.streams.push;
 
-import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 import com.ceeblue.streamingcloud.sdk.streams.push.models.push.Push;
 import com.ceeblue.streamingcloud.sdk.streams.push.models.push.PushEndpoint;
@@ -32,7 +31,6 @@ public interface StreamPushClient {
      * Fetch push id's of input stream
      *
      * @param id input stream id {@see com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.InputEndpoint}
-     *
      * @return list of push id {@see PushEndpoint}
      */
     List <String> retrieveStreamPush(String id) throws ClientException;

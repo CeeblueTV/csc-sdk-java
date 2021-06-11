@@ -63,5 +63,4 @@ public class VideoTrack extends Track {
                 (width != null ? ", framerate=" + framerate : "") +
                 '}';
     }
-
 }

@@ -1,10 +1,9 @@
 package com.ceeblue.streamingcloud.sdk.streams.recording;
 
-
+import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.InputEndpoint;
 import com.ceeblue.streamingcloud.sdk.streams.recording.models.Recording;
 import com.ceeblue.streamingcloud.sdk.streams.recording.models.created.RecordingModel;
-import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 
 import java.util.List;
 

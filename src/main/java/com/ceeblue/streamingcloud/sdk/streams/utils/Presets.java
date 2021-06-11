@@ -147,6 +147,5 @@ public class Presets {
                 .setWidth(1920)
                 .setFramerate(30);
     }
-
 }
 

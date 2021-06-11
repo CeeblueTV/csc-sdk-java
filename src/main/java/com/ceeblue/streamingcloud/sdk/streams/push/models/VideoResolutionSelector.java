@@ -62,5 +62,4 @@ public class VideoResolutionSelector {
                 (approximate != null ? ", approximate=" + approximate : "") +
                 '}';
     }
-
 }

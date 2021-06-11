@@ -109,5 +109,4 @@ public class Input {
                 (format != null ? ", accessToken=" + accessToken : "") +
                 " }";
     }
-
 }

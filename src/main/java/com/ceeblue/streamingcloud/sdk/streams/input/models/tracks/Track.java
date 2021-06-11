@@ -73,5 +73,4 @@ public class Track {
     public int hashCode() {
         return Objects.hash(type, settings);
     }
-
 }

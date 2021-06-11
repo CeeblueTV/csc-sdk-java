@@ -50,5 +50,4 @@ public class AudioTrack extends Track {
                 ", channels=" + channels +
                 "}";
     }
-
 }

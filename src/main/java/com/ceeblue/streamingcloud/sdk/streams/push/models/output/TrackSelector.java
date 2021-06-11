@@ -79,5 +79,4 @@ public class TrackSelector {
                 (resolution != null ? ", resolution=" + resolution : "") +
                 "}";
     }
-
 }

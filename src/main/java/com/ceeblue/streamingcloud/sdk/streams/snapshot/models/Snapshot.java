@@ -64,5 +64,4 @@ public class Snapshot {
                 ", interval=" + interval +
                 '}';
     }
-
 }

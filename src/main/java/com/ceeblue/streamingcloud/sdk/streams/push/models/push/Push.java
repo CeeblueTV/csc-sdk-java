@@ -48,7 +48,6 @@ public class Push {
         this.autostart = autostart;
     }
 
-
     public PushFormat getFormat() {
         return format;
     }
@@ -85,7 +84,6 @@ public class Push {
         return this;
     }
 
-
     @Override
     public String toString() {
         return "Push{" +
@@ -95,5 +93,4 @@ public class Push {
                 (autostart != null ? ", autostart=" + autostart : "") +
                 '}';
     }
-
 }

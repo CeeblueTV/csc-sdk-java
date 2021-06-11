@@ -46,5 +46,4 @@ public class HttpRestTemplate implements HttpClient {
 
         return new HttpEntity <>(payload.getBody(), httpHeaders);
     }
-
 }

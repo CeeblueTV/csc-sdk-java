@@ -24,6 +24,5 @@ public class Streamer {
                 "ipAddress='" + ipAddress + '\'' +
                 '}';
     }
-
 }
 

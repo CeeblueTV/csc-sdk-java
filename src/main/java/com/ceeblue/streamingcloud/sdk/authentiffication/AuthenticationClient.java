@@ -12,5 +12,4 @@ public interface AuthenticationClient {
      * @throws AuthorizationException if server deny or endpoint doesn't set
      */
     Session authenticate() throws AuthorizationException;
-
 }

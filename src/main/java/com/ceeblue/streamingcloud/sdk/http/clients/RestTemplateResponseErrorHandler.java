@@ -1,6 +1,5 @@
 package com.ceeblue.streamingcloud.sdk.http.clients;
 
-
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
@@ -43,5 +42,4 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
             throw new ApiCallException("Internal error on remote server", httpResponse.getStatusCode().value(), body);
         }
     }
-
 }

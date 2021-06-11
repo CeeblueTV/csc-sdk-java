@@ -46,5 +46,4 @@ public class RTMPOutput extends OutputParent {
                 (server != null ? ", key=" + key : "") +
                 " }";
     }
-
 }

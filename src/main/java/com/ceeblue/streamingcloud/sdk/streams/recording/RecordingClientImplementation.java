@@ -41,7 +41,7 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
         } catch (JsonParseException exception) {
             throw new ClientException("Can't add recording: " + recording, exception);
         } catch (ApiCallException exception) {
-             String serverMessage = getServerMessage(exception.getServerResponse());
+            String serverMessage = getServerMessage(exception.getServerResponse());
             throw new ClientException(serverMessage != null ? serverMessage : "Can't add recording: " + recording, exception);
         }
     }
@@ -54,7 +54,7 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get recordings: ", exception);
         } catch (ApiCallException exception) {
-             String serverMessage = getServerMessage(exception.getServerResponse());
+            String serverMessage = getServerMessage(exception.getServerResponse());
             throw new ClientException(serverMessage != null ? serverMessage : "Can't get recordings: ", exception);
         }
     }
@@ -71,7 +71,7 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get recordings for Stream: " + streamId, exception);
         } catch (ApiCallException exception) {
-             String serverMessage = getServerMessage(exception.getServerResponse());
+            String serverMessage = getServerMessage(exception.getServerResponse());
             throw new ClientException(serverMessage != null ? serverMessage : "Can't get recordings for Stream: " + streamId, exception);
         }
 
@@ -90,7 +90,7 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get recordings", exception);
         } catch (ApiCallException exception) {
-             String serverMessage = getServerMessage(exception.getServerResponse());
+            String serverMessage = getServerMessage(exception.getServerResponse());
             throw new ClientException(serverMessage != null ? serverMessage : "Can't get recordings", exception);
         }
 
@@ -104,7 +104,7 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
         } catch (JsonParseException exception) {
             throw new ClientException("Can't stop recording", exception);
         } catch (ApiCallException exception) {
-             String serverMessage = getServerMessage(exception.getServerResponse());
+            String serverMessage = getServerMessage(exception.getServerResponse());
             throw new ClientException(serverMessage != null ? serverMessage : "Can't stop recording", exception);
         }
     }
@@ -117,5 +117,4 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
             throw new ClientException("Can't delete recording", exception);
         }
     }
-
 }
