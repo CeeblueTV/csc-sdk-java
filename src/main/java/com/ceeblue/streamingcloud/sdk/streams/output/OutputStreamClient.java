@@ -8,7 +8,7 @@ import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 import java.util.List;
 
 /**
- * Client for input output manipulation
+ * Client for output manipulation
  */
 public interface OutputStreamClient {
     /**
