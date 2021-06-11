@@ -1,7 +1,7 @@
 package com.ceeblue.streamingcloud.sdk.streams.recording.models;
 
 import com.ceeblue.streamingcloud.sdk.streams.models.Source;
-import com.ceeblue.streamingcloud.sdk.streams.push.models.TrackSelector;
+import com.ceeblue.streamingcloud.sdk.streams.push.models.output.TrackSelector;
 
 /**
  * Stream capture settings
