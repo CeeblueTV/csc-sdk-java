@@ -113,8 +113,11 @@ public class RecordingClientImplementation extends ApiClient implements Recordin
     public void deleteRecording(String recordingId) throws ClientException {
         try {
             exchange(RECORDINGS + recordingId, "", DELETE, Void.class);
-        } catch (RuntimeException exception) {
+        } catch (JsonParseException exception) {
             throw new ClientException("Can't delete recording", exception);
+        } catch (ApiCallException exception) {
+            String serverMessage = getServerMessage(exception.getServerResponse());
+            throw new ClientException(serverMessage != null ? serverMessage : "Can't delete recording", exception);
         }
     }
 }

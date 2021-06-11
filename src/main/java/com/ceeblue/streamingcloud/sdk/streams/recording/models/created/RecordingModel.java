@@ -46,17 +46,17 @@ public class RecordingModel {
     /**
      * Recording duration (seconds)
      */
-    private int duration;
+    private Integer duration;
 
     /**
      * Recording file length (bytes
      */
-    private int length;
+    private Integer length;
 
     /**
      * Amount of recorded file uploaded to storage (bytes)
      */
-    private int uploaded;
+    private Integer uploaded;
 
     /**
      * List of messages
@@ -134,7 +134,7 @@ public class RecordingModel {
         return this;
     }
 
-    public int getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
@@ -143,7 +143,7 @@ public class RecordingModel {
         return this;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
@@ -152,7 +152,7 @@ public class RecordingModel {
         return this;
     }
 
-    public int getUploaded() {
+    public Integer getUploaded() {
         return uploaded;
     }
 
@@ -179,4 +179,21 @@ public class RecordingModel {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "RecordingModel{ " +
+                (id != null ? "id=" + id : "") +
+                (streamId != null ? ", streamId=" + streamId : "") +
+                (fileName != null ? ", fileName=" + fileName : "") +
+                (fileFormat != null ? ", fileFormat=" + fileFormat : "") +
+                (storageId != null ? ", storageId=" + storageId : "") +
+                (capture != null ? ", capture=" + capture : "") +
+                (state != null ? ", state=" + state : "") +
+                (duration != null ? ", duration=" + duration : "") +
+                (length != null ? ", length=" + length : "") +
+                (uploaded != null ? ", uploaded=" + uploaded : "") +
+                (messages != null ? ", messages=" + messages : "") +
+                (callbackUri != null ? ", callbackUri=" + callbackUri : "") +
+                " }";
+    }
 }

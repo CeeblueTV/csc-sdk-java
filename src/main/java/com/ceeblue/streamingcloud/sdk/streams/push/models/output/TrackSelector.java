@@ -43,7 +43,7 @@ public class TrackSelector {
         return this;
     }
 
-    public int getIdx() {
+    public Integer getIdx() {
         return idx;
     }
 

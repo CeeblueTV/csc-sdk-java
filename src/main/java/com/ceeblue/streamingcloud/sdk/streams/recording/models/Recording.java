@@ -107,4 +107,15 @@ public class Recording {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Recording{" +
+                (streamId != null ? "streamId=" + streamId : "") +
+                (fileName != null ? ", fileName=" + fileName : "") +
+                (fileFormat != null ? ", fileFormat=" + fileFormat : "") +
+                (capture != null ? ", capture=" + capture : "") +
+                (storageId != null ? ", storageId=" + storageId : "") +
+                (callbackUri != null ? ", callbackUri=" + callbackUri : "") +
+                "}";
+    }
 }
