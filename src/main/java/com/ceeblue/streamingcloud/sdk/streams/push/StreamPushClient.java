@@ -33,7 +33,7 @@ public interface StreamPushClient {
      * @param id input stream id {@see com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.InputEndpoint}
      * @return list of push id {@see PushEndpoint}
      */
-    List <String> retrieveStreamPush(String id) throws ClientException;
+    List<String> retrieveStreamPush(String id) throws ClientException;
 
     /**
      * Delete push

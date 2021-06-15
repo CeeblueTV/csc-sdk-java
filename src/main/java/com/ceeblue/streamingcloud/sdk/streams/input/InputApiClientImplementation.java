@@ -49,7 +49,7 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     }
 
     @Override
-    public List <InputEndpoint> getInputs() {
+    public List<InputEndpoint> getInputs() {
         try {
 
             InputEndpoint[] result = exchange(INPUTS, "", GET, InputEndpoint[].class);
@@ -82,7 +82,7 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
     @Override
     public InputEndpoint updateInput(String id, Access access, String token) {
         try {
-            Map <String, Object> updated = new HashMap <>();
+            Map<String, Object> updated = new HashMap<>();
             if (id == null) {
                 throw new IllegalArgumentException("Id must be nonnull");
             }

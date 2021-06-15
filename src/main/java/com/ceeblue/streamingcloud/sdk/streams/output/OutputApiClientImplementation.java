@@ -46,7 +46,7 @@ public class OutputApiClientImplementation extends ApiClient implements OutputSt
     }
 
     @Override
-    public List <OutputEndpoint> getOutputs(String streamId) throws ClientException {
+    public List<OutputEndpoint> getOutputs(String streamId) throws ClientException {
         String parts = OUTPUTS + "?streamId=" + streamId;
         try {
             OutputEndpoint[] result = exchange(parts, "", GET, OutputEndpoint[].class);

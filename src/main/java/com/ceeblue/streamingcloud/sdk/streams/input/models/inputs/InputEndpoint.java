@@ -52,7 +52,7 @@ public class InputEndpoint {
     /**
      * List of messages
      */
-    private List <String> statusMessages;
+    private List<String> statusMessages;
 
     /**
      * Input endpoint parameters for streaming
@@ -127,11 +127,11 @@ public class InputEndpoint {
         return this;
     }
 
-    public List <String> getStatusMessages() {
+    public List<String> getStatusMessages() {
         return statusMessages;
     }
 
-    public InputEndpoint setStatusMessages(List <String> statusMessages) {
+    public InputEndpoint setStatusMessages(List<String> statusMessages) {
         this.statusMessages = statusMessages;
         return this;
     }

@@ -17,7 +17,7 @@ public class UDPTSOutput extends OutputParent {
     /**
      * List of track selectors (capture all if empty)
      */
-    private List <TrackSelector> tracks;
+    private List<TrackSelector> tracks;
 
     private UDPTSOutput() {
     }
@@ -45,11 +45,11 @@ public class UDPTSOutput extends OutputParent {
         return this;
     }
 
-    public List <TrackSelector> getTracks() {
+    public List<TrackSelector> getTracks() {
         return tracks;
     }
 
-    public UDPTSOutput setTracks(List <TrackSelector> tracks) {
+    public UDPTSOutput setTracks(List<TrackSelector> tracks) {
         this.tracks = tracks;
         return this;
     }

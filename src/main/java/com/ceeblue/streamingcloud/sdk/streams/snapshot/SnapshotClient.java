@@ -3,7 +3,7 @@ package com.ceeblue.streamingcloud.sdk.streams.snapshot;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ClientException;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.InputEndpoint;
 import com.ceeblue.streamingcloud.sdk.streams.models.Source;
-import com.ceeblue.streamingcloud.sdk.streams.snapshot.models.Snapshot;
+import com.ceeblue.streamingcloud.sdk.streams.snapshot.models.SnapshotSettings;
 
 import java.nio.ByteBuffer;
 
@@ -27,16 +27,16 @@ public interface SnapshotClient {
      * @param streamId id of {@link InputEndpoint}
      * @param source   capturing source [ incoming | outgoing ]
      */
-    Snapshot getSnapshotSettings(String streamId, Source source) throws ClientException;
+    SnapshotSettings getSnapshotSettings(String streamId, Source source) throws ClientException;
 
     /**
      * Setup the creation of snapshots
      *
-     * @param streamId id of input stream
-     * @param source   capturing source [ incoming | outgoing ]
-     * @param snapshot settings for applying
+     * @param streamId         id of input stream
+     * @param source           capturing source [ incoming | outgoing ]
+     * @param snapshotSettings settings for applying
      */
-    void updateSnapshotSettings(Snapshot snapshot, String streamId, Source source) throws ClientException;
+    void updateSnapshotSettings(SnapshotSettings snapshotSettings, String streamId, Source source) throws ClientException;
 
     /**
      * Delete snapshot settings

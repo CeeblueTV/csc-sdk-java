@@ -29,7 +29,7 @@ public class OutputSettings {
      * List of video (and audio tracks for the version 2) transcoding tracks
      * required in version 2
      */
-    private List <Track> tracks = new ArrayList <>();
+    private List<Track> tracks = new ArrayList<>();
 
     public OutputSettings() {
         passthrough = false;
@@ -56,7 +56,7 @@ public class OutputSettings {
         return this;
     }
 
-    public OutputSettings tracks(List <Track> tracks) {
+    public OutputSettings tracks(List<Track> tracks) {
         this.tracks = tracks;
         return this;
     }
@@ -88,11 +88,11 @@ public class OutputSettings {
         return this;
     }
 
-    public List <Track> getTracks() {
+    public List<Track> getTracks() {
         return tracks;
     }
 
-    public OutputSettings setTracks(List <Track> tracks) {
+    public OutputSettings setTracks(List<Track> tracks) {
         this.tracks = tracks;
         return this;
     }

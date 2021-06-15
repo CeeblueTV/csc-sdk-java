@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 
-public class OutputDeserializer extends JsonDeserializer <OutputParent> {
+public class OutputDeserializer extends JsonDeserializer<OutputParent> {
 
     @Override
     public OutputParent deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {

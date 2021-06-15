@@ -26,7 +26,7 @@ public interface InputStreamClient {
      *
      * @return list of input stream
      */
-    List <InputEndpoint> getInputs() throws ClientException;
+    List<InputEndpoint> getInputs() throws ClientException;
 
     /**
      * Fetch input by id

@@ -40,7 +40,7 @@ public class PushEndpoint {
     /**
      * Server messages e.g. errors
      */
-    private List <String> messages;
+    private List<String> messages;
 
     public PushEndpoint() {
     }
@@ -90,11 +90,11 @@ public class PushEndpoint {
         return this;
     }
 
-    public List <String> getMessages() {
+    public List<String> getMessages() {
         return messages;
     }
 
-    public PushEndpoint setMessages(List <String> messages) {
+    public PushEndpoint setMessages(List<String> messages) {
         this.messages = messages;
         return this;
     }

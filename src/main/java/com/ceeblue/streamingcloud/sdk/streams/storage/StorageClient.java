@@ -27,7 +27,7 @@ public interface StorageClient {
     /**
      * Get all storages
      */
-    List <AmazonS3> getStorages() throws ClientException;
+    List<AmazonS3> getStorages() throws ClientException;
 
     /**
      * Update storage

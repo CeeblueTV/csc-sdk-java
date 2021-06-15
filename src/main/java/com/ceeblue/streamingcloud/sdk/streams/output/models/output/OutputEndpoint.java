@@ -12,7 +12,7 @@ public class OutputEndpoint {
     /**
      * Output active sessions
      */
-    private List <String> sessions;
+    private List<String> sessions;
 
     /**
      * Stream identifier
@@ -87,11 +87,11 @@ public class OutputEndpoint {
         return this;
     }
 
-    public List <String> getSessions() {
+    public List<String> getSessions() {
         return sessions;
     }
 
-    public OutputEndpoint setSessions(List <String> sessions) {
+    public OutputEndpoint setSessions(List<String> sessions) {
         this.sessions = sessions;
         return this;
     }

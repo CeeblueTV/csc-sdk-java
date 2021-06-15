@@ -26,7 +26,7 @@ public interface OutputStreamClient {
      * @param streamId id of input stream
      * @return output list
      */
-    List <OutputEndpoint> getOutputs(String streamId) throws ClientException;
+    List<OutputEndpoint> getOutputs(String streamId) throws ClientException;
 
     /**
      * Invalidate all active sessions

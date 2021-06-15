@@ -57,7 +57,7 @@ public class ApiPushClientImplementation extends ApiClient implements StreamPush
     }
 
     @Override
-    public List <String> retrieveStreamPush(String id) {
+    public List<String> retrieveStreamPush(String id) {
         try {
             String[] result = exchange(PUSHES + STREAM + id, "", GET, String[].class);
 

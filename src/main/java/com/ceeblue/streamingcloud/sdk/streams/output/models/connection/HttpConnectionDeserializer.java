@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 
-public class HttpConnectionDeserializer extends JsonDeserializer <Connection> {
+public class HttpConnectionDeserializer extends JsonDeserializer<Connection> {
 
     private static final String URI_JSON_NAME = "uri";
 

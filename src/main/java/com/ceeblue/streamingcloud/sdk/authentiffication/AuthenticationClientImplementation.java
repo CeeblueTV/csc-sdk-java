@@ -52,14 +52,14 @@ public class AuthenticationClientImplementation implements AuthenticationClient 
             return session;
         }
 
-        TypeReference <HashMap <String, String>> typeRef = new TypeReference <HashMap <String, String>>() {
+        TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
         };
 
         String body = getBody();
 
         byte[] result = template.exchange(session.getEndpoint() + LOGIN, new RequestInfo()
                 .setBody(body)
-                .setHeaders(new HashMap <>())
+                .setHeaders(new HashMap<>())
                 .setMethod(HTTPMethod.POST)
                 .setMediaType(MediaType.JSON));
         try {
@@ -70,7 +70,7 @@ public class AuthenticationClientImplementation implements AuthenticationClient 
     }
 
     private String getBody() {
-        Map <String, Object> payload = new HashMap <>();
+        Map<String, Object> payload = new HashMap<>();
         payload.put(USERNAME, credentials.getUsername());
         payload.put(PASSWORD, credentials.getPassword());
 
