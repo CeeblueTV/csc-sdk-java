@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthenticationConstants.DEFAULT_ENDPOINT;
+import static com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationConstants.DEFAULT_ENDPOINT;
 
 public class AuthenticationClientImplementation implements AuthenticationClient {
 

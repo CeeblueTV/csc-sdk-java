@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.ceeblue.streamingcloud.sdk.authentiffication.utils.AuthenticationConstants.DEFAULT_ENDPOINT;
+import static com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationConstants.DEFAULT_ENDPOINT;
 
 /**
  * Helper for all API clients. Contains authorization and utils methods for working with json and authentication

@@ -1,4 +1,4 @@
-package com.ceeblue.streamingcloud.sdk.authentiffication.utils;
+package com.ceeblue.streamingcloud.sdk.authentiffication;
 
 public class AuthenticationConstants {
 

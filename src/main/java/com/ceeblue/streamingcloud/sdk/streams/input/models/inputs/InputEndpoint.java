@@ -1,9 +1,9 @@
 package com.ceeblue.streamingcloud.sdk.streams.input.models.inputs;
 
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Access;
+import com.ceeblue.streamingcloud.sdk.streams.input.models.InputStreamer;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Parameters;
 import com.ceeblue.streamingcloud.sdk.streams.input.models.Status;
-import com.ceeblue.streamingcloud.sdk.streams.input.models.Streamer;
 import com.ceeblue.streamingcloud.sdk.streams.models.InputFormat;
 import com.ceeblue.streamingcloud.sdk.streams.output.models.connection.Connection;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -27,7 +27,7 @@ public class InputEndpoint {
     /**
      * Streamer details
      */
-    private Streamer streamer;
+    private InputStreamer streamer;
 
     /**
      * Stream  status
@@ -82,11 +82,11 @@ public class InputEndpoint {
         return this;
     }
 
-    public Streamer getStreamer() {
+    public InputStreamer getStreamer() {
         return streamer;
     }
 
-    public InputEndpoint setStreamer(Streamer streamer) {
+    public InputEndpoint setStreamer(InputStreamer streamer) {
         this.streamer = streamer;
         return this;
     }
@@ -157,17 +157,17 @@ public class InputEndpoint {
     @Override
     public String toString() {
         return "InputEndpoint: {" +
-                (id != null ? "id=" + id : "") +
-                (format != null ? ", format=" + format : "") +
-                (streamer != null ? ", streamer=" + streamer : "") +
-                (status != null ? ", status=" + status : "") +
-                (access != null ? ", access=" + access : "") +
-                (accessToken != null ? ", accessToken=" + accessToken : "") +
-                (parameters != null ? ", parameters=" + parameters : "") +
-                (callbackUri != null ? ", callbackUri=" + callbackUri : "") +
-                (statusMessages != null ? ", statusMessages=" + statusMessages : "") +
-                (connection != null ? ", connection=" + connection : "") +
-                (parameters != null ? ", parameters=" + parameters : "") +
+                (id != null ? "id= " + id : "") +
+                (format != null ? ", format= " + format : "") +
+                (streamer != null ? ", streamer= " + streamer : "") +
+                (status != null ? ", status= " + status : "") +
+                (access != null ? ", access= " + access : "") +
+                (accessToken != null ? ", accessToken= " + accessToken : "") +
+                (parameters != null ? ", parameters= " + parameters : "") +
+                (callbackUri != null ? ", callbackUri= " + callbackUri : "") +
+                (statusMessages != null ? ", statusMessages= " + statusMessages : "") +
+                (connection != null ? ", connection= " + connection : "") +
+                (parameters != null ? ", parameters= " + parameters : "") +
                 "}";
     }
 

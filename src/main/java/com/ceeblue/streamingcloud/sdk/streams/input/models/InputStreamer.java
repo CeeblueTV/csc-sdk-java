@@ -32,4 +32,12 @@ public class InputStreamer {
         this.geoLocation = geoLocation;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "InputStreamer{" +
+                (ip != null ? "ip= " + ip : "") +
+                (geoLocation != null ? "geoLocation= " + geoLocation : "") +
+                '}';
+    }
 }
