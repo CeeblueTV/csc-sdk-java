@@ -2,11 +2,9 @@ package com.ceeblue.streamingcloud.sdk.http.clients;
 
 import com.ceeblue.streamingcloud.sdk.http.HttpClient;
 import com.ceeblue.streamingcloud.sdk.http.RequestInfo;
+import com.ceeblue.streamingcloud.sdk.http.ResponseInfo;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,11 +23,13 @@ public class HttpRestTemplate implements HttpClient {
     }
 
     @Override
-    public byte[] exchange(String uri, RequestInfo payload) throws ApiCallException {
+    public ResponseInfo exchange(String uri, RequestInfo payload) throws ApiCallException {
         try {
             HttpEntity<String> entity = processPayload(payload);
 
-            return template.exchange(uri, HttpMethod.valueOf(payload.getMethod().name()), entity, byte[].class).getBody();
+            ResponseEntity <byte[]> result = template.exchange(uri, HttpMethod.valueOf(payload.getMethod().name()), entity, byte[].class);
+
+            return new ResponseInfo(result.getBody(), result.getHeaders().toSingleValueMap());
         } catch (ResourceAccessException exception) {
             throw new ApiCallException("Timeout", -1, exception.getMessage());
         } catch (ApiCallException e) {

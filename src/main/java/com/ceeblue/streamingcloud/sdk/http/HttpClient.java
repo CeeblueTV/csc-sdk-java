@@ -16,10 +16,10 @@ public interface HttpClient {
      *
      * @param uri     URI of API call
      * @param payload request info e.g. http method, body, headers etc
-     * @return Return result from server in byte[]
+     * @return Return result from server
      * @throws ApiCallException In case when couldn't perform request. Some error on server were occurred, timeout or
      *                          authentication problem
      */
-    byte[] exchange(String uri, RequestInfo payload) throws ApiCallException;
+    ResponseInfo exchange(String uri, RequestInfo payload) throws ApiCallException;
 
 }

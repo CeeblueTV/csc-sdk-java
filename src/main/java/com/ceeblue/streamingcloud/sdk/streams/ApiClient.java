@@ -2,10 +2,7 @@ package com.ceeblue.streamingcloud.sdk.streams;
 
 import com.ceeblue.streamingcloud.sdk.authentiffication.AuthenticationClient;
 import com.ceeblue.streamingcloud.sdk.authentiffication.Session;
-import com.ceeblue.streamingcloud.sdk.http.HTTPMethod;
-import com.ceeblue.streamingcloud.sdk.http.HttpClient;
-import com.ceeblue.streamingcloud.sdk.http.MediaType;
-import com.ceeblue.streamingcloud.sdk.http.RequestInfo;
+import com.ceeblue.streamingcloud.sdk.http.*;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.ApiCallException;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -45,26 +42,38 @@ public abstract class ApiClient {
         session = new Session().setEndpoint(endpoint);
     }
 
-    protected <T> T exchange(String parts, String body, HTTPMethod method, Class<T> type) throws JsonParseException, ApiCallException {
-        return exchange(parts, body, method, type, new HashMap<>(), MediaType.JSON);
+    protected <T> T exchange(String parts, String body, HTTPMethod method, Class <T> type) throws JsonParseException, ApiCallException {
+        return exchange(parts, body, method, type, new HashMap <>(), MediaType.JSON);
     }
 
-    protected <T> T exchange(String parts, String body, HTTPMethod method, Class<T> type, Map<String, Object> headers, MediaType mediaType) throws JsonParseException, ApiCallException {
-        HashMap<String, Object> authHeader = authenticateIfHaveNot();
+    protected <T> T exchange(String parts, String body, HTTPMethod method, Class <T> type, Map <String, Object> headers, MediaType mediaType) throws JsonParseException, ApiCallException {
+        HashMap <String, Object> authHeader = authenticateIfHaveNot();
         authHeader.putAll(headers);
 
-        byte[] result = template.exchange(session.getEndpoint() + parts, new RequestInfo()
+        ResponseInfo result = template.exchange(session.getEndpoint() + parts, new RequestInfo()
                 .setBody(body)
                 .setMediaType(mediaType)
                 .setHeaders(authHeader)
                 .setMethod(method)
         );
 
-        return processRequestResult(type, result);
+        return processRequestResult(type, result.getBody());
+    }
+
+    protected ResponseInfo exchange(String parts, String body, HTTPMethod method, Map <String, Object> headers, MediaType mediaType) throws JsonParseException, ApiCallException {
+        HashMap <String, Object> authHeader = authenticateIfHaveNot();
+        authHeader.putAll(headers);
+
+        return template.exchange(session.getEndpoint() + parts, new RequestInfo()
+                .setBody(body)
+                .setMediaType(mediaType)
+                .setHeaders(authHeader)
+                .setMethod(method)
+        );
     }
 
     @SuppressWarnings("unchecked")
-    private <T> T processRequestResult(Class<T> type, byte[] result) {
+    private <T> T processRequestResult(Class <T> type, byte[] result) {
         if (type != byte[].class) {
             String json = null;
             if (type != Void.class) {
@@ -76,7 +85,7 @@ public abstract class ApiClient {
         return (T) result;
     }
 
-    protected <T> T parseJson(Class<T> type, String result) throws JsonParseException {
+    protected <T> T parseJson(Class <T> type, String result) throws JsonParseException {
         try {
             if (type != Void.class) {
                 return mapper.readValue(result, type);
@@ -96,12 +105,12 @@ public abstract class ApiClient {
         }
     }
 
-    public HashMap<String, Object> authenticateIfHaveNot() {
+    public HashMap <String, Object> authenticateIfHaveNot() {
         if (session == null || session.getToken() == null) {
             session = authenticationClient.authenticate();
         }
 
-        HashMap<String, Object> authHeader = new HashMap<>();
+        HashMap <String, Object> authHeader = new HashMap <>();
         authHeader.put(AUTHORIZATION_HEADER, BEARER + session.getToken());
 
         return authHeader;

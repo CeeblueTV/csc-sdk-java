@@ -5,7 +5,7 @@ import com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.InputEndpoint;
 import com.ceeblue.streamingcloud.sdk.streams.models.Source;
 import com.ceeblue.streamingcloud.sdk.streams.snapshot.models.SnapshotSettings;
 
-import java.nio.ByteBuffer;
+import java.io.File;
 
 /**
  * Service for stream snapshot operations
@@ -19,7 +19,7 @@ public interface SnapshotClient {
      * @param source   capturing source [ incoming | outgoing ]
      * @return ByteBuffer with image
      */
-    ByteBuffer getSnapshotImage(String streamId, Source source) throws ClientException;
+    File getSnapshotImage(String streamId, Source source) throws ClientException;
 
     /**
      * Fetches a specific snapshot settings

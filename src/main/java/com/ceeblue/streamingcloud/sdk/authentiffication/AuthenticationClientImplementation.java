@@ -1,9 +1,6 @@
 package com.ceeblue.streamingcloud.sdk.authentiffication;
 
-import com.ceeblue.streamingcloud.sdk.http.HTTPMethod;
-import com.ceeblue.streamingcloud.sdk.http.HttpClient;
-import com.ceeblue.streamingcloud.sdk.http.MediaType;
-import com.ceeblue.streamingcloud.sdk.http.RequestInfo;
+import com.ceeblue.streamingcloud.sdk.http.*;
 import com.ceeblue.streamingcloud.sdk.streams.exceptions.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -57,15 +54,15 @@ public class AuthenticationClientImplementation implements AuthenticationClient 
 
         String body = getBody();
 
-        byte[] result = template.exchange(session.getEndpoint() + LOGIN, new RequestInfo()
+        ResponseInfo result = template.exchange(session.getEndpoint() + LOGIN, new RequestInfo()
                 .setBody(body)
                 .setHeaders(new HashMap<>())
                 .setMethod(HTTPMethod.POST)
                 .setMediaType(MediaType.JSON));
         try {
-            return session.setToken(mapper.readValue(new String(result), typeRef).get(TOKEN));
+            return session.setToken(mapper.readValue(new String(result.getBody()), typeRef).get(TOKEN));
         } catch (JsonProcessingException e) {
-            throw new AuthorizationException("Invalid response from Server: " + new String(result));
+            throw new AuthorizationException("Invalid response from Server: " + new String(result.getBody()));
         }
     }
 
