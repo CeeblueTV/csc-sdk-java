@@ -87,4 +87,14 @@ public class Output {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Output{" +
+                (streamId != null ? "streamId='" + streamId : "") +
+                (format != null ? ", format=" + format : "") +
+                (sessionLimit != null ? ", sessionLimit=" + sessionLimit : "") +
+                (viewer != null ? ", viewer=" + viewer : "") +
+                (callbackUri != null ? ", callbackUri='" + callbackUri : "") +
+                "}";
+    }
 }

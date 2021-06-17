@@ -46,4 +46,11 @@ public class Capture {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Capture{" +
+                (trackSelector != null ? "trackSelector=" + trackSelector : "") +
+                (source != null ? ", source=" + source : "") +
+                '}';
+    }
 }
