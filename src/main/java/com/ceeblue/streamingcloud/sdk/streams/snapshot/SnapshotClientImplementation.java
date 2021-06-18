@@ -45,8 +45,9 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
 
     @Override
     public File getSnapshotImage(String streamId, Source source) throws ClientException {
+        ResponseInfo responseInfo = null;
         try {
-            ResponseInfo responseInfo = exchange(SNAPSHOTS + STREAM + streamId + "/" + source.name().toLowerCase(Locale.ROOT) + "/" + IMAGE, "", GET, new HashMap<>(), MediaType.IMAGE);
+            responseInfo = exchange(SNAPSHOTS + STREAM + streamId + "/" + source.name().toLowerCase(Locale.ROOT) + "/" + IMAGE, "", GET, new HashMap <>(), MediaType.IMAGE);
 
             ByteArrayInputStream inputStream = new ByteArrayInputStream(responseInfo.getBody());
             BufferedImage bufferedImage = ImageIO.read(inputStream);
@@ -63,7 +64,7 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
             String serverMessage = getServerMessage(exception.getServerResponse());
             throw new ClientException(serverMessage != null ? serverMessage : "Can't get snapshot", exception);
         } catch (IOException e) {
-            throw new ClientException("Couldn't create snapshot image from gotten byte array", new RuntimeException(e.getMessage()));
+            throw new ClientException("Couldn't create snapshot image from gotten byte array: " + responseInfo, new RuntimeException(e.getMessage()));
         }
     }
 
