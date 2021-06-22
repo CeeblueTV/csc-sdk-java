@@ -42,12 +42,12 @@ public abstract class ApiClient {
         session = new Session().setEndpoint(endpoint);
     }
 
-    protected <T> T exchange(String parts, String body, HTTPMethod method, Class <T> type) throws JsonParseException, ApiCallException {
-        return exchange(parts, body, method, type, new HashMap <>(), MediaType.JSON);
+    protected <T> T exchange(String parts, String body, HTTPMethod method, Class<T> type) throws JsonParseException, ApiCallException {
+        return exchange(parts, body, method, type, new HashMap<>(), MediaType.JSON);
     }
 
-    protected <T> T exchange(String parts, String body, HTTPMethod method, Class <T> type, Map <String, Object> headers, MediaType mediaType) throws JsonParseException, ApiCallException {
-        HashMap <String, Object> authHeader = authenticateIfHaveNot();
+    protected <T> T exchange(String parts, String body, HTTPMethod method, Class<T> type, Map<String, Object> headers, MediaType mediaType) throws JsonParseException, ApiCallException {
+        HashMap<String, Object> authHeader = authenticateIfHaveNot();
         authHeader.putAll(headers);
 
         ResponseInfo result = template.exchange(session.getEndpoint() + parts, new RequestInfo()

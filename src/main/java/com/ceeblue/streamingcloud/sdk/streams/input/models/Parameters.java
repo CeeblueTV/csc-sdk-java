@@ -12,16 +12,16 @@ public class Parameters {
     /**
      * Dynamic input stream parameters
      */
-    private Map <String, Object> parameters;
+    private Map<String, Object> parameters;
 
     public Parameters() {
     }
 
-    private Map <String, Object> getParameters() {
+    private Map<String, Object> getParameters() {
         return parameters;
     }
 
-    private void setParameters(Map <String, Object> parameters) {
+    private void setParameters(Map<String, Object> parameters) {
         this.parameters = parameters;
     }
 
@@ -42,4 +42,4 @@ public class Parameters {
     public int hashCode() {
         return Objects.hash(parameters);
     }
-    }
+}

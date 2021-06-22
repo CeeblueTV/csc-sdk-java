@@ -27,7 +27,7 @@ public class HttpRestTemplate implements HttpClient {
         try {
             HttpEntity<String> entity = processPayload(payload);
 
-            ResponseEntity <byte[]> result = template.exchange(uri, HttpMethod.valueOf(payload.getMethod().name()), entity, byte[].class);
+            ResponseEntity<byte[]> result = template.exchange(uri, HttpMethod.valueOf(payload.getMethod().name()), entity, byte[].class);
 
             return new ResponseInfo(result.getBody(), result.getHeaders().toSingleValueMap());
         } catch (ResourceAccessException exception) {

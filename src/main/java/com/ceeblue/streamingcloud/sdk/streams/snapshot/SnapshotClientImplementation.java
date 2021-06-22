@@ -36,7 +36,7 @@ public class SnapshotClientImplementation extends ApiClient implements SnapshotC
     @Override
     public ResponseInfo getSnapshotImage(String streamId, Source source) throws ClientException {
         try {
-            return exchange(SNAPSHOTS + STREAM + streamId + "/" + source.name().toLowerCase(Locale.ROOT) + "/" + IMAGE, "", GET, new HashMap <>(), MediaType.IMAGE);
+            return exchange(SNAPSHOTS + STREAM + streamId + "/" + source.name().toLowerCase(Locale.ROOT) + "/" + IMAGE, "", GET, new HashMap<>(), MediaType.IMAGE);
         } catch (JsonParseException exception) {
             throw new ClientException("Can't get snapshot", exception);
         } catch (ApiCallException exception) {
