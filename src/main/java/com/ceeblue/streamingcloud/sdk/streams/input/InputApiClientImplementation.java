@@ -137,8 +137,4 @@ public class InputApiClientImplementation extends ApiClient implements InputStre
             throw new ClientException("Can't update output. New output: " + output, exception);
         }
     }
-
-    public void setTemplate(HttpClient template) {
-        this.template = template;
-    }
 }
