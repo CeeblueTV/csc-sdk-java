@@ -181,7 +181,7 @@ public class RecordingStatus {
 
     @Override
     public String toString() {
-        return "RecordingModel{ " +
+        return "RecordingStatus{ " +
                 (id != null ? "id=" + id : "") +
                 (streamId != null ? ", streamId=" + streamId : "") +
                 (fileName != null ? ", fileName=" + fileName : "") +

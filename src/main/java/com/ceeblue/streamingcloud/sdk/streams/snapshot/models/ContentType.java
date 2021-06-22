@@ -4,9 +4,9 @@ public enum ContentType {
     PNG("image/png", "png"),
     JPEG("image/jpg", "jpg");
 
-    public String contentType;
+    public final String contentType;
 
-    public String format;
+    public final String format;
 
     ContentType(String contentType, String format) {
         this.contentType = contentType;

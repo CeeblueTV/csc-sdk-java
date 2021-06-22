@@ -2,10 +2,14 @@ package com.ceeblue.streamingcloud.sdk.authentiffication;
 
 public class AuthorizationException extends RuntimeException {
 
-    String message;
+    private final String message;
 
     public AuthorizationException(String message) {
         this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     @Override

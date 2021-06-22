@@ -20,7 +20,7 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
 
     @Override
     public void handleError(ClientHttpResponse httpResponse) throws IOException {
-        String body = "";
+        String body;
         if (httpResponse.getStatusCode().series().value() == HttpStatus.Series.CLIENT_ERROR.value()) {
 
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getBody()))) {

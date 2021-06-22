@@ -5,7 +5,7 @@ import java.util.List;
 public class UDPTSOutput extends OutputParent {
 
     /**
-     * Streaming endpoint IP adress
+     * Streaming endpoint IP address
      */
     private String ipAddress;
 

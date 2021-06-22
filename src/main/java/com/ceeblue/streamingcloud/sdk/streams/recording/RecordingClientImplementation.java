@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.ceeblue.streamingcloud.sdk.http.HTTPMethod.*;
-import static com.ceeblue.streamingcloud.sdk.streams.utils.StingFormatter.getServerMessage;
+import static com.ceeblue.streamingcloud.sdk.streams.utils.StringFormatter.getServerMessage;
 
 public class RecordingClientImplementation extends ApiClient implements RecordingClient {
 

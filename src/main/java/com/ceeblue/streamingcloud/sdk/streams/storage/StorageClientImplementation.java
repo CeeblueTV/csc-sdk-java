@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.ceeblue.streamingcloud.sdk.streams.utils.StingFormatter.getServerMessage;
+import static com.ceeblue.streamingcloud.sdk.streams.utils.StringFormatter.getServerMessage;
 
 public class StorageClientImplementation extends ApiClient implements StorageClient {
 

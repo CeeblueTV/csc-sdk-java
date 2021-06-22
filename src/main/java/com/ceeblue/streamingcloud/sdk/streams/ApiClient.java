@@ -60,8 +60,8 @@ public abstract class ApiClient {
         return processRequestResult(type, result.getBody());
     }
 
-    protected ResponseInfo exchange(String parts, String body, HTTPMethod method, Map <String, Object> headers, MediaType mediaType) throws JsonParseException, ApiCallException {
-        HashMap <String, Object> authHeader = authenticateIfHaveNot();
+    protected ResponseInfo exchange(String parts, String body, HTTPMethod method, Map<String, Object> headers, MediaType mediaType) throws JsonParseException, ApiCallException {
+        HashMap<String, Object> authHeader = authenticateIfHaveNot();
         authHeader.putAll(headers);
 
         return template.exchange(session.getEndpoint() + parts, new RequestInfo()
@@ -73,7 +73,7 @@ public abstract class ApiClient {
     }
 
     @SuppressWarnings("unchecked")
-    private <T> T processRequestResult(Class <T> type, byte[] result) {
+    private <T> T processRequestResult(Class<T> type, byte[] result) {
         if (type != byte[].class) {
             String json = null;
             if (type != Void.class) {
@@ -85,7 +85,7 @@ public abstract class ApiClient {
         return (T) result;
     }
 
-    protected <T> T parseJson(Class <T> type, String result) throws JsonParseException {
+    protected <T> T parseJson(Class<T> type, String result) throws JsonParseException {
         try {
             if (type != Void.class) {
                 return mapper.readValue(result, type);
@@ -105,12 +105,12 @@ public abstract class ApiClient {
         }
     }
 
-    public HashMap <String, Object> authenticateIfHaveNot() {
+    public HashMap<String, Object> authenticateIfHaveNot() {
         if (session == null || session.getToken() == null) {
             session = authenticationClient.authenticate();
         }
 
-        HashMap <String, Object> authHeader = new HashMap <>();
+        HashMap<String, Object> authHeader = new HashMap<>();
         authHeader.put(AUTHORIZATION_HEADER, BEARER + session.getToken());
 
         return authHeader;

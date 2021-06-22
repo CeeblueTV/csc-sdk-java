@@ -1,6 +1,5 @@
 package com.ceeblue.streamingcloud.sdk.streams.input.models;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;

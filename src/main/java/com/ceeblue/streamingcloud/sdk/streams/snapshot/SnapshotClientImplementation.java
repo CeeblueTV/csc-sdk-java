@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import static com.ceeblue.streamingcloud.sdk.http.HTTPMethod.*;
-import static com.ceeblue.streamingcloud.sdk.streams.utils.StingFormatter.getServerMessage;
+import static com.ceeblue.streamingcloud.sdk.streams.utils.StringFormatter.getServerMessage;
 
 public class SnapshotClientImplementation extends ApiClient implements SnapshotClient {
 
