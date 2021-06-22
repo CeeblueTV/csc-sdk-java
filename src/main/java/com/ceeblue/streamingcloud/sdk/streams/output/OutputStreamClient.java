@@ -15,8 +15,8 @@ public interface OutputStreamClient {
     /**
      * Create output for {@link com.ceeblue.streamingcloud.sdk.streams.input.models.inputs.Input}
      *
-     * @param output output that will be applied. Must contains: streamId, {@link InputFormat}
-     * @return {@link OutputEndpoint}}
+     * @param output output that will be applied
+     * @return output endpoint settings
      */
     OutputEndpoint createOutput(Output output) throws ClientException;
 

@@ -14,6 +14,7 @@ public interface StorageClient {
      * Create a new storage
      *
      * @param amazonS3 Storage to set
+     * @return storage settings
      */
     AmazonS3 createStorage(AmazonS3 amazonS3) throws ClientException;
 
@@ -21,11 +22,14 @@ public interface StorageClient {
      * Get storage
      *
      * @param storageId id of storage to delete {@link AmazonS3}
+     * @return storage settings
      */
     AmazonS3 getStorage(String storageId) throws ClientException;
 
     /**
      * Get all storages
+     *
+     * @return all storages settings
      */
     List<AmazonS3> getStorages() throws ClientException;
 
@@ -33,6 +37,7 @@ public interface StorageClient {
      * Update storage
      *
      * @param storage storage settings that will be applied
+     * @return updated storage settings
      */
     AmazonS3 updateStorage(AmazonS3 storage) throws ClientException;
 

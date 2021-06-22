@@ -25,6 +25,7 @@ public interface SnapshotClient {
      *
      * @param streamId id of {@link InputEndpoint}
      * @param source   capturing source [ incoming | outgoing ]
+     * @return snapshot settings
      */
     SnapshotSettings getSnapshotSettings(String streamId, Source source) throws ClientException;
 

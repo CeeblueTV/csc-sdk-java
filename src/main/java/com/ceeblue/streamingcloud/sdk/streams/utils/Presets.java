@@ -11,6 +11,9 @@ import static com.ceeblue.streamingcloud.sdk.streams.input.models.CodecName.AAC;
 import static com.ceeblue.streamingcloud.sdk.streams.input.models.CodecName.Opus;
 import static com.ceeblue.streamingcloud.sdk.streams.input.models.encoder.SpeedPreset.superfast;
 
+/**
+ * Template to create most common tracks
+ */
 public class Presets {
 
     public static Track Opus_48kHz_2Ch_120Kbps() {

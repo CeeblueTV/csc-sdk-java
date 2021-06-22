@@ -24,6 +24,7 @@ public interface RecordingClient {
      * Fetching recording
      *
      * @param recordingId id of record {@link RecordingStatus}
+     * @return recording status
      */
     RecordingStatus getRecording(String recordingId) throws ClientException;
 
